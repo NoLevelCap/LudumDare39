@@ -6,6 +6,8 @@ document.body.appendChild(renderer.view);
 
 loader
   .add("res/main.json")
+  .add("res/backs/BackgroundSkies.png")
+  .add("res/backs/PixelatedBackgroundSkies.png")
   .load(setup);
 
 //Define any variables that are used in more than one function

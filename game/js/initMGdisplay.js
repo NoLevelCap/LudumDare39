@@ -41,10 +41,9 @@ function loadShipManagement(){
 }
 
 function ShipViewer(container){
-  graphics = new Graphics();
-  graphics.beginFill(0xFFFF00);
-  graphics.drawRect(0, 0, 1280, 480);
-  container.addChild(graphics);
+  scrollingBackground = new Sprite(PIXI.loader.resources["res/backs/BackgroundSkies.png"].texture)
+  scrollingBackground.setTransform(0, 0);
+  container.addChild(scrollingBackground);
 
   usersShip = new Ship(container, 20, 20);
 
@@ -53,8 +52,9 @@ function ShipViewer(container){
 
 
 
-  for (var i = 0; i < 24; i++) {
-    Wave_1 = new Wave(80*i - 24,500,96,96);
+  for (var i = 0; i < 44; i++) {
+    Wave_1 = new Wave(50*i - 24,500,96,96);
+    //Wave_1 = new Wave(0,0,96,96);
     waves.addChild(Wave_1.Sprite);
   }
 
@@ -87,9 +87,9 @@ function ShipProgress(container){
   graphics.drawRect(0, 0, 1280, 100);
   container.addChild(graphics);
 
-  progressbar = new Graphics();
-  progressbar.beginFill(0xFF00F9);
-  progressbar.drawRect(0, 10, 1280, 80);
+  progressbar = new Sprite(PIXI.loader.resources["res/backs/PixelatedBackgroundSkies.png"].texture)
+  progressbar.setTransform(0, 10);
+  progressbar.height = 80;
   container.addChild(progressbar);
 
   progressline = new Sprite(Tex_Main['break.png']);
@@ -98,6 +98,8 @@ function ShipProgress(container){
   progressline.width = 1240;
   progressline.height = 12;
   container.addChild(progressline);
+
+
 
 
   for (var i = 0; i < 15; i++) {
@@ -118,7 +120,7 @@ function ShipProgress(container){
     container.addChild(sp);
   }
 
-
+  miniProgressShip = new MiniShip(container, 20, 52, 48, 28);
 }
 
 function ShipManagment(container){
@@ -144,22 +146,40 @@ function ShipManagment(container){
   cookingPB = new PowerBar(container, 140, 860, "COOKING");
 }
 
+function MiniShip(container, x, y, w, h){
+  this.yards = 100;
+  this.Sprite = new Sprite(Tex_Main['Ship.png']);
+  this.Sprite.x = x + (60*(this.yards/100));
+  this.Sprite.y = y;
+  this.Sprite.width = w;
+  this.Sprite.height = h;
+  this.Sprite.anchor = new PIXI.Point(0.5, 1);
+  container.addChild(this.Sprite);
+
+  this.animate = function(){
+    this.Sprite.rotation = .035 * Math.sin((Date.now()*0.52) / 256);
+    //this.Sprite.rotation += .01;
+  }
+
+  animatables.push(this);
+}
+
 function Ship(container, x, y){
   this.ShipContainer = new Container();
   this.ShipContainer.x = x;
   this.ShipContainer.y = y;
   container.addChild(this.ShipContainer);
 
-  this.Sprite = new Sprite(Tex_Main['break.png']);
+  this.Sprite = new Sprite(Tex_Main['Ship.png']);
   this.Sprite.x = 480;
-  this.Sprite.y = 560;
+  this.Sprite.y = 500;
   this.Sprite.width = 960;
   this.Sprite.height = 560;
-  this.Sprite.pivot = new PIXI.Point(2, 3.75);
+  this.Sprite.anchor = new PIXI.Point(0.5, 1);
   this.ShipContainer.addChild(this.Sprite);
 
   this.animate = function(){
-    this.Sprite.rotation = .035 * Math.sin(Date.now() / 128);
+    this.Sprite.rotation = .035 * Math.sin(Date.now() / 256);
     //this.Sprite.rotation += .01;
   }
 
@@ -167,15 +187,15 @@ function Ship(container, x, y){
 }
 
 function Wave(x, y, w, h){
-  this.Sprite = new Sprite(Tex_Main['break.png']);
+  this.Sprite = new Sprite(Tex_Main['SeaWaves.png']);
   this.Sprite.x = x;
   this.Sprite.y = y;
   this.Sprite.width = w;
   this.Sprite.height = h;
-  this.Sprite.pivot = new PIXI.Point(2, 3.75);
+  this.Sprite.anchor = new PIXI.Point(0.5, 1);
 
   this.animate = function(){
-    this.Sprite.rotation = .2 * Math.sin(Date.now() / 64);
+    this.Sprite.rotation = .2 * Math.sin(Date.now() / 128);
     //this.Sprite.rotation += .01;
   }
 
@@ -208,7 +228,7 @@ function PowerBar(container, x, y, name){
       }
   };
 
-  text = new PIXI.Text(name,{fontFamily : 'Arial', fontSize: 24, fill : 0xffffff, align : 'right'});
+  text = new PIXI.Text(name,{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0xffffff, align : 'right'});
   text.x = x - text.width - 4;
   text.y = y + text.height / 2;
   container.addChild(text);
