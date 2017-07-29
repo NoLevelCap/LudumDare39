@@ -22,6 +22,10 @@ AI - Should be done in Adobe Illustrator; Do a temp one in GIMP or whatever in t
 [ ] - UIBackgroundTexture (128x128)
 [X] - PowerBar_Slot (72x48)
 [X] - Person (48x72) AI
+[ ] - UnderneathProgressLine (1x12)
+[ ] - StartProgressIcon (64x64)
+[ ] - EndProgressIcon (64x64)
+[ ] - EnemyShip (960x560)
 
 Notes:
 For PowerBar, I was thinking a seat - or a plank. Something the person can go on.
