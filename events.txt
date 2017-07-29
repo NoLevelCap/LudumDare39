@@ -1,0 +1,13 @@
+"You find 50 shillings worth of buried treasure!", gold, 50
+"Good weather means you reach your next destination sooner than expected...", skip, 0
+"You come across a stranded pirate who joins your crew", lowest_stat, 1
+"You come across a lifeboat with willing pirates who join your crew", all_stats, 1
+"Your crewmen band together to repair the ship", health, 30
+"Some of your crew catch scurvy and die!", highest_stat, -2
+"Some of your crew decide to commit mutiny and skarper in a lifeboat", all_stats, -1
+"Your ship hits a big wave and one of your crew goes overboard!", sails, -1
+"Your ship hits some rocks and gets damaged", health, -20
+"Some loose gunpowder goes off and some of your cannon men die", cannons, -2
+"Stormy weather means your ship takes some signifficant damage", health, -20
+"Your foods gone stale and one of your cooks dies from trying it", cooks, -1
+"An unsecured treasure chest goes overboard and is lost!", gold, -20
