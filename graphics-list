@@ -6,18 +6,18 @@ These don't have to look good, just fit somewhat. We can change them later.
 Key:
 AI - Should be done in Adobe Illustrator; Do a temp one in GIMP or whatever in the mean time.
 
-[ ] - Ship (960x560)
-[ ] - Circular_Button_Hover (128x128)
-[ ] - Circular_Button_Normal (128x128)
-[ ] - Circular_Button_MouseDown (128x128)
-[ ] - Flee_Icon (128x128)
-[ ] - Fire_Icon (128x128)
-[ ] - Flank_Icon (128x128)
-[X] - Diamond (128x128) AI
-[X] - Circle (128x128) AI
-[ ] - BackgroundSkies (4096x480)
-[ ] - PixelatedBackgroundSkies (4096x80)
-[ ] - SeaWaves (128x128)
+[X] - Ship (960x560)
+[X] - Circular_Button_Hover (128x128)
+[X] - Circular_Button_Normal (128x128)
+[X] - Circular_Button_MouseDown (128x128)
+[X] - Flee_Icon (128x128)
+[X] - Fire_Icon (128x128)
+[X] - Flank_Icon (128x128)
+[ ] - Diamond (128x128) AI
+[ ] - Circle (128x128) AI
+[X] - BackgroundSkies (4096x480)
+[X] - PixelatedBackgroundSkies (4096x80)
+[X] - SeaWaves (128x128)
 [ ] - UIBoxWithBorders (128x128)
 [ ] - UIBackgroundTexture (128x128)
 [X] - PowerBar_Slot (72x48)
