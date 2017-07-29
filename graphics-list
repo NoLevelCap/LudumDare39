@@ -13,8 +13,8 @@ AI - Should be done in Adobe Illustrator; Do a temp one in GIMP or whatever in t
 [X] - Flee_Icon (128x128)
 [X] - Fire_Icon (128x128)
 [X] - Flank_Icon (128x128)
-[ ] - Diamond (128x128) AI
-[ ] - Circle (128x128) AI
+[X] - Diamond (128x128) AI
+[X] - Circle (128x128) AI
 [X] - BackgroundSkies (4096x480)
 [X] - PixelatedBackgroundSkies (4096x80)
 [X] - SeaWaves (128x128)
@@ -25,7 +25,7 @@ AI - Should be done in Adobe Illustrator; Do a temp one in GIMP or whatever in t
 [ ] - UnderneathProgressLine (1x12)
 [ ] - StartProgressIcon (64x64)
 [ ] - EndProgressIcon (64x64)
-[ ] - EnemyShip (960x560)
+[X] - EnemyShip (960x560)
 
 Notes:
 For PowerBar, I was thinking a seat - or a plank. Something the person can go on.
