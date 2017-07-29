@@ -93,6 +93,10 @@ function ShipProgress(container){
   progressbar.height = 80;
   container.addChild(progressbar);
 
+  for (var i = 0; i < 10; i++) {
+    array[i]
+  }
+
   progressline = new Sprite(Tex_Main['break.png']);
   progressline.x = 20;
   progressline.y = 44;
@@ -100,8 +104,26 @@ function ShipProgress(container){
   progressline.height = 12;
   container.addChild(progressline);
 
+  sp = new Sprite(Tex_Main['circle.png']);
+  sp.x = 8;
+  sp.y = 22 + 16;
+  sp.width = 24;
+  sp.height = 24;
+  container.addChild(sp);
 
+  sp = new Sprite(Tex_Main['Start.png']);
+  sp.x = 4;
+  sp.y = 22 + 12;
+  sp.width = 32;
+  sp.height = 32;
+  container.addChild(sp);
 
+  sp = new Sprite(Tex_Main['End.png']);
+  sp.x = 50 + 15 * 80;
+  sp.y = 22 + 12;
+  sp.width = 32;
+  sp.height = 32;
+  container.addChild(sp);
 
   for (var i = 0; i < 15; i++) {
     if(!LOADEDLEVEL.POI.includes(i)){
@@ -151,7 +173,7 @@ function MiniShip(container, x, y, w, h){
   this.eventPassed = false;
   this.lastYard = 0;
 
-  this.Sprite = new Sprite(Tex_Main['Ship.png']);
+  this.Sprite = new Sprite(Tex_Main['SmallBoat.png']);
   this.Sprite.x = x;
   this.oX = x;
   this.Sprite.y = y;
@@ -173,7 +195,11 @@ function MiniShip(container, x, y, w, h){
       this.lastYard += 100;
     }
 
-    this.Sprite.x = -5 + (80*(this.yards/100));
+
+      this.Sprite.x = -5 + (80*(this.yards/100));
+    if(this.Sprite.x < this.oX){
+      this.Sprite.x = this.oX;
+    }
   }
 
   animatables.push(this);

@@ -1,5 +1,5 @@
 
-var ShipSpeed = .5, pause = false;
+var ShipSpeed = .1, pause = false;
 
 function CheckPassedPOI(){
   if(miniProgressShip.eventPassed){
