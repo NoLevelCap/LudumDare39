@@ -1,7 +1,7 @@
 //This file loads the main game display
 
 var MainGameContainer, SHIPVIEWER, SHIPROGRESS, SHIPMANAGMENT, LOADEDLEVEL,
-miniProgressShip, scrollingBackground
+miniProgressShip, scrollingBackground, hullPB, cannonPB, sailsPB, cookingPB
 animatables = new Array();
 
 function loadMainGame(){
