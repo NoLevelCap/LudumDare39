@@ -1,16 +1,40 @@
 {"frames": {
 
-"person.png":
+"break.png":
 {
-	"frame": {"x":74,"y":1,"w":16,"h":32},
+	"frame": {"x":100,"y":249,"w":4,"h":4},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":32},
-	"sourceSize": {"w":16,"h":32}
+	"spriteSourceSize": {"x":0,"y":0,"w":4,"h":4},
+	"sourceSize": {"w":4,"h":4}
+},
+"circle.png":
+{
+	"frame": {"x":1,"y":1,"w":122,"h":122},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":3,"w":122,"h":122},
+	"sourceSize": {"w":128,"h":128}
+},
+"diamond.png":
+{
+	"frame": {"x":1,"y":125,"w":122,"h":122},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":3,"w":122,"h":122},
+	"sourceSize": {"w":128,"h":128}
+},
+"person.png":
+{
+	"frame": {"x":74,"y":249,"w":24,"h":48},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":24,"h":48},
+	"sourceSize": {"w":24,"h":48}
 },
 "power.png":
 {
-	"frame": {"x":1,"y":1,"w":71,"h":48},
+	"frame": {"x":1,"y":249,"w":71,"h":48},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":0,"w":71,"h":48},
@@ -21,8 +45,8 @@
 	"version": "1.0",
 	"image": "main.png",
 	"format": "RGBA8888",
-	"size": {"w":91,"h":50},
+	"size": {"w":124,"h":298},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:c918371f016ec1f2426355c43b1dd1a8:617f9da232a1b285eb2acc3164bdd643:03f91ab73e0f4667800419161e658c40$"
+	"smartupdate": "$TexturePacker:SmartUpdate:d4531d1aade2d913a232d1d888e7b69b:6f350670d8c70a7b2b1a888330595892:03f91ab73e0f4667800419161e658c40$"
 }
 }
