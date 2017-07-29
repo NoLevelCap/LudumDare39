@@ -1,0 +1,28 @@
+{"frames": {
+
+"person.png":
+{
+	"frame": {"x":74,"y":1,"w":16,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":32},
+	"sourceSize": {"w":16,"h":32}
+},
+"power.png":
+{
+	"frame": {"x":1,"y":1,"w":71,"h":48},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":71,"h":48},
+	"sourceSize": {"w":72,"h":48}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "main.png",
+	"format": "RGBA8888",
+	"size": {"w":91,"h":50},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:c918371f016ec1f2426355c43b1dd1a8:617f9da232a1b285eb2acc3164bdd643:03f91ab73e0f4667800419161e658c40$"
+}
+}

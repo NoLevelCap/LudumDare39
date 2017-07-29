@@ -5,13 +5,15 @@ var stage = new Container(),
 document.body.appendChild(renderer.view);
 
 loader
-  .add("")
+  .add("res/main.json")
   .load(setup);
 
 //Define any variables that are used in more than one function
-var cat, state = play;
+var Tex_Main, state = play;
 function setup() {
   state = play;
+
+  Tex_Main = PIXI.loader.resources["res/main.json"].textures;
 
   loadMainGame();
 
@@ -30,4 +32,7 @@ function gameLoop(){
 }
 
 function play() {
+  for (var i = 0; i < animatables.length; i++) {
+    animatables[i].animate();
+  }
 }
