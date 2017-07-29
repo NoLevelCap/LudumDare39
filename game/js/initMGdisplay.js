@@ -1,6 +1,7 @@
 //This file loads the main game display
 
-var MainGameContainer, SHIPVIEWER, SHIPROGRESS, SHIPMANAGMENT, LOADEDLEVEL
+var MainGameContainer, SHIPVIEWER, SHIPROGRESS, SHIPMANAGMENT, LOADEDLEVEL,
+miniProgressShip,
 animatables = new Array();
 
 function loadMainGame(){
@@ -147,7 +148,10 @@ function ShipManagment(container){
 }
 
 function MiniShip(container, x, y, w, h){
-  this.yards = 100;
+  this.yards = 0;
+  this.eventPassed = false;
+  this.lastYard = 0;
+
   this.Sprite = new Sprite(Tex_Main['Ship.png']);
   this.Sprite.x = x + (60*(this.yards/100));
   this.Sprite.y = y;
@@ -159,6 +163,15 @@ function MiniShip(container, x, y, w, h){
   this.animate = function(){
     this.Sprite.rotation = .035 * Math.sin((Date.now()*0.52) / 256);
     //this.Sprite.rotation += .01;
+  }
+
+  this.increaseYards = function(inYards){
+    this.yards += inYards;
+
+    if(this.yards > this.lastYard + 100 && this.eventPassed == false){
+      this.eventPassed = true;
+      this.lastYard += 100;
+    }
   }
 
   animatables.push(this);
