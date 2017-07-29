@@ -20,9 +20,8 @@ AI - Should be done in Adobe Illustrator; Do a temp one in GIMP or whatever in t
 [ ] - SeaWaves (128x128)
 [ ] - UIBoxWithBorders (128x128)
 [ ] - UIBackgroundTexture (128x128)
-[ ] - PowerBar_Slot (72x48)
-[ ] - PowerBar_SlotHover (72x48)
-[ ] - Person (48x72) AI
+[X] - PowerBar_Slot (72x48)
+[X] - Person (48x72) AI
 
 Notes:
 For PowerBar, I was thinking a seat - or a plank. Something the person can go on.
