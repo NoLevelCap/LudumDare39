@@ -37,4 +37,6 @@ function play() {
   for (var i = 0; i < animatables.length; i++) {
     animatables[i].animate();
   }
+
+  Sail();
 }

@@ -14,5 +14,6 @@ function getRandomInt(min, max) {
 }
 
 function Level(){
+  this.POI = 0;
   this.POI = getPoints();
 }

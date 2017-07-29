@@ -1,7 +1,7 @@
 //This file loads the main game display
 
 var MainGameContainer, SHIPVIEWER, SHIPROGRESS, SHIPMANAGMENT, LOADEDLEVEL,
-miniProgressShip,
+miniProgressShip, scrollingBackground
 animatables = new Array();
 
 function loadMainGame(){
@@ -53,8 +53,8 @@ function ShipViewer(container){
 
 
 
-  for (var i = 0; i < 44; i++) {
-    Wave_1 = new Wave(50*i - 24,500,96,96);
+  for (var i = 0; i < 32; i++) {
+    Wave_1 = new Wave(68*i - 24,500,96,96);
     //Wave_1 = new Wave(0,0,96,96);
     waves.addChild(Wave_1.Sprite);
   }
@@ -125,11 +125,10 @@ function ShipProgress(container){
 }
 
 function ShipManagment(container){
-
-  graphics = new Graphics();
-  graphics.beginFill(0xFF00FF);
-  graphics.drawRect(0, 580, 1280, 380);
-  container.addChild(graphics);
+  sp = new Sprite(Tex_Main['UIBack.png']);
+  sp.x = -10;
+  sp.y = 580;
+  container.addChild(sp);
 
   graphics = new Graphics();
   graphics.beginFill(0xFFFFFF);
@@ -153,7 +152,8 @@ function MiniShip(container, x, y, w, h){
   this.lastYard = 0;
 
   this.Sprite = new Sprite(Tex_Main['Ship.png']);
-  this.Sprite.x = x + (60*(this.yards/100));
+  this.Sprite.x = x;
+  this.oX = x;
   this.Sprite.y = y;
   this.Sprite.width = w;
   this.Sprite.height = h;
@@ -172,6 +172,8 @@ function MiniShip(container, x, y, w, h){
       this.eventPassed = true;
       this.lastYard += 100;
     }
+
+    this.Sprite.x = -5 + (80*(this.yards/100));
   }
 
   animatables.push(this);
@@ -185,7 +187,7 @@ function Ship(container, x, y){
 
   this.Sprite = new Sprite(Tex_Main['Ship.png']);
   this.Sprite.x = 480;
-  this.Sprite.y = 500;
+  this.Sprite.y = 460;
   this.Sprite.width = 960;
   this.Sprite.height = 560;
   this.Sprite.anchor = new PIXI.Point(0.5, 1);
@@ -241,8 +243,8 @@ function PowerBar(container, x, y, name){
       }
   };
 
-  text = new PIXI.Text(name,{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0xffffff, align : 'right'});
-  text.x = x - text.width - 4;
+  text = new PIXI.Text(name,{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'right'});
+  text.x = x - text.width - 2;
   text.y = y + text.height / 2;
   container.addChild(text);
 }
