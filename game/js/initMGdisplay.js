@@ -1,6 +1,7 @@
 //This file loads the main game display
 
-var MainGameContainer, SHIPVIEWER, SHIPROGRESS, SHIPMANAGMENT;
+var MainGameContainer, SHIPVIEWER, SHIPROGRESS, SHIPMANAGMENT,
+animatables = new Array();
 
 function loadMainGame(){
   MainGameContainer = new Container();
@@ -88,10 +89,10 @@ function ShipManagment(container){
   graphics.drawRect(1140, 665, 120, 40);
   container.addChild(graphics);
 
-  pb = new PowerBar(container, 140, 620);
-  pb = new PowerBar(container, 140, 700);
-  pb = new PowerBar(container, 140, 780);
-  pb = new PowerBar(container, 140, 860);
+  hullPB = new PowerBar(container, 140, 620, "HULL");
+  cannonPB = new PowerBar(container, 140, 700, "CANNON");
+  sailsPB = new PowerBar(container, 140, 780, "SAILS");
+  cookingPB = new PowerBar(container, 140, 860, "COOKING");
 }
 
 function Ship(container){
@@ -101,18 +102,75 @@ function Ship(container){
   container.addChild(this.graphics);
 }
 
-function PowerBar(container, x, y){
-
+function PowerBar(container, x, y, name){
+  this.powerbars = new Array();
 
   for (var i = 0; i < 12; i++) {
-    graphics = new Graphics();
+    this.powerbars[i] = new bar(this, x + (82*i) , y, i);
+    container.addChild(this.powerbars[i].Sprite);
+    animatables.push(this.powerbars[i]);
+    /*graphics = new Graphics();
     graphics.beginFill(0xF0FF0F);
     graphics.drawRect(x + (82*i) , y, 72, 48);
-    container.addChild(graphics);
-  }
+    container.addChild(graphics);*/
+  };
 
-  text = new PIXI.Text('_NAME_',{fontFamily : 'Arial', fontSize: 24, fill : 0xffffff, align : 'right'});
+  this.loadPower = function(id){
+      id++;
+      for (var i = 0; i < id; i++) {
+        this.powerbars[i].setActive(true);
+      }
+
+      for (var i = id; i < 12; i++) {
+        this.powerbars[i].setActive(false);
+      }
+  };
+
+  text = new PIXI.Text(name,{fontFamily : 'Arial', fontSize: 24, fill : 0xffffff, align : 'right'});
   text.x = x - text.width - 16;
   text.y = y + text.height / 2;
   container.addChild(text);
+}
+
+function bar(p, x, y, id, active){
+  this.active = active;
+  this.Sprite = new Sprite(Tex_Main['power.png']);
+  this.Sprite.x = x;
+  this.Sprite.y = y;
+  this.Sprite.interactive = true;
+  this.Sprite.p = this;
+  this.parent = p;
+
+  this.Person_Sprite = new Sprite(Tex_Main['person.png']);
+  this.Person_Sprite.x = (this.Sprite.width / 2) - (this.Person_Sprite.width /2);
+  this.Person_Sprite.y = ((this.Sprite.height / 2) - this.Person_Sprite.height) + 12 ;
+  this.Person_Sprite.visible = this.active;
+  this.Sprite.addChild(this.Person_Sprite);
+
+  this.floating = false;
+  this.sy = 0;
+
+  this.Sprite
+    .on('mouseover', function(){
+      this.p.floating = true;
+      this.p.sy = this.y;
+    })
+    .on('mouseout', function(){
+      this.p.floating = false;
+      this.y = this.p.sy;
+    })
+    .on('mouseup', function(){
+      this.p.parent.loadPower(id);
+    });
+
+  this.animate = function(){
+    if(this.floating){
+        this.Sprite.y += 0.4 * Math.sin(Date.now() / 64);
+    }
+  }
+
+  this.setActive = function(active){
+    this.active = active;
+    this.Person_Sprite.visible = active;
+  }
 }
