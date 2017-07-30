@@ -1,7 +1,7 @@
 //This file loads the main game display
 
 var MainGameContainer, SHIPVIEWER, SHIPROGRESS, SHIPMANAGMENT, LOADEDLEVEL,
-miniProgressShip, scrollingBackground, hullPB, cannonPB, sailsPB, cookingPB, shipHealth, inCombat;
+miniProgressShip, scrollingBackground, hullPB, cannonPB, sailsPB, cookingPB, shipHealth, inCombat, war;
 animatables = new Array();
 
 function loadMainGame(){
@@ -64,7 +64,7 @@ function ShipViewer(container){
 
 
   war = new Container();
-  war.visible = inCombat;
+  war.visible = false;
   container.addChild(war);
 
   fire_button = new Graphics();
