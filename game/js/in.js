@@ -40,7 +40,13 @@ function play() {
     animatables[i].animate();
   }
 
-  Sail();
+  if (!inCombat)
+  {
+    Sail();
+  }
+  else {
+    combatManager();
+  }
 
-  war.visible = false; //combat modifier
+  war.visible = warButtonsVisible();
 }
