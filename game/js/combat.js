@@ -4,25 +4,33 @@ var flankFlag, enemyHealth, enemyAttack, enemySpeed, playerTurn, enemyTurn, enem
 function initCombat(){
   flankFlag = false;
   enemyHealth = Math.floor((Math.random() * 10) + 5) * 10;
-  enemyAttack = (Math.random() * 6) + sailsPB - 3;
+  enemyAttack = Math.floor((Math.random() * 6) + cannonPB.value - 3);
   if (enemyAttack > 12)
   {
     enemyAttack = 12;
   }
-  enemySpeed = (Math.random() * 6) + 3;
+  if (enemyAttack < 1)
+  {
+    enemyAttack = 1;
+  }
+  enemySpeed = Math.floor((Math.random() * 6) + 3);
   playerTurn = true;
   enemyTurn = false;
   enemyFlank = false;
+  debug.log(enemyAttack);
+  debug.log(enemySpeed);
+  debug.log(enemyHealth);
 }
 
-function createMessage(text)
+function createMessage(text, subtext)
 {
-  
+  pause = true;
+  EVENTWINDOW.showEvent(new emptyEvent(text, subtext));
 }
 
 function warButtonsVisible()
 {
-  if (inCombat && playerTurn)
+  if (inCombat && playerTurn && !pause)
   {
     return true;
   }
@@ -33,21 +41,24 @@ function warButtonsVisible()
 
 // Controller for combat scenarios
 function combatManager(){
-  if (enemyTurn)
+  if (!pause)
   {
-    if (AITimer > 0)
+    if (enemyTurn)
     {
-      AITimer -= 1;
-    }
-    else {
-      if (Math.random() < 0.25 && enemyHealth > 30)
+      if (AITimer > 0)
       {
-        AIFlank();
+        AITimer -= 1;
       }
       else {
-        AIFire();
+        if (Math.random() < 0.25 && enemyHealth > 30)
+        {
+          AIFlank();
+        }
+        else {
+          AIFire();
+        }
+        swapTurns();
       }
-      swapTurns();
     }
   }
 }
@@ -58,7 +69,7 @@ function swapTurns(){
   enemyTurn = !enemyTurn;
   if (enemyTurn)
   {
-    AITimer = (Math.floor(Math.random() * 5) + 2) * 60;
+    AITimer = Math.floor(((Math.random() * 2) + 1) * 60);
   }
 }
 
@@ -67,23 +78,23 @@ function swapTurns(){
 function calcDamage(){
   if (flankFlag == true)
   {
-    return (cannonPB / 12.0) * 150;
+    return Math.floor((cannonPB.value / 12.0) * 150);
   }
   else {
-    return (cannonPB / 12.0) * 75;
+    return Math.floor((cannonPB.value / 12.0) * 75);
   }
 }
 
 function calcFleeStat(){
-  return (sailsPB / 20.0);
+  return (sailsPB.value / 20.0);
 }
 
 function calcFlankStat(){
-  return (sailsPB / 12.0);
+  return (sailsPB.value / 12.0);
 }
 
 function calcDefence(){
-  return (hullPB / 18.0);
+  return (hullPB.value / 18.0);
 }
 
 
@@ -92,8 +103,10 @@ function calcDefence(){
 function Fire(){
   if (warButtonsVisible())
   {
+    createMessage("Fire the cannons!", "You hit for " + calcDamage() + " damage");
     enemyHealth -= calcDamage();
     swapTurns();
+    flankFlag = false;
   }
 }
 
@@ -104,9 +117,12 @@ function Flee(){
     var randVal = Math.random();
     if (randVal < calcFleeStat())
     {
+      createMessage("Run away!", "You flee succesfully");
       return true;
     }
     else {
+      createMessage("There's no escape...", "You fail to flee");
+      flankFlag = false;
       return false;
     }
   }
@@ -120,10 +136,12 @@ function Flank(){
     if (randVal < calcFlankStat())
     {
       flankFlag = true;
+      createMessage("You flank your enemy succesfully", "");
       return true;
     }
     else {
       flankFlag = false;
+      createMessage("You fail to flank your enemy", "");
       return false;
     }
   }
@@ -136,15 +154,17 @@ function calcAIDamage()
 {
   if (enemyFlank == true)
   {
-    return (enemyAttack / 12.0) * 150;
+    return Math.floor(((enemyAttack / 12.0) * 150) * (1.0 - calcDefence()));
   }
   else {
-    return (enemyAttack / 12.0) * 75;
+    return Math.floor(((enemyAttack / 12.0) * 75) * (1.0 - calcDefence()));
   }
 }
 
 function AIFire()
 {
+  enemyFlank = false;
+  createMessage("Your enemy fires their cannons", "You take " + calcAIDamage() + " points of damage");
   TakeDamage(calcAIDamage());
 }
 
@@ -154,10 +174,12 @@ function AIFlank()
   if (randVal < (enemySpeed / 12.0))
   {
     enemyFlank = true;
+    createMessage("Your enemy flanks you", "");
     return true;
   }
   else {
     enemyFlank = false;
+    createMessage("Your enemy tries to flank you...", "but fails");
     return false;
   }
 }
