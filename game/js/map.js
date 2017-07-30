@@ -161,6 +161,9 @@ function Node(container){
   .on('mouseup', function(){
     for (var i = 0; i < this.p.connections.length; i++) {
       if(this.p.connections[i].startNode === currentNode){
+        if(visitNode != null && !visitNode.visited){
+          visitNode.Sprite.texture = Tex_Main["WrittenCircleScored.png"];
+        }
         visitNode = this.p;
       }
     }
