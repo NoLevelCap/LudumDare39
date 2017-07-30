@@ -17,10 +17,9 @@ function loadMainGame(){
   loadShipProgress();
   loadShipManagement();
   loadEventWindow();
-
-  initCombat();
-  inCombat = true;
-
+  
+  //initCombat();
+  //inCombat = true;
 }
 
 function loadLevelData(){
@@ -263,11 +262,9 @@ function EventDisplay(container){
 
     this.currentEvent;
 
-    back = new Sprite(Tex_Main['break.png']);
+    back = new Extras.TilingSprite(Tex_Main['EventBack.png'], 640, 320);
     back.x = 0;
     back.y = 0;
-    back.width = 640;
-    back.height = 320;
     container.addChild(back);
 
     for (var i = 0; i < 16; i++) {
@@ -443,8 +440,11 @@ function PowerBar(container, x, y, name, effect){
       }
 
       console.log("Crew Data: " + crewused + "/" + crew + ":" + id);
-      if(crew < 0){
-        id = 0;
+      if(crew - crewused < 0){
+        id = this.temp_value + (crew - crewused);
+        if(id < 0){
+          id = 0;
+        }
       } else if(crewused + (id - this.temp_value) > crew){
         id = (crew - crewused) + this.temp_value;
       }
@@ -470,7 +470,13 @@ function PowerBar(container, x, y, name, effect){
 
   this.changePower = function(val){
     if(val != 0){
-      this.loadPower(this.temp_value + val);
+      if(this.temp_value + val < 0 && crewused >= crew){
+        intermediatary = this.temp_value;
+        this.loadPower(0);
+        getHighestPowerBar().changePower(val + intermediatary);
+      } else {
+        this.loadPower(this.temp_value + val);
+      }
     }
   }
 

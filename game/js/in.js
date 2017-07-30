@@ -12,7 +12,7 @@ loader
   .load(setup);
 
 //Define any variables that are used in more than one function
-var Tex_Main, state = play;
+var Tex_Main, state = play, MAP;
 function setup() {
   state = play;
 
@@ -20,6 +20,8 @@ function setup() {
 
   loadEvents();
   loadMainGame();
+
+  MAP = new Map(stage);
 
   //get the stage details
   Console.log(stage);
