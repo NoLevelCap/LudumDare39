@@ -184,13 +184,13 @@ function ShipManagment(container){
   container.addChild(crewValue);
 
 
-  bb = new button("Submit", Tex_Main['Button_UI.png'], 1120, 860, 144, 48, function(){SwitchCover(false); hullPB.submitPower(); cannonPB.submitPower(); sailsPB.submitPower(); cookingPB.submitPower()});
+  bb = new button("Submit", Tex_Main['Button_UI.png'], 1120, 860, 144, 48, function(){ pause = false; SwitchCover(false); hullPB.submitPower(); cannonPB.submitPower(); sailsPB.submitPower(); cookingPB.submitPower()});
   container.addChild(bb.Sprite);
 
   hullPB = new PowerBar(container, 140, 620, "HULL");
   cannonPB = new PowerBar(container, 140, 700, "CANNON");
-  sailsPB = new PowerBar(container, 140, 780, "SAILS");
-  cookingPB = new PowerBar(container, 140, 860, "COOKING");
+  sailsPB = new PowerBar(container, 140, 780, "SAILS", function(){ ShipSpeed = 0.1 + (this.value/12) * 1.9;});
+  cookingPB = new PowerBar(container, 140, 860, "COOKING", function() { karma = 0.2 + (this.value/12) * 0.6;});
 
   cover = new Sprite(Tex_Main['break.png']);
   cover.x = -10;
@@ -253,7 +253,6 @@ function EventDisplay(container){
     this.hideEvent = function(){
       this.currentEvent.fire();
       this.container.visible = false;
-      pause = false;
     }
 
     bb = new button("", Tex_Main['End.png'], 640 - 64 - 6, 320 - 64 - 6, 64, 64, function(){EVENTWINDOW.hideEvent();});
@@ -336,10 +335,11 @@ function Wave(x, y, w, h){
   animatables.push(this);
 }
 
-function PowerBar(container, x, y, name){
+function PowerBar(container, x, y, name, effect){
   this.powerbars = new Array();
   this.value = 0;
   this.temp_value = 0;
+  this.effect = effect;
 
   for (var i = 0; i < 12; i++) {
     this.powerbars[i] = new bar(this, x + (82*i) , y, i);
@@ -380,7 +380,6 @@ function PowerBar(container, x, y, name){
       }
 
       for (var i = id; i < 12; i++) {
-        debug.log(i + "/" + id);
         if(this.powerbars[i].active){
           this.powerbars[i].setActive(false);
           crewused--;
@@ -398,6 +397,10 @@ function PowerBar(container, x, y, name){
 
   this.submitPower = function(){
     this.value = this.temp_value;
+    if(this.effect != null){
+      this.effect();
+    }
+
   }
 
   text = new PIXI.Text(name,{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'right'});
