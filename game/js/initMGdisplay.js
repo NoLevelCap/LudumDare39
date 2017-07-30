@@ -10,14 +10,16 @@ function loadMainGame(){
   stage.addChild(MainGameContainer);
 
   shipHealth = 100;
-  inCombat = false;
+
+//  inCombat = true;
+//  initCombat();
 
   loadLevelData();
 
   loadShipViewer();
   loadShipProgress();
   loadShipManagement();
-  loadEventWindow();
+//  loadEventWindow();
 }
 
 function loadLevelData(){
@@ -73,26 +75,80 @@ function ShipViewer(container){
     waves.addChild(Wave_1.Sprite);
   }
 
-
   war = new Container();
   war.visible = false;
   container.addChild(war);
 
-  fire_button = new Graphics();
-  fire_button.beginFill(0x000000);
-  fire_button.drawRect(12, 340, 128, 128);
-  war.addChild(fire_button);
+//  fire_button = new Graphics();
+  fire_button = new warButton(12, 340, Fire);
+  war.addChild(fire_button.container);
+  fire_button.container.addChild(new Sprite(Tex_Main['Fire_Icon.png']))
 
-  flee_button = new Graphics();
-  flee_button.beginFill(0x000000);
-  flee_button.drawRect(24 + 128, 340, 128, 128);
-  war.addChild(flee_button);
+//  flee_button = new Graphics();
+  flee_button = new warButton(24 + 128, 340, Flee);
+  war.addChild(flee_button.container);
+  flee_button.container.addChild(new Sprite(Tex_Main['Flee_Icon.png']))
 
-  flank_button = new Graphics();
-  flank_button.beginFill(0x000000);
-  flank_button.drawRect(12*3 + 128 * 2, 340, 128, 128);
-  war.addChild(flank_button);
+//  flank_button = new Graphics();
+  flank_button = new warButton(36 + 256, 340, Flank);
+  war.addChild(flank_button.container);
+  flank_button.container.addChild(new Sprite(Tex_Main['Flank_Icon.png']))
 
+}
+
+function warButton(x, y, func){
+  console.log("button created");
+  this.baseSprite = new Sprite(Tex_Main['Circular_Button_Normal.png']);
+  this.container = new Container();
+  this.container.addChild(this.baseSprite);
+  this.container.x = x;
+  this.container.y = y;
+  this.container.p = this;
+  this.container.interactive = true;
+
+  this.mouseHover = false;
+  this.mouseDown = false;
+
+  this.func = func;
+
+  this.container
+    .on('mouseover', function(){
+      this.p.mouseHover = true;
+    })
+    .on('mouseout', function(){
+      this.p.mouseHover = false;
+    })
+    .on('mouseup', function(){
+      this.p.mouseDown = false;
+      this.p.mouseHover = true;
+      this.p.func();
+    })
+    .on('mousedown', function(){
+      this.p.mouseDown = true;
+    });
+
+    this.animate = function(){
+      if (this.mouseDown)
+      {
+        this.baseSprite.texture = Tex_Main['Circular_Button_MouseDown.png'];
+      }
+      else {
+        if (this.mouseHover)
+        {
+          this.baseSprite.texture = Tex_Main['Circular_Button_Hover.png'];
+        }
+        else {
+          this.baseSprite.texture = Tex_Main['Circular_Button_Normal.png'];
+        }
+      }
+//      this.Sprite = this.baseSprite;
+    }
+
+    animatables.push(this);
+}
+
+function startWar()
+{
 
 }
 
