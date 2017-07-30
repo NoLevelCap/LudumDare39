@@ -60,5 +60,20 @@ function play() {
     gold = 0;
   }
 
+  if (shipHealth <= 0)
+  {
+    gameOver = true;
+    pause = true;
+  }
+
+  if (gameOver)
+  {
+    usersShip.ShipContainer.y += 2;
+    if (usersShip.ShipContainer.y > 400 && usersShip.ShipContainer.y < 403)
+    {
+      EVENTWINDOW.showEvent(new gameOverMessage());
+    }
+  }
+
   war.visible = warButtonsVisible();
 }
