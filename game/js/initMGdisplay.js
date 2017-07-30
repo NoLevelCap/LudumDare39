@@ -19,7 +19,7 @@ function loadMainGame(){
   loadShipViewer();
   loadShipProgress();
   loadShipManagement();
-//  loadEventWindow();
+  loadEventWindow();
 }
 
 function loadLevelData(){
@@ -53,7 +53,7 @@ function loadEventWindow(){
   eventWindow.x = 640 - 320;
   eventWindow.y = 480 - 400;
   MainGameContainer.addChild(eventWindow);
-
+  
   EVENTWINDOW = new EventDisplay(eventWindow);
   eventWindow.visible = false;
 }
