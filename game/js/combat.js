@@ -5,7 +5,7 @@ function initCombat(){
   inCombat = true;
   flankFlag = false;
   enemyHealth = Math.floor((Math.random() * 10) + 5) * 10;
-  enemyAttack = Math.floor((Math.random() * 6) + cannonPB.value - 3);
+  enemyAttack = Math.floor((Math.random() * 6) + sailsPB.value - 4);
   if (enemyAttack > 12)
   {
     enemyAttack = 12;
@@ -99,7 +99,9 @@ function combatManager(){
     }
     if (enemyHealth <= 0 && !enemySink)
     {
-      createMessage("You have sunk the enemy ship!");
+      moneyPlus = Math.floor(Math.random() * 60) + 10
+      createMessage("You have sunk the enemy ship!", "You gain " + moneyPlus + " gold");
+      gold += moneyPlus;
       enemySink = true;
       animationTimer = 60 * 4;
     }

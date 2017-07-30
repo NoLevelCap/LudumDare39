@@ -54,6 +54,7 @@ function play() {
   }
 
   healthView.text = "Ship health: " + shipHealth;
+  goldValue.text = "Gold: " + gold;
 
   war.visible = warButtonsVisible();
 }
