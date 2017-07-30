@@ -18,12 +18,53 @@ function Map(container){
     }
 
     this.createConnections = function(){
-      console.log(this.segments);
-      this.segments[0].nodes[0].addConnection(this.segments[1].nodes[0]);
-      this.segments[1].nodes[0].addConnection(this.segments[2].nodes[0]);
-      this.segments[2].nodes[0].addConnection(this.segments[3].nodes[0]);
-      this.segments[3].nodes[0].addConnection(this.segments[4].nodes[0]);
-      this.segments[4].nodes[0].addConnection(this.segments[5].nodes[0]);
+      for (var i = 0; i < this.segments.length-1; i++) {
+        if(this.segments[i].nodes.length > this.segments[i+1].nodes.length){
+          if(this.segments[i].nodes.length % this.segments[i+1].nodes.length == 0){
+              if(this.segments[i+1].nodes.length != 1){
+                this.segments[i].nodes[0].addConnection(this.segments[i+1].nodes[0]);
+                this.segments[i].nodes[1].addConnection(this.segments[i+1].nodes[0]);
+                this.segments[i].nodes[2].addConnection(this.segments[i+1].nodes[1]);
+                this.segments[i].nodes[3].addConnection(this.segments[i+1].nodes[1]);
+              } else {
+                for (var n = 0; n < this.segments[i].nodes.length; n++) {
+                  this.segments[i].nodes[n].addConnection(this.segments[i+1].nodes[0]);
+                }
+              }
+          } else {
+              this.segments[i].nodes[0].addConnection(this.segments[i+1].nodes[0]);
+              this.segments[i].nodes[1].addConnection(this.segments[i+1].nodes[getRandomInt(0, 2)]);
+              this.segments[i].nodes[2].addConnection(this.segments[i+1].nodes[1]);
+              if(this.segments[i+1].nodes.length > 2){
+                this.segments[i].nodes[3].addConnection(this.segments[i+1].nodes[2]);
+              }
+          }
+        } else if(this.segments[i].nodes.length < this.segments[i+1].nodes.length){
+          if(this.segments[i+1].nodes.length % this.segments[i].nodes.length == 0){
+            if(this.segments[i].nodes.length != 1){
+                this.segments[i].nodes[0].addConnection(this.segments[i+1].nodes[0]);
+                this.segments[i].nodes[0].addConnection(this.segments[i+1].nodes[1]);
+                this.segments[i].nodes[1].addConnection(this.segments[i+1].nodes[2]);
+                this.segments[i].nodes[1].addConnection(this.segments[i+1].nodes[3]);
+            } else {
+              for (var n = 0; n < this.segments[i+1].nodes.length; n++) {
+                this.segments[i].nodes[0].addConnection(this.segments[i+1].nodes[n]);
+              }
+            }
+          } else {
+              this.segments[i].nodes[0].addConnection(this.segments[i+1].nodes[0]);
+              this.segments[i].nodes[1].addConnection(this.segments[i+1].nodes[2]);
+              this.segments[i].nodes[getRandomInt(0, 2)].addConnection(this.segments[i+1].nodes[1]);
+              if(this.segments[i].nodes.length > 2){
+                this.segments[i].nodes[2].addConnection(this.segments[i+1].nodes[3]);
+              }
+          }
+        } else {
+          for (var n = 0; n < this.segments[i].nodes.length; n++) {
+            this.segments[i].nodes[n].addConnection(this.segments[i+1].nodes[n]);
+          }
+        }
+      }
     }
 
     this.showMap = function(){
@@ -86,8 +127,8 @@ function MapSegment(x){
   this.positionNodes = function(){
     for (var i = 0; i < this.nodes.length; i++) {
       node = this.nodes[i];
-      node.Sprite.x = 160/2 - node.Sprite.width/2;
-      node.Sprite.y = (480/(this.nodes.length))/2 - node.Sprite.height/2 + (i*(480/(this.nodes.length)));
+      node.Sprite.x = 160/2;
+      node.Sprite.y = (480/(this.nodes.length))/2 + (i*(480/(this.nodes.length)));
 
 
     }
@@ -97,12 +138,15 @@ function MapSegment(x){
 function Node(container){
   this.parent = container;
   this.genX = container.segment.x;
-  this.Sprite = new Sprite(Tex_Main["circle.png"]);
+  this.Sprite = new Sprite(Tex_Main["WrittenCircle.png"]);
   this.Sprite.x = 0;
   this.Sprite.y = 0;
-  this.Sprite.width = 48;
-  this.Sprite.height = 48;
+  this.Sprite.width = 64;
+  this.Sprite.height = 64;
+  this.Sprite.anchor.set(0.5, 0.5);
   this.Sprite.p = this;
+
+
   container.segment.addChild(this.Sprite);
 
   this.connections = new Array();
@@ -116,34 +160,23 @@ function Connection(Node1, Node2){
   this.startNode = Node1;
   this.endNode = Node2;
 
-  this.line = new Sprite(Tex_Main["break.png"]);
-  this.line.position.set(this.startNode.Sprite.x, this.startNode.Sprite.y);
-  this.line.height = 5;
+
   dy = (this.startNode.Sprite.y - this.endNode.Sprite.y) * -1;
-  this.line.width = Math.hypot(160, dy); //use pythagoras to get width;
+  cw = Math.hypot(160, dy) * 0.8;
+  var shiftfactor = 128/cw * 32;
+  this.line = new Extras.TilingSprite(Tex_Main["WrittenLine.png"], cw, 8);
+  this.line.height = 8;
+  this.line.anchor.set(0, 0.5);
+  this.line.width = cw; //use pythagoras to get width;
   dx = 160;
-  /*if(dy > 160){
-    dx = dy;
-    dy = 160;
-  }*/
-
-  console.log("Delta y: " + dy + "/ dx: " + dx + " = " + Math.tan(dy/dx))
-
-  val =  Math.tan((dy/dx)/(Math.PI/2));
-  /*if(dy > 0){
-    val = Math.tan((dy/dx));
-  }*/
-  //this.line.rotation = 90 * (Math.PI/180);
+  var angleRadians = Math.atan2(dy, 160);
+  mx = (dx/cw) * 0.8;
+  my = (dy/cw) * 0.8;
+  //console.log("Delta y: " + dy + "/ dx: " + dx + " = " + mx + "/" + my + "cw" + cw + "sf" + shiftfactor)
+  val = angleRadians;
+  this.line.position.set(this.line.width/2 + mx*shiftfactor, this.startNode.Sprite.y + my*shiftfactor);
   this.line.rotation = val;
   this.startNode.parent.segment.addChild(this.line);
-
-  this.gr = new Graphics();
-  this.gr.position.set(this.startNode.Sprite.x, this.startNode.Sprite.y);
-  this.gr.lineStyle(5, 0xffffff)
-       .moveTo(0, 0)
-       .lineTo(this.endNode.Sprite.x + 160, this.endNode.Sprite.y-this.startNode.Sprite.y);
-
-  this.startNode.parent.segment.addChild(this.gr);
 
 
 }
