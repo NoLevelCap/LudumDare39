@@ -248,7 +248,7 @@ function ShipManagment(container){
   goldValue.y = 740;
   container.addChild(goldValue);
 
-  bb = new button("Submit", Tex_Main['Button_UI.png'], 1120, 860, 144, 48, function(){ pause = false; SwitchCover(false); hullPB.submitPower(); cannonPB.submitPower(); sailsPB.submitPower(); cookingPB.submitPower()});
+  bb = new button("Submit", Tex_Main['Button_UI.png'], 1120, 860, 144, 48, function(){InitLevel();});
   container.addChild(bb.Sprite);
 
   hullPB = new PowerBar(container, 140, 620, "HULL");

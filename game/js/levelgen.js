@@ -16,3 +16,17 @@ function getRandomInt(min, max) {
 function Level(){
   this.POI = getPoints();
 }
+
+function InitLevel(){
+  pause = false;
+  SwitchCover(false);
+  hullPB.submitPower();
+  cannonPB.submitPower();
+  sailsPB.submitPower();
+  cookingPB.submitPower();
+
+  MAP.hideMap();
+
+  currentNode = visitNode;
+  currentNode.setVisted();
+}
