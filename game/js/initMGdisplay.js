@@ -53,7 +53,7 @@ function loadEventWindow(){
   eventWindow.x = 640 - 320;
   eventWindow.y = 480 - 400;
   MainGameContainer.addChild(eventWindow);
-  
+
   EVENTWINDOW = new EventDisplay(eventWindow);
   eventWindow.visible = false;
 }
@@ -420,8 +420,11 @@ function PowerBar(container, x, y, name, effect){
       }
 
       console.log("Crew Data: " + crewused + "/" + crew + ":" + id);
-      if(crew < 0){
-        id = 0;
+      if(crew - crewused < 0){
+        id = this.temp_value + (crew - crewused);
+        if(id < 0){
+          id = 0;
+        }
       } else if(crewused + (id - this.temp_value) > crew){
         id = (crew - crewused) + this.temp_value;
       }
@@ -447,7 +450,13 @@ function PowerBar(container, x, y, name, effect){
 
   this.changePower = function(val){
     if(val != 0){
-      this.loadPower(this.temp_value + val);
+      if(this.temp_value + val < 0 && crewused >= crew){
+        intermediatary = this.temp_value;
+        this.loadPower(0);
+        getHighestPowerBar().changePower(val + intermediatary);
+      } else {
+        this.loadPower(this.temp_value + val);
+      }
     }
   }
 
