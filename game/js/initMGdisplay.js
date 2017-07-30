@@ -11,15 +11,16 @@ function loadMainGame(){
 
   shipHealth = 100;
 
-  inCombat = true;
-  initCombat();
-
   loadLevelData();
 
   loadShipViewer();
   loadShipProgress();
   loadShipManagement();
-//  loadEventWindow();
+  loadEventWindow();
+
+  initCombat();
+  inCombat = true;
+
 }
 
 function loadLevelData(){
@@ -354,6 +355,28 @@ function MiniShip(container, x, y, w, h){
 }
 
 function Ship(container, x, y){
+  this.ShipContainer = new Container();
+  this.ShipContainer.x = x;
+  this.ShipContainer.y = y;
+  container.addChild(this.ShipContainer);
+
+  this.Sprite = new Sprite(Tex_Main['Ship.png']);
+  this.Sprite.x = 480;
+  this.Sprite.y = 460;
+  this.Sprite.width = 960;
+  this.Sprite.height = 560;
+  this.Sprite.anchor = new PIXI.Point(0.5, 1);
+  this.ShipContainer.addChild(this.Sprite);
+
+  this.animate = function(){
+    this.Sprite.rotation = .035 * Math.sin(Date.now() / 256);
+    //this.Sprite.rotation += .01;
+  }
+
+  animatables.push(this);
+}
+
+function enemyShip(container, x, y){
   this.ShipContainer = new Container();
   this.ShipContainer.x = x;
   this.ShipContainer.y = y;

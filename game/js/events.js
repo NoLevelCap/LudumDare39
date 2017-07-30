@@ -139,5 +139,5 @@ function changeCrewmen(val){
 function emptyEvent(text, description){
   this.text = text;
   this.final = description;
-  this.fire = function(){};
+  this.fire = function(){pause=false;};
 }
