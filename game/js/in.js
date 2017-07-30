@@ -45,10 +45,15 @@ function play() {
   if (!inCombat)
   {
     Sail();
+    enemyHealthView.visible = false;
   }
   else {
     combatManager();
+    enemyHealthView.visible = true;
+    enemyHealthView.text = "Enemy health: " + enemyHealth;
   }
+
+  healthView.text = "Ship health: " + shipHealth;
 
   war.visible = warButtonsVisible();
 }
