@@ -262,11 +262,9 @@ function EventDisplay(container){
 
     this.currentEvent;
 
-    back = new Sprite(Tex_Main['break.png']);
+    back = new Extras.TilingSprite(Tex_Main['EventBack.png'], 640, 320);
     back.x = 0;
     back.y = 0;
-    back.width = 640;
-    back.height = 320;
     container.addChild(back);
 
     for (var i = 0; i < 16; i++) {
