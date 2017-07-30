@@ -1,11 +1,11 @@
-var flankFlag, enemyHealth, enemyAttack, enemySpeed, playerTurn, enemyTurn, enemyFlank, shipHealth = 100, AITimer, animationTimer, enemyEnter, enemySink, AIShip;
+var flankFlag, enemyHealth, enemyAttack, enemySpeed, playerTurn, enemyTurn, enemyFlank, shipHealth = 100, AITimer, animationTimer, enemyEnter, enemySink, AIShip, animFlee;
 
 // Initialise combat scenario
 function initCombat(){
   inCombat = true;
   flankFlag = false;
   enemyHealth = Math.floor((Math.random() * 10) + 5) * 10;
-  enemyAttack = Math.floor((Math.random() * 6) + cannonPB.value - 3);
+  enemyAttack = Math.floor((Math.random() * 6) + sailsPB.value - 4);
   if (enemyAttack > 12)
   {
     enemyAttack = 12;
@@ -16,6 +16,7 @@ function initCombat(){
   }
   enemyEnter = true;
   enemySink = false;
+  animFlee = false;
   animationTimer = Math.floor(60 * 3.9);
   enemySpeed = Math.floor((Math.random() * 6) + 3);
   playerTurn = true;
@@ -34,7 +35,7 @@ function createMessage(text, subtext)
 
 function warButtonsVisible()
 {
-  if (inCombat && playerTurn && !pause && !enemyEnter && !enemySink)
+  if (inCombat && playerTurn && !pause && !enemyEnter && !enemySink && !animFlee)
   {
     return true;
   }
@@ -67,6 +68,16 @@ function combatManager(){
         enemyHealth = 1;
       }
     }
+    else if (animFlee)
+    {
+      animationTimer -= 1;
+      AIShip.ShipContainer.x -= 6;
+      if (animationTimer <= 0)
+      {
+        animFlee = false;
+        inCombat = false;
+      }
+    }
     else {
       if (enemyTurn)
       {
@@ -88,7 +99,9 @@ function combatManager(){
     }
     if (enemyHealth <= 0 && !enemySink)
     {
-      createMessage("You have sunk the enemy ship!");
+      moneyPlus = Math.floor(Math.random() * 60) + 10
+      createMessage("You have sunk the enemy ship!", "You gain " + moneyPlus + " gold");
+      gold += moneyPlus;
       enemySink = true;
       animationTimer = 60 * 4;
     }
@@ -150,6 +163,8 @@ function Flee(){
     if (randVal < calcFleeStat())
     {
       createMessage("Run away!", "You flee succesfully");
+      animFlee = true;
+      animationTimer = 60 * 4;
       return true;
     }
     else {

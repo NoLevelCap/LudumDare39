@@ -8,14 +8,23 @@ function CheckPassedPOI(){
     eventLoc = miniProgressShip.lastYard / 100;
 
     if(LOADEDLEVEL.POI.includes(eventLoc-1)){
+      debug.log("Create event");
       EVENTWINDOW.showEvent(DrawEvent());
+      pause = true;
+    }
+    else {
+      if (Math.random() <= 0.25)
+      {
+//        initCombat();
+//        pause = true;
+      }
     }
 
-    if(CrewSwitchingEnabled != true){
-      SwitchCover(true);
-    }
+//    if(CrewSwitchingEnabled != true){
+//      SwitchCover(true);
+//    }
 
-    pause = true;
+//    pause = true;
     miniProgressShip.eventPassed = false;
   }
 }

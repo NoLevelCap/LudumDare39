@@ -2,7 +2,7 @@
 
 var MainGameContainer, SHIPVIEWER, SHIPROGRESS, SHIPMANAGMENT, LOADEDLEVEL, EVENTWINDOW,
 miniProgressShip, scrollingBackground, hullPB, cannonPB, sailsPB, cookingPB, shipHealth, inCombat, war,
-cover, crewValue, healthView, enemyHealthView,
+cover, crewValue, healthView, enemyHealthView, goldValue, gold,
 animatables = new Array();
 
 function loadMainGame(){
@@ -10,6 +10,8 @@ function loadMainGame(){
   stage.addChild(MainGameContainer);
 
   shipHealth = 100;
+  gold = 0;
+  pause = true;
 
   loadLevelData();
 
@@ -17,8 +19,6 @@ function loadMainGame(){
   loadShipProgress();
   loadShipManagement();
   loadEventWindow();
-
-//  initCombat();
 }
 
 function loadLevelData(){
@@ -243,6 +243,10 @@ function ShipManagment(container){
   crewValue.y = 640;
   container.addChild(crewValue);
 
+  goldValue = new PIXI.Text("Gold: ",{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'center'});
+  goldValue.x = 1130;
+  goldValue.y = 740;
+  container.addChild(goldValue);
 
   bb = new button("Submit", Tex_Main['Button_UI.png'], 1120, 860, 144, 48, function(){ pause = false; SwitchCover(false); hullPB.submitPower(); cannonPB.submitPower(); sailsPB.submitPower(); cookingPB.submitPower()});
   container.addChild(bb.Sprite);
@@ -298,14 +302,21 @@ function EventDisplay(container){
     this.showEvent = function(event){
       this.currentEvent = event;
 
+      debug.log("A");
+
       this.container.visible = true;
       this.eventSpeech.text = event.text;
       this.eventSpeech.x = 320 - this.eventSpeech.width/2;
       this.eventSpeech.y = 160 - this.eventSpeech.height;
 
+      debug.log("B");
+
       this.eventDesc.text = event.final;
       this.eventDesc.x = 320 - this.eventDesc.width/2;
       this.eventDesc.y = this.eventSpeech.y + this.eventSpeech.height + 40;
+
+      debug.log("C");
+
     }
 
     this.hideEvent = function(){

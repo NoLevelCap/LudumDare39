@@ -12,7 +12,12 @@ function loadEvents(){
       commaSplits[2] = commaSplits[2].replace(/ /g, "");
       commaSplits[3] = commaSplits[3].replace(/"/g, "");
       commaSplits[4] = commaSplits[4].replace(/ /g, "");
-      EventCollection.push(new EventData(commaSplits[0], commaSplits[1], commaSplits[2], commaSplits[3], (commaSplits[4] == 'true')));
+      ifGood = false;
+      if (commaSplits[4] == "true")
+      {
+        ifGood = true;
+      }
+      EventCollection.push(new EventData(commaSplits[0], commaSplits[1], commaSplits[2], commaSplits[3], ifGood));
     }
   }
 
@@ -43,6 +48,8 @@ function DrawEvent(ignore){
   debug.log("Is good? " + isGood + " with " + (karma*100) + "% chance.");
   while (true) {
     event = EventCollection[getRandomInt(0, EventCollection.length)];
+//    debug.log(event);
+    debug.log(event.good + ", " + isGood);
     if(event.good == isGood){
       return event;
     }
@@ -67,11 +74,12 @@ function EventData(text, type, vari, final, good){
   this.final = this.getFinal();
 
   this.fire = function(){
+    debug.log("HEY");
     this.vari = this.getVari();
     this.text = this.getText();
     this.final = this.getFinal();
-
     this.type(this.vari);
+    pause = false;
   }
 }
 
