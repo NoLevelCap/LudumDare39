@@ -27,13 +27,13 @@ AI - Should be done in Adobe Illustrator; Do a temp one in GIMP or whatever in t
 [X] - EndProgressIcon (64x64)
 [X] - LoResShip (96x56)
 [X] - EnemyShip (960x560)
-[ ] - DiaryCoverWNameArea (1280x480)
-[ ] - DismissArrow (128x128)
-[ ] - WrittenCircle (128x128)
-[ ] - WrittenX (128x128)
-[ ] - WrittenCircleScoredOrTicked (128x128)
-[ ] - CurvedArrowRight (512x128)
-[ ] - VerticallyFlippedCurvedArrowRight (512x128)
+[X] - DiaryCoverWNameArea (1280x480)
+[X] - DismissArrow (128x128)
+[X] - WrittenCircle (128x128)
+[X] - WrittenX (128x128)
+[X] - WrittenCircleScoredOrTicked (128x128)
+[X] - CurvedArrowRight (512x128)
+[X] - VerticallyFlippedCurvedArrowRight (512x128)
 
 Notes:
 For PowerBar, I was thinking a seat - or a plank. Something the person can go on.
