@@ -2,7 +2,7 @@
 
 var MainGameContainer, SHIPVIEWER, SHIPROGRESS, SHIPMANAGMENT, LOADEDLEVEL, EVENTWINDOW,
 miniProgressShip, scrollingBackground, hullPB, cannonPB, sailsPB, cookingPB, shipHealth, inCombat, war,
-cover, crewValue, healthView, enemyHealthView, goldValue, gold, submit, canEditPower, gameOver, usersShip
+cover, crewValue, healthView, enemyHealthView, goldValue, gold, submit, canEditPower, gameOver, usersShip, crew,
 animatables = new Array();
 
 function loadMainGame(){

@@ -61,7 +61,7 @@ function play() {
     gold = 0;
   }
 
-  if (shipHealth <= 0)
+  if (shipHealth <= 0 || crew <= 0)
   {
     gameOver = true;
     pause = true;
