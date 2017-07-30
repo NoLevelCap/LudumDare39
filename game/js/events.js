@@ -17,6 +17,7 @@ function loadEvents(){
       commaSplits[0] = commaSplits[0].replace(/{invval}/g, "" + -commaSplits[2]);
       commaSplits[3] = commaSplits[3].replace(/{val}/g, "" + commaSplits[2]);
       commaSplits[3] = commaSplits[3].replace(/{invval}/g, "" + -commaSplits[2]);
+      commaSplits[0] = commaSplits[0].replace(/{nl}/g, "\n");
       EventCollection.push(new EventData(commaSplits[0], commaSplits[1], commaSplits[2], commaSplits[3], (commaSplits[4] == 'true')));
     }
   }

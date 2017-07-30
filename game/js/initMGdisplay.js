@@ -1,6 +1,6 @@
 //This file loads the main game display
 
-var MainGameContainer, SHIPVIEWER, SHIPROGRESS, SHIPMANAGMENT, LOADEDLEVEL,
+var MainGameContainer, SHIPVIEWER, SHIPROGRESS, SHIPMANAGMENT, LOADEDLEVEL, EVENTWINDOW,
 miniProgressShip, scrollingBackground, hullPB, cannonPB, sailsPB, cookingPB, shipHealth, inCombat, war,
 cover, crewValue,
 animatables = new Array();
@@ -17,6 +17,7 @@ function loadMainGame(){
   loadShipViewer();
   loadShipProgress();
   loadShipManagement();
+  loadEventWindow();
 }
 
 function loadLevelData(){
@@ -43,6 +44,15 @@ function loadShipManagement(){
   MainGameContainer.addChild(shipManagement);
 
   SHIPMANAGMENT = new ShipManagment(shipManagement);
+}
+
+function loadEventWindow(){
+  eventWindow = new Container();
+  eventWindow.x = 640 - 320;
+  eventWindow.y = 480 - 400;
+  MainGameContainer.addChild(eventWindow);
+
+  EVENTWINDOW = new EventDisplay(eventWindow);
 }
 
 function ShipViewer(container){
@@ -188,6 +198,52 @@ function ShipManagment(container){
   cover.height = 600;
   cover.visible = false;
   container.addChild(cover);
+}
+
+function EventDisplay(container){
+    this.container = container;
+
+    back = new Sprite(Tex_Main['break.png']);
+    back.x = 0;
+    back.y = 0;
+    back.width = 640;
+    back.height = 320;
+    container.addChild(back);
+
+    for (var i = 0; i < 16; i++) {
+      embossTop = new Sprite(Tex_Main['Trim.png']);
+      embossTop.x = i * 40;
+      embossTop.y = -10;
+      container.addChild(embossTop);
+    }
+
+    for (var i = 0; i < 16; i++) {
+      embossTop = new Sprite(Tex_Main['Trim.png']);
+      embossTop.x = i * 40;
+      embossTop.y = 320;
+      container.addChild(embossTop);
+    }
+
+    this.eventSpeech = new PIXI.Text("This is where the event \n information goes. \n another line",{fontFamily : 'Permanent Marker', fontSize: 32, fill : 0x000000, align : 'center'});
+    this.eventSpeech.x = 320 - this.eventSpeech.width/2;
+    this.eventSpeech.y = 160 - this.eventSpeech.height;
+    container.addChild(this.eventSpeech);
+
+    this.eventDesc = new PIXI.Text("This is where the event \n information goes.",{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'center'});
+    this.eventDesc.x = 320 - this.eventDesc.width/2;
+    this.eventDesc.y = this.eventSpeech.y + this.eventSpeech.height + 40;
+    container.addChild(this.eventDesc);
+
+    this.showEvent = function(event){
+      this.container.visible = true;
+      this.eventSpeech.text = event.text;
+      this.eventSpeech.x = 320 - this.eventSpeech.width/2;
+      this.eventSpeech.y = 160 - this.eventSpeech.height;
+
+      this.eventDesc.text = event.final;
+      this.eventDesc.x = 320 - this.eventDesc.width/2;
+      this.eventDesc.y = this.eventSpeech.y + this.eventSpeech.height + 40;
+    }
 }
 
 function MiniShip(container, x, y, w, h){

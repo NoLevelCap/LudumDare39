@@ -1,13 +1,13 @@
-"You find {val} shillings worth of buried treasure!",gold,50,"You gain {val} gold.",true
-"Good weather means you reach your next destination sooner than expected...",skip,1,"You skip {val} destination.",true
-"You come across a stranded pirate who joins your crew",lowest_stat,1,"You gain {val} crewmen.",true
-"You come across a lifeboat with willing pirates who join your crew",all_stats,1,"You gain {val} crewmen in all stats.",true
-"Your crewmen band together to repair the ship",health,30,"You gain {val} hull points.",true
-"Some of your crew catch scurvy and die!",highest_stat,-2,"You lose {invval} crewmen.",true
-"Some of your crew decide to commit mutiny and skarper in a lifeboat",all_stats,-1,"You lose {invval} crewmen in all stats.",true
-"Your ship hits a big wave and one of your crew goes overboard!",sails,-1,"You lose {invval} crew in sails.",true
-"Your ship hits some rocks and gets damaged",health,-20,"You lose {invval} hull points.",true
-"Some loose gunpowder goes off and some of your cannon men die",cannons,-2,"You lose {invval} crew in cannons.",true
-"Stormy weather means your ship takes some significant damage",health,-20,"You lose {invval} hull points.",true
-"Your foods gone stale and one of your cooks dies from trying it",cooks,-1,"You lose {invval} crew in cooks.",true
-"An unsecured treasure chest goes overboard and is lost!",gold,-20,"You lose {invval} gold.",true
+"You find {val} shillings worth of{nl}buried treasure!",gold,50,"You gain {val} gold.",true
+"Good weather!{nl}means you reach your next destination{nl}sooner than expected...",skip,1,"You skip {val} destination.",true
+"You come across a stranded pirate{nl}who joins your crew",lowest_stat,1,"You gain {val} crewmen.",true
+"You come across a lifeboat{nl}with willing pirates{nl}who join your crew",all_stats,1,"You gain {val} crewmen in all stats.",true
+"Your crewmen band together{nl}to repair the ship",health,30,"You gain {val} hull points.",true
+"Some of your crew{nl}catch scurvy and die!",highest_stat,-2,"You lose {invval} crewmen.",true
+"Some of your crew{nl}decide to commit mutiny and skarper{nl}in a lifeboat",all_stats,-1,"You lose {invval} crewmen in all stats.",true
+"Your ship hits a big wave{nl}one of your crew goes overboard!",sails,-1,"You lose {invval} crew in sails.",true
+"Your ship hits some rocks!{nl}It gets damaged",health,-20,"You lose {invval} hull points.",true
+"Some loose gunpowder goes off{nl}Some of your cannon men die",cannons,-2,"You lose {invval} crew in cannons.",true
+"Stormy weather!{nl}Your ship takes some{nl}significant damage",health,-20,"You lose {invval} hull points.",true
+"Your foods gone stale!{nl}One of your cooks dies from trying it",cooks,-1,"You lose {invval} crew in cooks.",true
+"An unsecured treasure chest{nl}goes overboard and is lost!",gold,-20,"You lose {invval} gold.",true
