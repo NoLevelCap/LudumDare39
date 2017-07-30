@@ -1,6 +1,6 @@
 //This file loads the main game display
 
-var MainGameContainer, SHIPVIEWER, SHIPROGRESS, SHIPMANAGMENT, LOADEDLEVEL,
+var MainGameContainer, SHIPVIEWER, SHIPROGRESS, SHIPMANAGMENT, LOADEDLEVEL, EVENTWINDOW,
 miniProgressShip, scrollingBackground, hullPB, cannonPB, sailsPB, cookingPB, shipHealth, inCombat, war,
 cover, crewValue,
 animatables = new Array();
@@ -17,6 +17,7 @@ function loadMainGame(){
   loadShipViewer();
   loadShipProgress();
   loadShipManagement();
+  loadEventWindow();
 }
 
 function loadLevelData(){
@@ -45,8 +46,18 @@ function loadShipManagement(){
   SHIPMANAGMENT = new ShipManagment(shipManagement);
 }
 
+function loadEventWindow(){
+  eventWindow = new Container();
+  eventWindow.x = 640 - 320;
+  eventWindow.y = 480 - 400;
+  MainGameContainer.addChild(eventWindow);
+
+  EVENTWINDOW = new EventDisplay(eventWindow);
+  eventWindow.visible = false;
+}
+
 function ShipViewer(container){
-  scrollingBackground = new Sprite(PIXI.loader.resources["res/backs/BackgroundSkies.png"].texture)
+  scrollingBackground = new Extras.TilingSprite(PIXI.loader.resources["res/backs/BackgroundSkies.png"].texture, 8192, 480);
   scrollingBackground.setTransform(0, 0);
   container.addChild(scrollingBackground);
 
@@ -173,7 +184,7 @@ function ShipManagment(container){
   container.addChild(crewValue);
 
 
-  bb = new button("Submit", 1120, 860, function(){SwitchCover(false); hullPB.submitPower(); cannonPB.submitPower(); sailsPB.submitPower(); cookingPB.submitPower()});
+  bb = new button("Submit", Tex_Main['Button_UI.png'], 1120, 860, 144, 48, function(){SwitchCover(false); hullPB.submitPower(); cannonPB.submitPower(); sailsPB.submitPower(); cookingPB.submitPower()});
   container.addChild(bb.Sprite);
 
   hullPB = new PowerBar(container, 140, 620, "HULL");
@@ -188,6 +199,66 @@ function ShipManagment(container){
   cover.height = 600;
   cover.visible = false;
   container.addChild(cover);
+}
+
+function EventDisplay(container){
+    this.container = container;
+
+    this.currentEvent;
+
+    back = new Sprite(Tex_Main['break.png']);
+    back.x = 0;
+    back.y = 0;
+    back.width = 640;
+    back.height = 320;
+    container.addChild(back);
+
+    for (var i = 0; i < 16; i++) {
+      embossTop = new Sprite(Tex_Main['Trim.png']);
+      embossTop.x = i * 40;
+      embossTop.y = -10;
+      container.addChild(embossTop);
+    }
+
+    for (var i = 0; i < 16; i++) {
+      embossTop = new Sprite(Tex_Main['Trim.png']);
+      embossTop.x = i * 40;
+      embossTop.y = 320;
+      container.addChild(embossTop);
+    }
+
+    this.eventSpeech = new PIXI.Text("This is where the event \n information goes. \n another line",{fontFamily : 'Permanent Marker', fontSize: 32, fill : 0x000000, align : 'center'});
+    this.eventSpeech.x = 320 - this.eventSpeech.width/2;
+    this.eventSpeech.y = 160 - this.eventSpeech.height;
+    container.addChild(this.eventSpeech);
+
+    this.eventDesc = new PIXI.Text("This is where the event \n information goes.",{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'center'});
+    this.eventDesc.x = 320 - this.eventDesc.width/2;
+    this.eventDesc.y = this.eventSpeech.y + this.eventSpeech.height + 40;
+    container.addChild(this.eventDesc);
+
+    this.showEvent = function(event){
+      this.currentEvent = event;
+
+      this.container.visible = true;
+      this.eventSpeech.text = event.text;
+      this.eventSpeech.x = 320 - this.eventSpeech.width/2;
+      this.eventSpeech.y = 160 - this.eventSpeech.height;
+
+      this.eventDesc.text = event.final;
+      this.eventDesc.x = 320 - this.eventDesc.width/2;
+      this.eventDesc.y = this.eventSpeech.y + this.eventSpeech.height + 40;
+    }
+
+    this.hideEvent = function(){
+      this.currentEvent.fire();
+      this.container.visible = false;
+      pause = false;
+    }
+
+    bb = new button("", Tex_Main['End.png'], 640 - 64 - 6, 320 - 64 - 6, 64, 64, function(){EVENTWINDOW.hideEvent();});
+    container.addChild(bb.Sprite);
+    debug.log(bb);
 }
 
 function MiniShip(container, x, y, w, h){
@@ -281,13 +352,21 @@ function PowerBar(container, x, y, name){
   };
 
   this.loadPower = function(id){
-      if(!this.powerbars[id].active){
-        id++;
+      if(id < 0){
+        id = 0;
+      }
+      if(id >= 12){
+        id = 12;
       }
 
-      console.log("Crew Data: " + crewused + "/" + crew);
+      if(id == 1 && this.powerbars[0].active && this.temp_value < 2){
+        id--;
+      }
 
-      if(crewused + (id - this.temp_value) > crew){
+      console.log("Crew Data: " + crewused + "/" + crew + ":" + id);
+      if(crew < 0){
+        id = 0;
+      } else if(crewused + (id - this.temp_value) > crew){
         id = (crew - crewused) + this.temp_value;
       }
 
@@ -301,6 +380,7 @@ function PowerBar(container, x, y, name){
       }
 
       for (var i = id; i < 12; i++) {
+        debug.log(i + "/" + id);
         if(this.powerbars[i].active){
           this.powerbars[i].setActive(false);
           crewused--;
@@ -309,6 +389,12 @@ function PowerBar(container, x, y, name){
 
       crewValue.text = crewused + "/" + crew;
   };
+
+  this.changePower = function(val){
+    if(val != 0){
+      this.loadPower(this.temp_value + val);
+    }
+  }
 
   this.submitPower = function(){
     this.value = this.temp_value;
@@ -320,17 +406,19 @@ function PowerBar(container, x, y, name){
   container.addChild(text);
 }
 
-function button(name, x, y, func){
+function button(name, texture, x, y, w, h, func){
   console.log("button created");
-  this.Sprite = new Sprite(Tex_Main['Button_UI.png']);
+  this.Sprite = new Sprite(texture);
   this.Sprite.x = x;
   this.Sprite.y = y;
+  this.Sprite.width = w;
+  this.Sprite.height = h;
   this.Sprite.p = this;
   this.Sprite.interactive = true;
 
   text = new PIXI.Text(name,{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'right'});
-  text.x = 24;
-  text.y = 8;
+  text.x = text.width/2 - 8;
+  text.y = text.height/2 - 8;
   this.Sprite.addChild(text);
 
   this.func = func;
@@ -388,7 +476,7 @@ function bar(p, x, y, id, active){
       this.y = this.p.sy;
     })
     .on('mouseup', function(){
-      this.p.parent.loadPower(id);
+      this.p.parent.loadPower(id+1);
     });
 
   this.animate = function(){

@@ -8,6 +8,7 @@ loader
   .add("res/main.json")
   .add("res/backs/BackgroundSkies.png")
   .add("res/backs/PixelatedBackgroundSkies.png")
+  .add("EventData", "dats/events.txt")
   .load(setup);
 
 //Define any variables that are used in more than one function
@@ -17,6 +18,7 @@ function setup() {
 
   Tex_Main = PIXI.loader.resources["res/main.json"].textures;
 
+  loadEvents();
   loadMainGame();
 
   //get the stage details
