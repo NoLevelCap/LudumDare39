@@ -1,5 +1,5 @@
 
-var ShipSpeed = .5, pause = false;
+var ShipSpeed = .1, pause = false, CrewSwitchingEnabled = true, crew = 8, crewused = 0;
 
 function CheckPassedPOI(){
   if(miniProgressShip.eventPassed){
@@ -11,6 +11,9 @@ function CheckPassedPOI(){
     } else {
       console.log("change location " + eventLoc + "/" + miniProgressShip.lastYard + "/" + miniProgressShip.yards);
       console.log(LOADEDLEVEL.POI);
+      if(CrewSwitchingEnabled != true){
+        SwitchCover(true);
+      }
     }
 
     miniProgressShip.eventPassed = false;
@@ -20,9 +23,18 @@ function CheckPassedPOI(){
 function Sail(){
   if(!pause){
     miniProgressShip.increaseYards(ShipSpeed);
-    scrollingBackground.x = -miniProgressShip.yards * 0.5;
+    scrollingBackground.x = -miniProgressShip.yards * 2.1;
     CheckPassedPOI();
   }
 
   //console.log(miniProgressShip);
+}
+
+function SwitchCover(crew){
+  CrewSwitchingEnabled = crew;
+  if(CrewSwitchingEnabled){
+    cover.visible = false;
+  } else {
+    cover.visible = true;
+  }
 }
