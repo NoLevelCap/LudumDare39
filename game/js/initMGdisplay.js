@@ -281,13 +281,21 @@ function PowerBar(container, x, y, name){
   };
 
   this.loadPower = function(id){
-      if(!this.powerbars[id].active){
-        id++;
+      if(id < 0){
+        id = 0;
+      }
+      if(id >= 12){
+        id = 12;
       }
 
-      console.log("Crew Data: " + crewused + "/" + crew);
+      if(id == 1 && this.powerbars[0].active && this.temp_value < 2){
+        id--;
+      }
 
-      if(crewused + (id - this.temp_value) > crew){
+      console.log("Crew Data: " + crewused + "/" + crew + ":" + id);
+      if(crew < 0){
+        id = 0;
+      } else if(crewused + (id - this.temp_value) > crew){
         id = (crew - crewused) + this.temp_value;
       }
 
@@ -301,6 +309,7 @@ function PowerBar(container, x, y, name){
       }
 
       for (var i = id; i < 12; i++) {
+        debug.log(i + "/" + id);
         if(this.powerbars[i].active){
           this.powerbars[i].setActive(false);
           crewused--;
@@ -309,6 +318,12 @@ function PowerBar(container, x, y, name){
 
       crewValue.text = crewused + "/" + crew;
   };
+
+  this.changePower = function(val){
+    if(val != 0){
+      this.loadPower(this.temp_value + val);
+    }
+  }
 
   this.submitPower = function(){
     this.value = this.temp_value;
@@ -388,7 +403,7 @@ function bar(p, x, y, id, active){
       this.y = this.p.sy;
     })
     .on('mouseup', function(){
-      this.p.parent.loadPower(id);
+      this.p.parent.loadPower(id+1);
     });
 
   this.animate = function(){

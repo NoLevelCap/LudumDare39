@@ -4,6 +4,8 @@ var Container = PIXI.Container,
     resources = PIXI.loader.resources,
     Sprite = PIXI.Sprite,
     Graphics = PIXI.Graphics,
+    debug = new Debug(true),
+    Debug = debug,
     Console = console;
 
 WebFontConfig = {
@@ -23,3 +25,12 @@ WebFontConfig = {
   var s = document.getElementsByTagName('script')[0];
   s.parentNode.insertBefore(wf, s);
 })();
+
+function Debug(db){
+  this.debug = db;
+  this.log = function(string){
+    if(this.debug){
+      console.log(string);
+    }
+  }
+}
