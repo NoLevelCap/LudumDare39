@@ -15,8 +15,9 @@ function CheckPassedPOI(){
     else {
       if (Math.random() <= 0.25)
       {
-//        initCombat();
-//        pause = true;
+
+       initCombat();
+       pause = true;
       }
     }
 
@@ -40,11 +41,16 @@ function Sail(){
 }
 
 function SwitchCover(crew){
+  debug.log("Show crew " + crew);
   CrewSwitchingEnabled = crew;
   if(CrewSwitchingEnabled){
-    cover.visible = false;
+    submit.Sprite.visible = true;
+    canEditPower = true;
+//    cover.visible = false;
   } else {
-    cover.visible = true;
+    submit.Sprite.visible = false;
+    canEditPower = false;
+//    cover.visible = true;
   }
 }
 

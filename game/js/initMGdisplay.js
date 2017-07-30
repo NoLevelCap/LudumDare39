@@ -2,7 +2,7 @@
 
 var MainGameContainer, SHIPVIEWER, SHIPROGRESS, SHIPMANAGMENT, LOADEDLEVEL, EVENTWINDOW,
 miniProgressShip, scrollingBackground, hullPB, cannonPB, sailsPB, cookingPB, shipHealth, inCombat, war,
-cover, crewValue, healthView, enemyHealthView, goldValue, gold,
+cover, crewValue, healthView, enemyHealthView, goldValue, gold, submit, canEditPower,
 animatables = new Array();
 
 function loadMainGame(){
@@ -12,6 +12,7 @@ function loadMainGame(){
   shipHealth = 100;
   gold = 0;
   pause = true;
+  canEditPower = true;
 
   loadLevelData();
 
@@ -248,8 +249,8 @@ function ShipManagment(container){
   goldValue.y = 740;
   container.addChild(goldValue);
 
-  bb = new button("Submit", Tex_Main['Button_UI.png'], 1120, 860, 144, 48, function(){InitLevel();});
-  container.addChild(bb.Sprite);
+  submit = new button("Submit", Tex_Main['Button_UI.png'], 1120, 860, 144, 48, function(){ pause = false; SwitchCover(false); hullPB.submitPower(); cannonPB.submitPower(); sailsPB.submitPower(); cookingPB.submitPower()});
+  container.addChild(submit.Sprite);
 
   hullPB = new PowerBar(container, 140, 620, "HULL");
   cannonPB = new PowerBar(container, 140, 700, "CANNON");
@@ -314,9 +315,6 @@ function EventDisplay(container){
       this.eventDesc.text = event.final;
       this.eventDesc.x = 320 - this.eventDesc.width/2;
       this.eventDesc.y = this.eventSpeech.y + this.eventSpeech.height + 40;
-
-      debug.log("C");
-
     }
 
     this.hideEvent = function(){
@@ -581,7 +579,10 @@ function bar(p, x, y, id, active){
       this.y = this.p.sy;
     })
     .on('mouseup', function(){
-      this.p.parent.loadPower(id+1);
+      if (canEditPower)
+      {
+        this.p.parent.loadPower(id+1);
+      }
     });
 
   this.animate = function(){
