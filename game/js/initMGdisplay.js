@@ -17,8 +17,6 @@ function loadMainGame(){
   loadShipProgress();
   loadShipManagement();
   loadEventWindow();
-
-//  initCombat();
 }
 
 function loadLevelData(){
