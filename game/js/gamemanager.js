@@ -10,6 +10,12 @@ function CheckPassedPOI(){
     if(LOADEDLEVEL.POI.includes(eventLoc-1)){
       EVENTWINDOW.showEvent(DrawEvent());
     }
+    else {
+      if (Math.random() <= 0.25)
+      {
+        initCombat();
+      }
+    }
 
     if(CrewSwitchingEnabled != true){
       SwitchCover(true);

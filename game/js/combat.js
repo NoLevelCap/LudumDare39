@@ -1,4 +1,4 @@
-var flankFlag, enemyHealth, enemyAttack, enemySpeed, playerTurn, enemyTurn, enemyFlank, shipHealth = 100, AITimer, animationTimer, enemyEnter, enemySink, AIShip;
+var flankFlag, enemyHealth, enemyAttack, enemySpeed, playerTurn, enemyTurn, enemyFlank, shipHealth = 100, AITimer, animationTimer, enemyEnter, enemySink, AIShip, animFlee;
 
 // Initialise combat scenario
 function initCombat(){
@@ -16,6 +16,7 @@ function initCombat(){
   }
   enemyEnter = true;
   enemySink = false;
+  animFlee = false;
   animationTimer = Math.floor(60 * 3.9);
   enemySpeed = Math.floor((Math.random() * 6) + 3);
   playerTurn = true;
@@ -34,7 +35,7 @@ function createMessage(text, subtext)
 
 function warButtonsVisible()
 {
-  if (inCombat && playerTurn && !pause && !enemyEnter && !enemySink)
+  if (inCombat && playerTurn && !pause && !enemyEnter && !enemySink && !animFlee)
   {
     return true;
   }
@@ -65,6 +66,16 @@ function combatManager(){
         enemySink = false;
         inCombat = false;
         enemyHealth = 1;
+      }
+    }
+    else if (animFlee)
+    {
+      animationTimer -= 1;
+      AIShip.ShipContainer.x -= 6;
+      if (animationTimer <= 0)
+      {
+        animFlee = false;
+        inCombat = false;
       }
     }
     else {
@@ -150,6 +161,8 @@ function Flee(){
     if (randVal < calcFleeStat())
     {
       createMessage("Run away!", "You flee succesfully");
+      animFlee = true;
+      animationTimer = 60 * 4;
       return true;
     }
     else {
