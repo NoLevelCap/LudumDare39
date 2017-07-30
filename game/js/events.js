@@ -77,8 +77,8 @@ function EventData(text, type, vari, final, good){
     this.vari = this.getVari();
     this.text = this.getText();
     this.final = this.getFinal();
-    this.type(this.vari);
     pause = false;
+    this.type(this.vari);
   }
 }
 
@@ -115,6 +115,11 @@ function getHighestPowerBar(){
   return highest;
 }
 
+function IncreaseGold(val)
+{
+  gold += val;
+}
+
 function skipToNextEvent(){
   pause = false;
   posi = Math.floor(miniProgressShip.lastYard/100);
@@ -147,4 +152,10 @@ function emptyEvent(text, description){
   this.text = text;
   this.final = description;
   this.fire = function(){pause=false;};
+}
+
+function gameOverMessage(){
+  this.text = "Your ship sunk!!";
+  this.final = "Refresh to play again";
+  this.fire = function(){EVENTWINDOW.showEvent(new gameOverMessage());pause=true;};
 }
