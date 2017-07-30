@@ -12,6 +12,7 @@ function initCombat(){
   enemySpeed = (Math.random() * 6) + 3;
   playerTurn = true;
   enemyTurn = false;
+  enemyFlank = false;
 }
 
 // Controller for combat scenarios
