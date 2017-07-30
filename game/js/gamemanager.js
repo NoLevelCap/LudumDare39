@@ -1,5 +1,5 @@
 
-var ShipSpeed = .1, pause = false, CrewSwitchingEnabled = true, crew = 8, crewused = 0;
+var ShipSpeed = .1, pause = false, CrewSwitchingEnabled = true, crew = 8, crewused = 0, karma = .2;
 
 var Gold = 0;
 
@@ -8,17 +8,14 @@ function CheckPassedPOI(){
     eventLoc = miniProgressShip.lastYard / 100;
 
     if(LOADEDLEVEL.POI.includes(eventLoc-1)){
-      debug.log("event location");
-      EVENTWINDOW.showEvent(DrawEvent(false, true));
-      pause = true;
-    } else {
-      debug.log("change location " + eventLoc + "/" + miniProgressShip.lastYard + "/" + miniProgressShip.yards);
-      debug.log(LOADEDLEVEL.POI);
-      if(CrewSwitchingEnabled != true){
-        SwitchCover(true);
-      }
+      EVENTWINDOW.showEvent(DrawEvent());
     }
 
+    if(CrewSwitchingEnabled != true){
+      SwitchCover(true);
+    }
+
+    pause = true;
     miniProgressShip.eventPassed = false;
   }
 }
