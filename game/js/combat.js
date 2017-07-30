@@ -1,4 +1,4 @@
-var flankFlag, enemyHealth, enemyAttack, enemySpeed, playerTurn, enemyTurn, enemyFlank;
+var flankFlag, enemyHealth, enemyAttack, enemySpeed, playerTurn, enemyTurn, enemyFlank, shipHealth = 100;
 
 // Initialise combat scenario
 function initCombat(){
@@ -110,7 +110,7 @@ function calcAIDamage()
 
 function AIFire()
 {
-  shipHealth -= calcAIDamage();
+  TakeDamage(calcAIDamage());
 }
 
 function AIFlank()
@@ -125,4 +125,14 @@ function AIFlank()
     enemyFlank = false;
     return false;
   }
+}
+
+function TakeDamage(val){
+  debug.log("Damage Taken: " + val + ", HEALTH: BF - " + shipHealth + ", AF - " + (shipHealth - val));
+  shipHealth -= val;
+}
+
+function HealShip(val){
+  debug.log("Ship Healed: " + val + ", HEALTH: BF - " + shipHealth + ", AF - " + (shipHealth + val));
+  shipHealth += val;
 }
