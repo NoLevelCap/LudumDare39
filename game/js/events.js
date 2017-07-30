@@ -35,13 +35,17 @@ function parseRanInt(input){
   }
 }
 
-function DrawEvent(good, ignore){
+function DrawEvent(ignore){
   if(ignore){
     return EventCollection[getRandomInt(0, EventCollection.length)];
   }
-  if(good){
-  } else {
-
+  isGood = (Math.random() <= karma);
+  debug.log("Is good? " + isGood + " with " + (karma*100) + "% chance.");
+  while (true) {
+    event = EventCollection[getRandomInt(0, EventCollection.length)];
+    if(event.good == isGood){
+      return event;
+    }
   }
 }
 
