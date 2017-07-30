@@ -74,7 +74,6 @@ function EventData(text, type, vari, final, good){
   this.final = this.getFinal();
 
   this.fire = function(){
-    debug.log("HEY");
     this.vari = this.getVari();
     this.text = this.getText();
     this.final = this.getFinal();
