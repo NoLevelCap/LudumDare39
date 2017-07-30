@@ -11,8 +11,8 @@ function loadMainGame(){
 
   shipHealth = 100;
 
-//  inCombat = true;
-//  initCombat();
+  inCombat = true;
+  initCombat();
 
   loadLevelData();
 

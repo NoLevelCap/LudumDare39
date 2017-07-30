@@ -17,7 +17,7 @@ function initCombat(){
 
 function createMessage(text)
 {
-  
+  EVENTWINDOW.showEvent(new emptyEvent("Hello", "World"));
 }
 
 function warButtonsVisible()
@@ -90,6 +90,7 @@ function calcDefence(){
 // User action functions
 
 function Fire(){
+  createMessage();
   if (warButtonsVisible())
   {
     enemyHealth -= calcDamage();

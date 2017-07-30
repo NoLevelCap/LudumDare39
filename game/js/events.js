@@ -131,3 +131,9 @@ function changeCrewmen(val){
   debug.log("Crewmen of change by " + val + " on " + crew);
   crew += val;
 }
+
+function emptyEvent(text, description){
+  this.text = text;
+  this.final = description;
+  this.fire = function(){};
+}
