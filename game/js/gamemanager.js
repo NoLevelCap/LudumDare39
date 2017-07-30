@@ -9,6 +9,7 @@ function CheckPassedPOI(){
 
     if(LOADEDLEVEL.POI.includes(eventLoc-1)){
       debug.log("event location");
+      EVENTWINDOW.showEvent(DrawEvent(false, true));
       pause = true;
     } else {
       debug.log("change location " + eventLoc + "/" + miniProgressShip.lastYard + "/" + miniProgressShip.yards);

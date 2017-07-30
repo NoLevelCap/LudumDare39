@@ -10,14 +10,8 @@ function loadEvents(){
       commaSplits[0] = commaSplits[0].replace(/"/g, "");
       commaSplits[1] = commaSplits[1].replace(/ /g, "");
       commaSplits[2] = commaSplits[2].replace(/ /g, "");
-      commaSplits[2] = parseInt(commaSplits[2].replace(/ /g, ""));
       commaSplits[3] = commaSplits[3].replace(/"/g, "");
       commaSplits[4] = commaSplits[4].replace(/ /g, "");
-      commaSplits[0] = commaSplits[0].replace(/{val}/g, "" + commaSplits[2]);
-      commaSplits[0] = commaSplits[0].replace(/{invval}/g, "" + -commaSplits[2]);
-      commaSplits[3] = commaSplits[3].replace(/{val}/g, "" + commaSplits[2]);
-      commaSplits[3] = commaSplits[3].replace(/{invval}/g, "" + -commaSplits[2]);
-      commaSplits[0] = commaSplits[0].replace(/{nl}/g, "\n");
       EventCollection.push(new EventData(commaSplits[0], commaSplits[1], commaSplits[2], commaSplits[3], (commaSplits[4] == 'true')));
     }
   }
@@ -29,15 +23,51 @@ function loadEvents(){
   }
 }
 
+function parseRanInt(input){
+  debug.log(input);
+  if(input.includes("{ran(")){
+    input = input.replace(/{ran\(/g, "");
+    input = input.replace(/\)}/g, "");
+    input = input.split(":");
+    return getRandomInt(parseInt(input[0]), parseInt(input[1]));
+  } else {
+    return parseInt(input);
+  }
+}
+
+function DrawEvent(good, ignore){
+  if(ignore){
+    return EventCollection[getRandomInt(0, EventCollection.length)];
+  }
+  if(good){
+  } else {
+
+  }
+}
+
 function EventData(text, type, vari, final, good){
-  this.text = text;
+  this.basetxt = text;
+  this.basefinal = final;
+  this.basevari = vari;
+
+  debug.log(this);
+
+  this.getText = function(){return this.basetxt.replace(/{val}/g, "" + this.vari).replace(/{invval}/g, "" + -this.vari).replace(/{nl}/g, "\n");};
   this.type = getEventEffectIden(type);
-  this.vari = vari;
-  this.final = final;
+  this.getVari = function(){return parseRanInt(this.basevari)};
+  this.getFinal = function(){return this.basefinal.replace(/{val}/g, "" + this.vari).replace(/{invval}/g, "" + -+ this.vari);};
   this.good = good;
 
+  this.vari = this.getVari();
+  this.text = this.getText();
+  this.final = this.getFinal();
+
   this.fire = function(){
-    this.type(vari);
+    this.vari = this.getVari();
+    this.text = this.getText();
+    this.final = this.getFinal();
+
+    this.type(this.vari);
   }
 }
 
