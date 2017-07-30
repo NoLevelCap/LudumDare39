@@ -39,4 +39,6 @@ function play() {
   }
 
   Sail();
+
+  war.visible = false; //combat modifier
 }
