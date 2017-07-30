@@ -4,6 +4,7 @@ var Container = PIXI.Container,
     resources = PIXI.loader.resources,
     Sprite = PIXI.Sprite,
     Graphics = PIXI.Graphics,
+    Extras = PIXI.extras,
     debug = new Debug(true),
     Debug = debug,
     Console = console;

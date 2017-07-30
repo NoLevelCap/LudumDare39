@@ -55,10 +55,11 @@ function loadEventWindow(){
   MainGameContainer.addChild(eventWindow);
 
   EVENTWINDOW = new EventDisplay(eventWindow);
+  eventWindow.visible = false;
 }
 
 function ShipViewer(container){
-  scrollingBackground = new Sprite(PIXI.loader.resources["res/backs/BackgroundSkies.png"].texture)
+  scrollingBackground = new Extras.TilingSprite(PIXI.loader.resources["res/backs/BackgroundSkies.png"].texture, 8192, 480);
   scrollingBackground.setTransform(0, 0);
   container.addChild(scrollingBackground);
 
@@ -239,7 +240,7 @@ function ShipManagment(container){
   container.addChild(crewValue);
 
 
-  bb = new button("Submit", 1120, 860, function(){SwitchCover(false); hullPB.submitPower(); cannonPB.submitPower(); sailsPB.submitPower(); cookingPB.submitPower()});
+  bb = new button("Submit", Tex_Main['Button_UI.png'], 1120, 860, 144, 48, function(){SwitchCover(false); hullPB.submitPower(); cannonPB.submitPower(); sailsPB.submitPower(); cookingPB.submitPower()});
   container.addChild(bb.Sprite);
 
   hullPB = new PowerBar(container, 140, 620, "HULL");
@@ -258,6 +259,8 @@ function ShipManagment(container){
 
 function EventDisplay(container){
     this.container = container;
+
+    this.currentEvent;
 
     back = new Sprite(Tex_Main['break.png']);
     back.x = 0;
@@ -291,6 +294,8 @@ function EventDisplay(container){
     container.addChild(this.eventDesc);
 
     this.showEvent = function(event){
+      this.currentEvent = event;
+
       this.container.visible = true;
       this.eventSpeech.text = event.text;
       this.eventSpeech.x = 320 - this.eventSpeech.width/2;
@@ -300,6 +305,16 @@ function EventDisplay(container){
       this.eventDesc.x = 320 - this.eventDesc.width/2;
       this.eventDesc.y = this.eventSpeech.y + this.eventSpeech.height + 40;
     }
+
+    this.hideEvent = function(){
+      this.currentEvent.fire();
+      this.container.visible = false;
+      pause = false;
+    }
+
+    bb = new button("", Tex_Main['End.png'], 640 - 64 - 6, 320 - 64 - 6, 64, 64, function(){EVENTWINDOW.hideEvent();});
+    container.addChild(bb.Sprite);
+    debug.log(bb);
 }
 
 function MiniShip(container, x, y, w, h){
@@ -447,17 +462,19 @@ function PowerBar(container, x, y, name){
   container.addChild(text);
 }
 
-function button(name, x, y, func){
+function button(name, texture, x, y, w, h, func){
   console.log("button created");
-  this.Sprite = new Sprite(Tex_Main['Button_UI.png']);
+  this.Sprite = new Sprite(texture);
   this.Sprite.x = x;
   this.Sprite.y = y;
+  this.Sprite.width = w;
+  this.Sprite.height = h;
   this.Sprite.p = this;
   this.Sprite.interactive = true;
 
   text = new PIXI.Text(name,{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'right'});
-  text.x = 24;
-  text.y = 8;
+  text.x = text.width/2 - 8;
+  text.y = text.height/2 - 8;
   this.Sprite.addChild(text);
 
   this.func = func;
