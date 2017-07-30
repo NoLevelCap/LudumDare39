@@ -1,13 +1,16 @@
 //This file loads the main game display
 
 var MainGameContainer, SHIPVIEWER, SHIPROGRESS, SHIPMANAGMENT, LOADEDLEVEL,
-miniProgressShip, scrollingBackground,
-cover, crewValue, war
+miniProgressShip, scrollingBackground, hullPB, cannonPB, sailsPB, cookingPB, shipHealth, inCombat, war,
+cover, crewValue,
 animatables = new Array();
 
 function loadMainGame(){
   MainGameContainer = new Container();
   stage.addChild(MainGameContainer);
+
+  shipHealth = 100;
+  inCombat = false;
 
   loadLevelData();
 
