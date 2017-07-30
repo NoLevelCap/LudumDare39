@@ -303,15 +303,18 @@ function EventDisplay(container){
     this.showEvent = function(event){
       this.currentEvent = event;
 
+      debug.log("A");
+
       this.container.visible = true;
       this.eventSpeech.text = event.text;
       this.eventSpeech.x = 320 - this.eventSpeech.width/2;
       this.eventSpeech.y = 160 - this.eventSpeech.height;
 
+      debug.log("B");
+
       this.eventDesc.text = event.final;
       this.eventDesc.x = 320 - this.eventDesc.width/2;
       this.eventDesc.y = this.eventSpeech.y + this.eventSpeech.height + 40;
-
     }
 
     this.hideEvent = function(){

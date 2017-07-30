@@ -1,4 +1,6 @@
 
+var currentNode, visitNode;
+
 function Map(container){
     this.segments = new Array();
 
@@ -78,37 +80,33 @@ function Map(container){
     this.mapContainer = new Container();
     container.addChild(this.mapContainer);
 
-    this.back = new Sprite(Tex_Main["break.png"]);
-    this.back.width = 1280;
-    this.back.height = 960;
+    this.back = new Extras.TilingSprite(Tex_Main['EventBack.png'], 1280, 580);
     this.mapContainer.addChild(this.back);
 
     this.map = new Container();
     this.map.x = 640 - 480;
-    this.map.y = 480 - 240;
+    this.map.y = 50;
     this.mapContainer.addChild(this.map);
 
-    back = new Extras.TilingSprite(Tex_Main['EventBack.png'], 960, 480);
-    back.x = 0;
-    back.y = 0;
-    this.map.addChild(back);
-
-    for (var i = 0; i < 24; i++) {
+    for (var i = 0; i < 32; i++) {
       embossTop = new Sprite(Tex_Main['Trim.png']);
       embossTop.x = i * 40;
-      embossTop.y = -10;
-      this.map.addChild(embossTop);
+      embossTop.y = 0;
+      this.mapContainer.addChild(embossTop);
     }
 
-    for (var i = 0; i < 24; i++) {
+    for (var i = 0; i < 32; i++) {
       embossTop = new Sprite(Tex_Main['Trim.png']);
       embossTop.x = i * 40;
-      embossTop.y = 480;
-      this.map.addChild(embossTop);
+      embossTop.y = 570;
+      this.mapContainer.addChild(embossTop);
     }
 
     this.generateMap();
     this.createConnections();
+
+    currentNode = this.segments[0].nodes[0];
+    currentNode.setVisted();
 
     this.hideMap();
 }
@@ -145,6 +143,40 @@ function Node(container){
   this.Sprite.height = 64;
   this.Sprite.anchor.set(0.5, 0.5);
   this.Sprite.p = this;
+  this.Sprite.interactive = true;
+
+  this.visited = false;
+
+  this.floating = false;
+  this.sy = 0;
+
+  this.Sprite.on('mouseover', function(){
+    this.p.floating = true;
+    this.p.sy = this.y;
+  })
+  .on('mouseout', function(){
+    this.p.floating = false;
+    this.y = this.p.sy;
+  })
+  .on('mouseup', function(){
+    for (var i = 0; i < this.p.connections.length; i++) {
+      if(this.p.connections[i].startNode === currentNode){
+        visitNode = this.p;
+      }
+    }
+  });
+
+  this.animate = function(){
+    if(this.floating && !this.visited){
+        this.Sprite.y += 0.4 * Math.sin(Date.now() / 64);
+    }
+  };
+  animatables.push(this);
+
+  this.setVisted = function(){
+    this.Sprite.texture = Tex_Main["WrittenCircleScored.png"];
+    this.visited = true;
+  }
 
 
   container.segment.addChild(this.Sprite);
@@ -160,6 +192,7 @@ function Connection(Node1, Node2){
   this.startNode = Node1;
   this.endNode = Node2;
 
+  this.endNode.connections.push(this);
 
   dy = (this.startNode.Sprite.y - this.endNode.Sprite.y) * -1;
   cw = Math.hypot(160, dy) * 0.8;

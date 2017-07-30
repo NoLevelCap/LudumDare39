@@ -15,8 +15,9 @@ function CheckPassedPOI(){
     else {
       if (Math.random() <= 0.25)
       {
-        initCombat();
-        pause = true;
+
+       initCombat();
+       pause = true;
       }
     }
 
