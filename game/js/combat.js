@@ -1,7 +1,8 @@
-var flankFlag, enemyHealth, enemyAttack, enemySpeed, playerTurn, enemyTurn, enemyFlank, shipHealth = 100, AITimer;
+var flankFlag, enemyHealth, enemyAttack, enemySpeed, playerTurn, enemyTurn, enemyFlank, shipHealth = 100, AITimer, animationTimer, enemyEnter, enemySink, AIShip;
 
 // Initialise combat scenario
 function initCombat(){
+  inCombat = true;
   flankFlag = false;
   enemyHealth = Math.floor((Math.random() * 10) + 5) * 10;
   enemyAttack = Math.floor((Math.random() * 6) + cannonPB.value - 3);
@@ -13,13 +14,16 @@ function initCombat(){
   {
     enemyAttack = 1;
   }
+  enemyEnter = true;
+  enemySink = false;
+  animationTimer = Math.floor(60 * 3.9);
   enemySpeed = Math.floor((Math.random() * 6) + 3);
   playerTurn = true;
   enemyTurn = false;
   enemyFlank = false;
-  debug.log(enemyAttack);
-  debug.log(enemySpeed);
-  debug.log(enemyHealth);
+  AIShip.ShipContainer.x = -960;
+  AIShip.ShipContainer.y = 50;
+  createMessage("An enemy ship approaches!", "");
 }
 
 function createMessage(text, subtext)
@@ -30,7 +34,7 @@ function createMessage(text, subtext)
 
 function warButtonsVisible()
 {
-  if (inCombat && playerTurn && !pause)
+  if (inCombat && playerTurn && !pause && !enemyEnter && !enemySink)
   {
     return true;
   }
@@ -43,22 +47,50 @@ function warButtonsVisible()
 function combatManager(){
   if (!pause)
   {
-    if (enemyTurn)
+    if (enemyEnter)
     {
-      if (AITimer > 0)
+      animationTimer -= 1;
+      AIShip.ShipContainer.x += 6;
+      if (animationTimer <= 0)
       {
-        AITimer -= 1;
+        enemyEnter = false;
       }
-      else {
-        if (Math.random() < 0.25 && enemyHealth > 30)
+    }
+    else if (enemySink)
+    {
+      animationTimer -= 1;
+      AIShip.ShipContainer.y += 2;
+      if (animationTimer <= 0)
+      {
+        enemySink = false;
+        inCombat = false;
+        enemyHealth = 1;
+      }
+    }
+    else {
+      if (enemyTurn)
+      {
+        if (AITimer > 0)
         {
-          AIFlank();
+          AITimer -= 1;
         }
         else {
-          AIFire();
+          if (Math.random() < 0.25 && enemyHealth > 30)
+          {
+            AIFlank();
+          }
+          else {
+            AIFire();
+          }
+          swapTurns();
         }
-        swapTurns();
       }
+    }
+    if (enemyHealth <= 0 && !enemySink)
+    {
+      createMessage("You have sunk the enemy ship!");
+      enemySink = true;
+      animationTimer = 60 * 4;
     }
   }
 }
@@ -69,7 +101,7 @@ function swapTurns(){
   enemyTurn = !enemyTurn;
   if (enemyTurn)
   {
-    AITimer = Math.floor(((Math.random() * 2) + 1) * 60);
+    AITimer = Math.floor(((Math.random() * 1.5) + 0.5) * 60);
   }
 }
 
@@ -163,9 +195,9 @@ function calcAIDamage()
 
 function AIFire()
 {
-  enemyFlank = false;
   createMessage("Your enemy fires their cannons", "You take " + calcAIDamage() + " points of damage");
   TakeDamage(calcAIDamage());
+  enemyFlank = false;
 }
 
 function AIFlank()

@@ -2,7 +2,7 @@
 
 var MainGameContainer, SHIPVIEWER, SHIPROGRESS, SHIPMANAGMENT, LOADEDLEVEL, EVENTWINDOW,
 miniProgressShip, scrollingBackground, hullPB, cannonPB, sailsPB, cookingPB, shipHealth, inCombat, war,
-cover, crewValue,
+cover, crewValue, healthView, enemyHealthView,
 animatables = new Array();
 
 function loadMainGame(){
@@ -17,9 +17,8 @@ function loadMainGame(){
   loadShipProgress();
   loadShipManagement();
   loadEventWindow();
-  
-  //initCombat();
-  //inCombat = true;
+
+//  initCombat();
 }
 
 function loadLevelData(){
@@ -68,7 +67,7 @@ function ShipViewer(container){
   waves = new Container();
   container.addChild(waves);
 
-
+  AIShip = new enemyShip(container, -960, 50);
 
   for (var i = 0; i < 32; i++) {
     Wave_1 = new Wave(68*i - 24,500,96,96);
@@ -79,6 +78,16 @@ function ShipViewer(container){
   war = new Container();
   war.visible = false;
   container.addChild(war);
+
+  healthView = new PIXI.Text("Ship health:",{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'right'});
+  healthView.x = 10;
+  healthView.y = 0;
+  container.addChild(healthView);
+
+  enemyHealthView = new PIXI.Text("Enemy health:",{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'right'});
+  enemyHealthView.x = 1060;
+  enemyHealthView.y = 0;
+  container.addChild(enemyHealthView);
 
 //  fire_button = new Graphics();
   fire_button = new warButton(12, 340, Fire);
@@ -121,7 +130,7 @@ function warButton(x, y, func){
     })
     .on('mouseup', function(){
       this.p.mouseDown = false;
-      this.p.mouseHover = true;
+      this.p.mouseHover = false;
       this.p.func();
     })
     .on('mousedown', function(){
@@ -146,11 +155,6 @@ function warButton(x, y, func){
     }
 
     animatables.push(this);
-}
-
-function startWar()
-{
-
 }
 
 function ShipProgress(container){
@@ -373,13 +377,14 @@ function Ship(container, x, y){
   animatables.push(this);
 }
 
+
 function enemyShip(container, x, y){
   this.ShipContainer = new Container();
   this.ShipContainer.x = x;
   this.ShipContainer.y = y;
   container.addChild(this.ShipContainer);
 
-  this.Sprite = new Sprite(Tex_Main['Ship.png']);
+  this.Sprite = new Sprite(Tex_Main['EnemyShip.png']);
   this.Sprite.x = 480;
   this.Sprite.y = 460;
   this.Sprite.width = 960;
@@ -388,12 +393,13 @@ function enemyShip(container, x, y){
   this.ShipContainer.addChild(this.Sprite);
 
   this.animate = function(){
-    this.Sprite.rotation = .035 * Math.sin(Date.now() / 256);
+    this.Sprite.rotation = .035 * Math.sin(Date.now() / 456);
     //this.Sprite.rotation += .01;
   }
 
   animatables.push(this);
 }
+
 
 function Wave(x, y, w, h){
   this.Sprite = new Sprite(Tex_Main['SeaWaves.png']);
