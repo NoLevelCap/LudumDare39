@@ -84,7 +84,7 @@ function Map(container){
     this.mapContainer.addChild(this.back);
 
     this.map = new Container();
-    this.map.x = 640 - 480;
+    this.map.x = 640 - 320;
     this.map.y = 50;
     this.mapContainer.addChild(this.map);
 
