@@ -2,7 +2,7 @@
 
 var MainGameContainer, SHIPVIEWER, SHIPROGRESS, SHIPMANAGMENT, LOADEDLEVEL, EVENTWINDOW,
 miniProgressShip, scrollingBackground, hullPB, cannonPB, sailsPB, cookingPB, shipHealth, inCombat, war,
-cover, crewValue, healthView, enemyHealthView, goldValue, gold, submit, canEditPower, gameOver, usersShip, crew,
+cover, crewValue, healthView, enemyHealthView, goldValue, Gold, submit, canEditPower, gameOver, usersShip, crew,
 animatables = new Array();
 
 function loadMainGame(){
@@ -10,7 +10,7 @@ function loadMainGame(){
   stage.addChild(MainGameContainer);
 
   shipHealth = 100;
-  gold = 0;
+  Gold = 0;
   pause = true;
   canEditPower = true;
   gameOver = false;
@@ -21,6 +21,7 @@ function loadMainGame(){
   loadShipProgress();
   loadShipManagement();
   loadEventWindow();
+
 }
 
 function loadLevelData(){
@@ -304,14 +305,10 @@ function EventDisplay(container){
     this.showEvent = function(event){
       this.currentEvent = event;
 
-      debug.log("A");
-
       this.container.visible = true;
       this.eventSpeech.text = event.text;
       this.eventSpeech.x = 320 - this.eventSpeech.width/2;
       this.eventSpeech.y = 160 - this.eventSpeech.height;
-
-      debug.log("B");
 
       this.eventDesc.text = event.final;
       this.eventDesc.x = 320 - this.eventDesc.width/2;
@@ -488,8 +485,13 @@ function PowerBar(container, x, y, name, effect){
     if(val != 0){
       if(this.temp_value + val < 0 && crewused >= crew){
         intermediatary = this.temp_value;
+        debug.log(this.temp_value + ", " + this.value + ", " + val + ", " + intermediatary);
         this.loadPower(0);
-        getHighestPowerBar().changePower(val + intermediatary);
+        hPower = getHighestPowerBar();
+        if (hPower.value + val + intermediatary >= 0 && hPower != this)
+        {
+          getHighestPowerBar().changePower(val + intermediatary);
+        }
       } else {
         this.loadPower(this.temp_value + val);
       }
