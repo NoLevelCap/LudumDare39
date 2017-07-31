@@ -1,6 +1,6 @@
 function TutorialManager(){
   this.messages = {
-    start : new tutorialEvent("Welcome Captain!\nTo " + shipName, "On this screen you choose your destination and manage crew"),
+    start : new tutorialEvent("Welcome Captain!\nTo " + shipName, "On this screen you choose your\ndestination and manage crew"),
     crewChangeHull : new tutorialEvent("Manning the Hull", "This improves your defence in combat."),
     crewChangeCannons : new tutorialEvent("Manning the Cannons", "This improves your attack in combat."),
     crewChangeSails : new tutorialEvent("Manning the Sails", "This improves your speed and maneuver in combat."),

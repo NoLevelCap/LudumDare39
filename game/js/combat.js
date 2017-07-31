@@ -24,6 +24,8 @@ function initCombat(){
   enemyFlank = false;
   AIShip.ShipContainer.x = -960;
   AIShip.ShipContainer.y = 50;
+  AIShip.shipName = drawRandomArray(ShipNames);
+  AIShip.text.text = AIShip.shipName;
   if(TUTMANAGER.messages["combatStart"].used){
     createMessage("An enemy ship approaches!", "");
   }

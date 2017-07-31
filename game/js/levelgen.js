@@ -65,6 +65,9 @@ function InitLevel(){
     currentNode.setVisted();
     visitNode = null;
 
+    MAP.portName.text = drawRandomArray(PortNames)+"\nMarket";
+    MAP.portName.position.set(150-MAP.portName.width/2, -MAP.portName.height - 10);
+
     LOADEDLEVEL = new Level(currentNode.type);
     SHIPROGRESS.loadDisplay();
 }

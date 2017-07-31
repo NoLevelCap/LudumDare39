@@ -90,7 +90,7 @@ function Map(container){
     this.map.y = 100;
     this.mapContainer.addChild(this.map);
 
-    text = new PIXI.Text("Map of Pirate Cove",{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'center'});
+    text = new PIXI.Text("Map of " + drawRandomArray(PortNames),{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'center'});
     text.x = 960/2 - text.width/2;
     text.y = -50 - text.height/2 - 4;
     this.map.addChild(text);
@@ -112,19 +112,34 @@ function Map(container){
     this.generateMap();
     this.createConnections();
 
-    this.repairBtn = new button("Repair", Tex_Main["Button_UI.png"], 10, 10, 144, 48, repairShip);
-      this.repairTxt = new PIXI.Text("12 gold",{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'right'});
-      this.repairTxt.x = 160;
-      this.repairTxt.y = 15;
-      this.mapContainer.addChild(this.repairBtn.Sprite);
-      this.mapContainer.addChild(this.repairTxt);
+    this.shop = new Container();
+    this.shop.position.set(48, 286);
 
-      this.buyCrewBtn = new button("Buy crew", Tex_Main["Button_UI.png"], 10, 60, 144, 48, buyCrew);
-      this.buyCrewTxt = new PIXI.Text("24 gold",{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'right'});
-      this.buyCrewTxt.x = 160;
-      this.buyCrewTxt.y = 65;
-      this.mapContainer.addChild(this.buyCrewBtn.Sprite);
-      this.mapContainer.addChild(this.buyCrewTxt);
+    this.shopIcon = new Sprite(Tex_Main["market.png"]);
+    this.shopIcon.width = 320;
+    this.shopIcon.height = 192;
+    this.shopIcon.position.set(150-this.shopIcon.width/2, -this.shopIcon.height - 74);
+    //this.shop.addChild(this.shopIcon);
+
+    this.portName = new PIXI.Text(drawRandomArray(PortNames)+"\nMarket",{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'center'});
+    this.portName.position.set(150-this.portName.width/2, -this.portName.height - 10);
+    this.shop.addChild(this.portName);
+
+    this.repairBtn = new button("Repair", Tex_Main["Button_UI.png"], 0, 0, 144, 48, repairShip);
+    this.repairTxt = new PIXI.Text("12 gold",{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'right'});
+    this.repairTxt.x = 150;
+    this.repairTxt.y = 5;
+    this.shop.addChild(this.repairBtn.Sprite);
+    this.shop.addChild(this.repairTxt);
+
+    this.buyCrewBtn = new button("Buy crew", Tex_Main["Button_UI.png"], 0, 50, 144, 48, buyCrew);
+    this.buyCrewTxt = new PIXI.Text("24 gold",{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'right'});
+    this.buyCrewTxt.x = 150;
+    this.buyCrewTxt.y = 55;
+    this.shop.addChild(this.buyCrewBtn.Sprite);
+    this.shop.addChild(this.buyCrewTxt);
+
+    this.mapContainer.addChild(this.shop);
 
     currentNode = this.segments[0].nodes[0];
     currentNode.setVisted();

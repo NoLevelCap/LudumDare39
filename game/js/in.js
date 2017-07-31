@@ -1,7 +1,7 @@
 //Create a Pixi stage and renderer and add the
 //renderer.view to the DOM
 var stage = new Container(),
-    renderer = autoDetectRenderer(1280, 960);
+    renderer = autoDetectRenderer(1280, 960, {resolution: .85});
 document.body.appendChild(renderer.view);
 
 loader
@@ -9,14 +9,23 @@ loader
   .add("res/backs/BackgroundSkies.png")
   .add("res/backs/PixelatedBackgroundSkies.png")
   .add("EventData", "dats/events.txt")
+  .add("Ports", "dats/portnames.txt")
+  .add("Ships", "dats/shipnames.txt")
   .load(setup);
 
 //Define any variables that are used in more than one function
-var Tex_Main, state = play, MAP;
+var Tex_Main, state = play;
+var MAP, ShipNames, PortNames;
 function setup() {
   state = play;
 
   Tex_Main = PIXI.loader.resources["res/main.json"].textures;
+
+  ShipNames = loadDataArray("Ships");
+  console.log(ShipNames);
+
+  PortNames = loadDataArray("Ports");
+  console.log(PortNames);
 
   loadEvents();
   loadMainGame();
@@ -52,10 +61,11 @@ function play() {
   else {
     combatManager();
     enemyHealthView.visible = true;
-    enemyHealthView.text = "Enemy health: " + enemyHealth;
+    enemyHealthView.text = AIShip.shipName + " health: " + enemyHealth;
+    enemyHealthView.x = 1280 - enemyHealthView.width - 10;
   }
 
-  healthView.text = "Ship health: " + shipHealth;
+  healthView.text = shipName + " health: " + shipHealth;
   goldValue.text = "Gold: " + Gold;
   if (Gold < 0)
   {
