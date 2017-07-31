@@ -60,6 +60,19 @@ function loadScreen(data){
     FINALSCREEN.addChild(reward);
   }
 
+  iconContainer = new Container();
+  boat = new Sprite(Tex_main["boat"]);
+  by = new Sprite(Tex_main["by"]);
+  by.x = 160;
+  sn = new Sprite(Tex_main["sn"]);
+  sn.x = 160 * 2;
+  iconContainer.addChild(boat);
+  iconContainer.addChild(by);
+  iconContainer.addChild(sn);
+  iconContainer.x = 10;
+  iconContainer.y = 720;
+  FINALSCREEN.addChild(iconContainer);
+
   console.log();
 
   stage.addChild(FINALSCREEN);
