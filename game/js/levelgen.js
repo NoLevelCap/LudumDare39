@@ -68,6 +68,6 @@ function EndLevel(){
   if(LOADEDLEVEL.type == getLevelType("difficult")){
     prize = getRandomInt(50, 101);
     IncreaseGold(prize);
-    EVENTWINDOW.showEvent(new emptyEvent("You find a cache of treasure!", "You get " + prize + "gold."));
+    EVENTWINDOW.showEvent(new emptyEvent("You find a cache of treasure!", "You get " + prize + " gold."));
   }
 }

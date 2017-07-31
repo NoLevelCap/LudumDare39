@@ -4,8 +4,17 @@ Possible tweaks and adjustments:
 -Change treasure to arrow
 -Enemy ship encounters too frequent - maybe on sails and difficulty modifier
 -all stats bug
-- gameover on all crew
-- bit of gold at the end
 - add difficulty modifers to level loading
-- peaceful and difficult levels
--skipping events
+- peaceful have faster sailing speed
+- tutorialise
+-if 12 cooking then option to throw food in combat
+-move shop down
+-name ship
+-random name gen for ports and other ship
+- square for ui events box
+- change spelling of too to to
+- no win condition
+- force end node to be ahrd
+
+-----------Balancing---------------
+= Piss Orff
