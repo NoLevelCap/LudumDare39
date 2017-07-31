@@ -220,6 +220,7 @@ function Node(container, hard, easy){
     this.y = this.p.sy;
   })
   .on('mouseup', function(){
+    SOUNDMANAGER.playSound("pencil");
     TUTMANAGER.loadMessage("mapChange");
     if(!this.p.visited){
       for (var i = 0; i < this.p.connections.length; i++) {

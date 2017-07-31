@@ -15,9 +15,11 @@ loader
 
 //Define any variables that are used in more than one function
 var Tex_Main, state = play;
-var MAP, ShipNames, PortNames;
+var MAP, SOUNDMANAGER, ShipNames, PortNames;
 function setup() {
   state = play;
+
+  SOUNDMANAGER = new SoundManager();
 
   Tex_Main = PIXI.loader.resources["res/main.json"].textures;
 
