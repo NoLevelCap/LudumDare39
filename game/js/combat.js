@@ -30,6 +30,7 @@ function initCombat(){
     createMessage("An enemy ship approaches!", "");
   }
   TUTMANAGER.loadMessage("combatStart");
+  pause = false;
 }
 
 function createMessage(text, subtext)
