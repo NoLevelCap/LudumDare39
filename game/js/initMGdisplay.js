@@ -26,6 +26,7 @@ function loadMainGame(){
 
   loadEventWindow();
 
+  pause = true;
 }
 
 function loadLevelData(){
@@ -281,10 +282,10 @@ function ShipManagment(container){
   submit = new button("Submit", Tex_Main['Button_UI.png'], 1120, 860, 144, 48, function(){InitLevel()});
   container.addChild(submit.Sprite);
 
-  hullPB = new PowerBar(container, 140, 620, "HULL");
-  cannonPB = new PowerBar(container, 140, 700, "CANNON");
-  sailsPB = new PowerBar(container, 140, 780, "SAILS", function(){ ShipSpeed = 0.1 + (this.value/12) * 1.9;});
-  cookingPB = new PowerBar(container, 140, 860, "COOKING", function() { karma = 0.2 + (this.value/12) * 0.6;});
+  hullPB = new PowerBar(container, 140, 620, "HULL", function(){}, function(){TUTMANAGER.loadMessage("crewChangeHull")});
+  cannonPB = new PowerBar(container, 140, 700, "CANNON",  function(){}, function(){TUTMANAGER.loadMessage("crewChangeCannons")});
+  sailsPB = new PowerBar(container, 140, 780, "SAILS", function(){ ShipSpeed = 0.1 + (this.value/12) * 1.9;}, function(){TUTMANAGER.loadMessage("crewChangeSails")});
+  cookingPB = new PowerBar(container, 140, 860, "COOKING", function() { karma = 0.2 + (this.value/12) * 0.6;}, function(){TUTMANAGER.loadMessage("crewChangeCooks")});
 
   cover = new Sprite(Tex_Main['break.png']);
   cover.x = -10;
@@ -321,7 +322,7 @@ function EventDisplay(container){
 
     this.eventSpeech = new PIXI.Text("This is where the event \n information goes. \n another line",{fontFamily : 'Permanent Marker', fontSize: 32, fill : 0x000000, align : 'center'});
     this.eventSpeech.x = 320 - this.eventSpeech.width/2;
-    this.eventSpeech.y = 160 - this.eventSpeech.height;
+    this.eventSpeech.y = 20;
     container.addChild(this.eventSpeech);
 
     this.eventDesc = new PIXI.Text("This is where the event \n information goes.",{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'center'});
@@ -335,7 +336,6 @@ function EventDisplay(container){
       this.container.visible = true;
       this.eventSpeech.text = event.text;
       this.eventSpeech.x = 320 - this.eventSpeech.width/2;
-      this.eventSpeech.y = 160 - this.eventSpeech.height;
 
       this.eventDesc.text = event.final;
       this.eventDesc.x = 320 - this.eventDesc.width/2;
@@ -351,6 +351,8 @@ function EventDisplay(container){
     container.addChild(bb.Sprite);
     debug.log(bb);
 }
+
+
 
 function MiniShip(container, x, y, w, h){
   this.yards = 0;
@@ -403,7 +405,13 @@ function Ship(container, x, y){
   this.Sprite.anchor = new PIXI.Point(0.5, 1);
   this.ShipContainer.addChild(this.Sprite);
 
+  this.text = new PIXI.Text(shipName,{fontFamily : 'Permanent Marker', fontSize: 12, fill : 0x784f33, align : 'center'});
+  this.text.position.set(this.text.width + 136, -90);
+  this.text.anchor.set(1, 0);
+  this.Sprite.addChild(this.text);
+
   this.animate = function(){
+    this.text.text = shipName;
     this.Sprite.rotation = .035 * Math.sin(Date.now() / 256);
     //this.Sprite.rotation += .01;
   }
@@ -451,11 +459,12 @@ function Wave(x, y, w, h){
   animatables.push(this);
 }
 
-function PowerBar(container, x, y, name, effect){
+function PowerBar(container, x, y, name, effect, onChange){
   this.powerbars = new Array();
   this.value = 0;
   this.temp_value = 0;
   this.effect = effect;
+  this.onChange = onChange;
 
   for (var i = 0; i < 12; i++) {
     this.powerbars[i] = new bar(this, x + (82*i) , y, i);
@@ -468,6 +477,7 @@ function PowerBar(container, x, y, name, effect){
   };
 
   this.loadPower = function(id){
+      this.onChange();
       if(id < 0){
         id = 0;
       }
@@ -509,6 +519,7 @@ function PowerBar(container, x, y, name, effect){
   };
 
   this.changePower = function(val){
+
     if(val != 0){
       if(this.temp_value + val < 0 && crewused >= crew){
         intermediatary = this.temp_value;
@@ -539,7 +550,10 @@ function PowerBar(container, x, y, name, effect){
   container.addChild(text);
 }
 
-function button(name, texture, x, y, w, h, func){
+function button(name, texture, x, y, w, h, func, fs){
+  if(fs == null){
+    fs = 24;
+  }
   console.log("button created");
   this.Sprite = new Sprite(texture);
   this.Sprite.x = x;
@@ -549,7 +563,7 @@ function button(name, texture, x, y, w, h, func){
   this.Sprite.p = this;
   this.Sprite.interactive = true;
 
-  text = new PIXI.Text(name,{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'right'});
+  text = new PIXI.Text(name,{fontFamily : 'Permanent Marker', fontSize: fs, fill : 0x000000, align : 'right'});
   text.x = this.Sprite.width/2 - text.width/2;
   text.y = this.Sprite.height/2 - text.height/2 - 4;
   this.Sprite.addChild(text);

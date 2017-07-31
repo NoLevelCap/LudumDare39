@@ -29,11 +29,19 @@ function getRandomInt(min, max) {
 function Level(type){
   this.POI = getPoints(type);
   this.type = type;
+  this.difficultyModifier = 1; //1 = hardest, 0 = easiest
+  this.shipSpeedModifier = 1;
+
+  if(this.type == getLevelType("peaceful")){
+    TUTMANAGER.loadMessage("peacefulStart");
+  } else if(this.type == getLevelType("difficult")){
+    TUTMANAGER.loadMessage("difficultStart");
+  }
 }
 
 function InitLevel(){
   if(visitNode == null){
-    createMessage("Please select a location to travel too", "Click on the circle\nnext to the scored circle");
+    createMessage("Please select a location to travel to", "Click on the circle\nnext to the scored circle");
     return;
   }
 

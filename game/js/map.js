@@ -205,6 +205,7 @@ function Node(container, hard, easy){
     this.y = this.p.sy;
   })
   .on('mouseup', function(){
+    TUTMANAGER.loadMessage("mapChange");
     if(!this.p.visited){
       for (var i = 0; i < this.p.connections.length; i++) {
         if(this.p.connections[i].startNode === currentNode){

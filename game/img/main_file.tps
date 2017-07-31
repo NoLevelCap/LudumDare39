@@ -199,29 +199,27 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">Button_UI.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>36,12,72,24</rect>
-                <key>scale9Paddings</key>
-                <rect>36,12,72,24</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
+            <key type="filename">ArrowRight.png</key>
             <key type="filename">Circular_Button_Hover.png</key>
             <key type="filename">Circular_Button_MouseDown.png</key>
             <key type="filename">Circular_Button_Normal.png</key>
+            <key type="filename">CurvedArrowRight.png</key>
+            <key type="filename">Dangerous.png</key>
+            <key type="filename">DismissArrow.png</key>
             <key type="filename">End.png</key>
+            <key type="filename">EventBack.png</key>
             <key type="filename">Fire_Icon.png</key>
             <key type="filename">Flank_Icon.png</key>
             <key type="filename">Flee_Icon.png</key>
+            <key type="filename">Peaceful.png</key>
             <key type="filename">SeaWaves.png</key>
             <key type="filename">SmallBoat.png</key>
             <key type="filename">Start.png</key>
+            <key type="filename">VerticallyFlippedCurvedArrowRight.png</key>
+            <key type="filename">WrittenCircle.png</key>
+            <key type="filename">WrittenCircleScored.png</key>
+            <key type="filename">WrittenDoubleCircle.png</key>
+            <key type="filename">WrittenX.png</key>
             <key type="filename">circle.png</key>
             <key type="filename">diamond.png</key>
             <struct type="IndividualSpriteSettings">
@@ -233,6 +231,19 @@
                 <rect>32,32,64,64</rect>
                 <key>scale9Paddings</key>
                 <rect>32,32,64,64</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Button_UI.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>36,12,72,24</rect>
+                <key>scale9Paddings</key>
+                <rect>36,12,72,24</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -273,6 +284,19 @@
                 <rect>320,95,640,190</rect>
                 <key>scale9Paddings</key>
                 <rect>320,95,640,190</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">WrittenLine.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>16,4,32,8</rect>
+                <key>scale9Paddings</key>
+                <rect>16,4,32,8</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
