@@ -23,6 +23,8 @@ function setup() {
 
   
 
+  MAP.showMap();
+
   //get the stage details
   Console.log(stage);
   //Start the game loop
@@ -54,13 +56,13 @@ function play() {
   }
 
   healthView.text = "Ship health: " + shipHealth;
-  goldValue.text = "Gold: " + gold;
-  if (gold < 0)
+  goldValue.text = "Gold: " + Gold;
+  if (Gold < 0)
   {
-    gold = 0;
+    Gold = 0;
   }
 
-  if (shipHealth <= 0)
+  if (shipHealth <= 0 || crew <= 0)
   {
     gameOver = true;
     pause = true;

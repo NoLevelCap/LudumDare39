@@ -36,6 +36,11 @@ function CheckPassedPOI(){
   }
 }
 
+function repairShip()
+{
+  
+}
+
 function Sail(){
   if(!pause){
     miniProgressShip.increaseYards(ShipSpeed);

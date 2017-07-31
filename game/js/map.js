@@ -105,6 +105,11 @@ function Map(container){
     this.generateMap();
     this.createConnections();
 
+    this.repairBtn = new button("Repair", Tex_Main["Button_UI.png"], 10, 10, 144, 48, repairShip);
+    this.mapContainer.addChild(this.repairBtn.Sprite);
+
+    this.buyCrewBtn = new button("Buy crew", Tex_Main["Button_UI.png"], 10, 60, 144, 48, repairShip);
+    this.mapContainer.addChild(this.buyCrewBtn.Sprite);
 
     currentNode = this.segments[0].nodes[0];
     currentNode.setVisted();
@@ -197,7 +202,7 @@ function Node(container){
 function Connection(Node1, Node2){
   this.startNode = Node1;
   this.endNode = Node2;
-  
+
   this.endNode.connections.push(this);
 
   dy = (this.startNode.Sprite.y - this.endNode.Sprite.y) * -1;
