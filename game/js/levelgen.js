@@ -18,15 +18,36 @@ function Level(){
 }
 
 function InitLevel(){
-  pause = false;
-  SwitchCover(false);
-  hullPB.submitPower();
-  cannonPB.submitPower();
-  sailsPB.submitPower();
-  cookingPB.submitPower();
+  if(visitNode == null){
+    createMessage("Please select a location to travel too", "Click on the circle\nnext to the scored circle");
+    return;
+  }
 
-  MAP.hideMap();
+  if(crewused == 0){
+    createMessage("You could select some crew", "Click on the checkboxes\nto assign crew to areas of the ship");
+    return;
+  }
 
-  currentNode = visitNode;
-  currentNode.setVisted();
+    pause = false;
+    miniProgressShip.yards = 0;
+    SwitchCover(false);
+    hullPB.submitPower();
+    cannonPB.submitPower();
+    sailsPB.submitPower();
+    cookingPB.submitPower();
+
+    MAP.hideMap();
+
+    currentNode = visitNode;
+    currentNode.setVisted();
+    visitNode = null;
+
+    LOADEDLEVEL = new Level();
+    SHIPROGRESS.loadDisplay();
+}
+
+function EndLevel(){
+  pause = true;
+  MAP.showMap();
+  SwitchCover(true);
 }

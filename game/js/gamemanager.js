@@ -7,6 +7,12 @@ function CheckPassedPOI(){
   if(miniProgressShip.eventPassed){
     eventLoc = miniProgressShip.lastYard / 100;
 
+    if(eventLoc >= 16){
+      EndLevel();
+      miniProgressShip.eventPassed = false;
+      return;
+    }
+
     if(LOADEDLEVEL.POI.includes(eventLoc-1)){
       debug.log("Create event");
       EVENTWINDOW.showEvent(DrawEvent());

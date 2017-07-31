@@ -159,9 +159,15 @@ function Node(container){
     this.y = this.p.sy;
   })
   .on('mouseup', function(){
-    for (var i = 0; i < this.p.connections.length; i++) {
-      if(this.p.connections[i].startNode === currentNode){
-        visitNode = this.p;
+    if(!this.p.visited){
+      for (var i = 0; i < this.p.connections.length; i++) {
+        if(this.p.connections[i].startNode === currentNode){
+          if(visitNode != null && !visitNode.visited){
+            visitNode.Sprite.texture = Tex_Main["WrittenCircle.png"];
+          }
+          visitNode = this.p;
+          visitNode.Sprite.texture = Tex_Main["WrittenDoubleCircle.png"];
+        }
       }
     }
   });
