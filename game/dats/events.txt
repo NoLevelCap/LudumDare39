@@ -8,6 +8,6 @@
 "Your ship hits a big wave{nl}one of your crew goes overboard!",sails,-1,"You lose {invval} crew in sails.",false,
 "Your ship hits some rocks!{nl}It gets damaged",health,{ran(-10:-26)},"You lose {invval} hull points.",false,
 "Some loose gunpowder goes off{nl}Some of your cannon men die",cannons,-2,"You lose {invval} crew in cannons.",false,
-"Stormy weather!{nl}Your ship takes some{nl}significant damage",health,-{ran(-10:-26)},"You lose {invval} hull points.",false,
+"Stormy weather!{nl}Your ship takes some{nl}significant damage",health,{ran(-10:-26)},"You lose {invval} hull points.",false,
 "Your foods gone stale!{nl}One of your cooks dies from trying it",cooks,-1,"You lose {invval} crew in cooks.",false,
 "An unsecured treasure chest{nl}goes overboard and is lost!",gold,{ran(-10:-50)},"You lose {invval} gold.",false,

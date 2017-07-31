@@ -26,7 +26,7 @@ function CheckPassedPOI(){
       {
 
        initCombat();
-       pause = true;
+       //pause = true;
       }
     }
 

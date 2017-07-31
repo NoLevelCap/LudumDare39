@@ -284,8 +284,8 @@ function ShipManagment(container){
 
   hullPB = new PowerBar(container, 140, 620, "HULL", function(){}, function(){TUTMANAGER.loadMessage("crewChangeHull")});
   cannonPB = new PowerBar(container, 140, 700, "CANNON",  function(){}, function(){TUTMANAGER.loadMessage("crewChangeCannons")});
-  sailsPB = new PowerBar(container, 140, 780, "SAILS", function(){ ShipSpeed = 0.1 + (this.value/12) * 1.9;}, function(){TUTMANAGER.loadMessage("crewChangeSails")});
-  cookingPB = new PowerBar(container, 140, 860, "COOKING", function() { karma = 0.2 + (this.value/12) * 0.6;}, function(){TUTMANAGER.loadMessage("crewChangeCooks")});
+  sailsPB = new PowerBar(container, 140, 780, "SAILS", function(){ ShipSpeed = 0.1 + (this.value/12) * 1.9 + LOADEDLEVEL.shipSpeedModifier * 1;}, function(){TUTMANAGER.loadMessage("crewChangeSails")});
+  cookingPB = new PowerBar(container, 140, 860, "COOKING", function() { karma = 0.5 + (this.value/12) * 0.4 + (1 - LOADEDLEVEL.difficultyModifier) * 0.1;}, function(){TUTMANAGER.loadMessage("crewChangeCooks")});
 
   cover = new Sprite(Tex_Main['break.png']);
   cover.x = -10;

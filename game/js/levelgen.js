@@ -29,12 +29,15 @@ function getRandomInt(min, max) {
 function Level(type){
   this.POI = getPoints(type);
   this.type = type;
-  this.difficultyModifier = 1; //1 = hardest, 0 = easiest
-  this.shipSpeedModifier = 1;
+  this.difficultyModifier = 0.5; //1 = hardest, 0 = easiest
+  this.shipSpeedModifier = 0.5;
 
   if(this.type == getLevelType("peaceful")){
+    this.difficultyModifier = 0.2;
+    this.shipSpeedModifier = 1.5;
     TUTMANAGER.loadMessage("peacefulStart");
   } else if(this.type == getLevelType("difficult")){
+    this.difficultyModifier = 1;
     TUTMANAGER.loadMessage("difficultStart");
   }
 }
@@ -54,10 +57,6 @@ function InitLevel(){
     miniProgressShip.yards = 0;
     miniProgressShip.lastYard = 0;
     SwitchCover(false);
-    hullPB.submitPower();
-    cannonPB.submitPower();
-    sailsPB.submitPower();
-    cookingPB.submitPower();
 
     MAP.hideMap();
 
@@ -69,6 +68,12 @@ function InitLevel(){
     MAP.portName.position.set(150-MAP.portName.width/2, -MAP.portName.height - 10);
 
     LOADEDLEVEL = new Level(currentNode.type);
+
+    hullPB.submitPower();
+    cannonPB.submitPower();
+    sailsPB.submitPower();
+    cookingPB.submitPower();
+
     SHIPROGRESS.loadDisplay();
 }
 
