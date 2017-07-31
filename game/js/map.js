@@ -106,10 +106,18 @@ function Map(container){
     this.createConnections();
 
     this.repairBtn = new button("Repair", Tex_Main["Button_UI.png"], 10, 10, 144, 48, repairShip);
+    this.repairTxt = new PIXI.Text("12 gold",{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'right'});
+    this.repairTxt.x = 160;
+    this.repairTxt.y = 15;
     this.mapContainer.addChild(this.repairBtn.Sprite);
+    this.mapContainer.addChild(this.repairTxt);
 
-    this.buyCrewBtn = new button("Buy crew", Tex_Main["Button_UI.png"], 10, 60, 144, 48, repairShip);
+    this.buyCrewBtn = new button("Buy crew", Tex_Main["Button_UI.png"], 10, 60, 144, 48, buyCrew);
+    this.buyCrewTxt = new PIXI.Text("24 gold",{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'right'});
+    this.buyCrewTxt.x = 160;
+    this.buyCrewTxt.y = 65;
     this.mapContainer.addChild(this.buyCrewBtn.Sprite);
+    this.mapContainer.addChild(this.buyCrewTxt);
 
     currentNode = this.segments[0].nodes[0];
     currentNode.setVisted();
