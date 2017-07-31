@@ -8,11 +8,16 @@ function loadStartMenu(){
   back = new Extras.TilingSprite(Tex_Main["EventBack.png"], 1280, 960);
   STARTMENU.addChild(back);
 
-  nt = new TextField("The Kobayashi Maru", 640, 480, 512, 32);
+  shipName = new PIXI.Text("Ship Name:",{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'center'});
+  shipName.x = 1280 - 32 -shipName.width - 8;
+  shipName.y = 600 - shipName.height/2;
+  STARTMENU.addChild(shipName);
+
+  nt = new TextField("The Kobayashi Maru", 1280-32, 640, 512, 48);
   STARTMENU.textField = nt;
   STARTMENU.addChild(nt.field);
 
-  subButton = new button("Sail!", Tex_Main["Button_UI.png"], 640-72, 540-24, 144, 48, function(){startGame()});
+  subButton = new button("Sail!", Tex_Main["Button_UI.png"], 1280-144-32, 668, 144, 48, function(){startGame()});
   STARTMENU.addChild(subButton.Sprite);
 }
 
@@ -21,13 +26,13 @@ function TextField(placeholder, x, y, w, h){
   this.field.position.set(x, y);
 
   this.text = new PIXI.Text(placeholder,{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'center'});
-  this.background = new Sprite(Tex_Main["break.png"]);
+  this.background = new Sprite(Tex_Main["dis.png"]);
   this.background.width = w;
   this.background.height = h;
-  this.background.anchor.set(0.5, 0.5);
+  this.background.anchor.set(1, 0.5);
   this.background.interactive = true;
 
-  this.text.x = -this.text.width/2;
+  this.text.x = -this.text.width - 8;
   this.text.y = -this.text.height/2 - 4;
 
   this.field.addChild(this.background);
@@ -63,7 +68,7 @@ function TextField(placeholder, x, y, w, h){
     } else if (event.keyCode == 8){
       _this.text.text = _this.text.text.substring(0, _this.text.text.length-1);
     }
-    _this.text.x = -_this.text.width/2;
+    _this.text.x = -_this.text.width - 8;
     _this.text.y = -_this.text.height/2 - 4;
   }
 

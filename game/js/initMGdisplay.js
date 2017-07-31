@@ -87,13 +87,13 @@ function ShipViewer(container){
   war.visible = false;
   container.addChild(war);
 
-  healthView = new PIXI.Text("Ship health:",{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'right'});
+  healthView = new PIXI.Text(shipName + " health:",{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'right'});
   healthView.x = 10;
   healthView.y = 0;
   container.addChild(healthView);
 
-  enemyHealthView = new PIXI.Text("Enemy health:",{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'right'});
-  enemyHealthView.x = 1060;
+  enemyHealthView = new PIXI.Text("health:",{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'right'});
+  enemyHealthView.x = 1280 - enemyHealthView.width - 10;
   enemyHealthView.y = 0;
   container.addChild(enemyHealthView);
 
@@ -426,6 +426,8 @@ function enemyShip(container, x, y){
   this.ShipContainer.y = y;
   container.addChild(this.ShipContainer);
 
+  this.shipName = "name of ship";
+
   this.Sprite = new Sprite(Tex_Main['EnemyShip.png']);
   this.Sprite.x = 480;
   this.Sprite.y = 460;
@@ -433,6 +435,11 @@ function enemyShip(container, x, y){
   this.Sprite.height = 560;
   this.Sprite.anchor = new PIXI.Point(0.5, 1);
   this.ShipContainer.addChild(this.Sprite);
+
+  this.text = new PIXI.Text(shipName,{fontFamily : 'Permanent Marker', fontSize: 12, fill : 0x784f33, align : 'center'});
+  this.text.position.set(this.text.width + 136, -90);
+  this.text.anchor.set(1, 0);
+  this.Sprite.addChild(this.text);
 
   this.animate = function(){
     this.Sprite.rotation = .035 * Math.sin(Date.now() / 456);
