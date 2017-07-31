@@ -8,6 +8,16 @@ function loadStartMenu(){
   back = new Extras.TilingSprite(Tex_Main["EventBack.png"], 1280, 960);
   STARTMENU.addChild(back);
 
+  title = new Sprite(Tex_Main["TitleScreen.png"]);
+  title.x = 50;
+  title.y = 50;
+  STARTMENU.addChild(title);
+
+  madeBy = new Sprite(Tex_Main["TitleScreenMadeBy.png"]);
+  madeBy.x = 30;
+  madeBy.y = 750;
+  STARTMENU.addChild(madeBy);
+
   shipName = new PIXI.Text("Ship Name:",{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'center'});
   shipName.x = 1280 - 32 -shipName.width - 8;
   shipName.y = 600 - shipName.height/2;
