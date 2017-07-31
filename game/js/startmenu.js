@@ -6,6 +6,7 @@ function loadStartMenu(){
   stage.addChild(STARTMENU);
 
   back = new Extras.TilingSprite(Tex_Main["EventBack.png"], 1280, 960);
+  back.interactive = true;
   STARTMENU.addChild(back);
 
   shipName = new PIXI.Text("Ship Name:",{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'center'});
