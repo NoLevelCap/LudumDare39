@@ -27,7 +27,7 @@ function getRandomInt(min, max) {
 }
 
 function Level(type){
-  this.POI = getPoints(type);
+  this.POI = getPoints(type).sort();
   this.type = type;
   this.difficultyModifier = 0.5; //1 = hardest, 0 = easiest
   this.shipSpeedModifier = 0.5;
@@ -79,6 +79,12 @@ function InitLevel(){
 
 function EndLevel(){
   pause = true;
+
+  if(currentNode.isFinalNode()){
+    console.log("final node!!");
+    submitScore(new ScoreInfo(shipName, areaname, Gold, Math.floor((Date.now() - startTime)/1000), crew));
+  }
+
   MAP.showMap();
   SwitchCover(true);
   if(LOADEDLEVEL.type == getLevelType("difficult")){
