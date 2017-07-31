@@ -105,9 +105,9 @@ function Map(container){
     this.generateMap();
     this.createConnections();
 
-
     currentNode = this.segments[0].nodes[0];
     currentNode.setVisted();
+
     this.hideMap();
 }
 
@@ -159,12 +159,15 @@ function Node(container){
     this.y = this.p.sy;
   })
   .on('mouseup', function(){
-    for (var i = 0; i < this.p.connections.length; i++) {
-      if(this.p.connections[i].startNode === currentNode){
-        if(visitNode != null && !visitNode.visited){
-          visitNode.Sprite.texture = Tex_Main["WrittenCircleScored.png"];
+    if(!this.p.visited){
+      for (var i = 0; i < this.p.connections.length; i++) {
+        if(this.p.connections[i].startNode === currentNode){
+          if(visitNode != null && !visitNode.visited){
+            visitNode.Sprite.texture = Tex_Main["WrittenCircle.png"];
+          }
+          visitNode = this.p;
+          visitNode.Sprite.texture = Tex_Main["WrittenDoubleCircle.png"];
         }
-        visitNode = this.p;
       }
     }
   });
@@ -194,7 +197,7 @@ function Node(container){
 function Connection(Node1, Node2){
   this.startNode = Node1;
   this.endNode = Node2;
-  
+
   this.endNode.connections.push(this);
 
   dy = (this.startNode.Sprite.y - this.endNode.Sprite.y) * -1;
@@ -213,5 +216,6 @@ function Connection(Node1, Node2){
   this.line.position.set(this.line.width/2 + mx*shiftfactor, this.startNode.Sprite.y + my*shiftfactor);
   this.line.rotation = val;
   this.startNode.parent.segment.addChild(this.line);
+
 
 }

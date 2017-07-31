@@ -20,6 +20,10 @@ function loadMainGame(){
   loadShipViewer();
   loadShipProgress();
   loadShipManagement();
+
+  MAP = new Map(MainGameContainer);
+  MAP.showMap();
+
   loadEventWindow();
 }
 
@@ -160,6 +164,7 @@ function warButton(x, y, func){
 }
 
 function ShipProgress(container){
+  this.container = container;
 
   progressbar = new Sprite(PIXI.loader.resources["res/backs/PixelatedBackgroundSkies.png"].texture)
   progressbar.setTransform(0, 10);
@@ -208,6 +213,8 @@ function ShipProgress(container){
   sp.height = 32;
   container.addChild(sp);
 
+  this.pointers = new Array();
+
   for (var i = 0; i < 15; i++) {
     if(!LOADEDLEVEL.POI.includes(i)){
       sp = new Sprite(Tex_Main['circle.png']);
@@ -222,9 +229,29 @@ function ShipProgress(container){
       sp.width = 32;
       sp.height = 32;
     }
-
-    container.addChild(sp);
+    this.pointers.push(sp);
+    this.container.addChild(sp);
   }
+
+  this.loadDisplay = function(){
+    for (var i = 0; i < this.pointers.length; i++) {
+      if(!LOADEDLEVEL.POI.includes(i)){
+        this.pointers[i].texture = (Tex_Main['circle.png']);
+        this.pointers[i].x = 50 + 16 + i * 80;
+        this.pointers[i].y = 22 + 16;
+        this.pointers[i].width = 24;
+        this.pointers[i].height = 24;
+      } else {
+        this.pointers[i].texture = (Tex_Main['diamond.png']);
+        this.pointers[i].x = 50 + 8 + i * 80;
+        this.pointers[i].y = 22 + 12;
+        this.pointers[i].width = 32;
+        this.pointers[i].height = 32;
+      }
+    }
+  }
+  this.loadDisplay();
+
 
   miniProgressShip = new MiniShip(container, 20, 52, 48, 28);
 }
@@ -250,7 +277,7 @@ function ShipManagment(container){
   goldValue.y = 740;
   container.addChild(goldValue);
 
-  submit = new button("Submit", Tex_Main['Button_UI.png'], 1120, 860, 144, 48, function(){ pause = false; SwitchCover(false); hullPB.submitPower(); cannonPB.submitPower(); sailsPB.submitPower(); cookingPB.submitPower()});
+  submit = new button("Submit", Tex_Main['Button_UI.png'], 1120, 860, 144, 48, function(){InitLevel()});
   container.addChild(submit.Sprite);
 
   hullPB = new PowerBar(container, 140, 620, "HULL");
@@ -521,8 +548,8 @@ function button(name, texture, x, y, w, h, func){
   this.Sprite.interactive = true;
 
   text = new PIXI.Text(name,{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'right'});
-  text.x = text.width/2 - 8;
-  text.y = text.height/2 - 8;
+  text.x = this.Sprite.width/2 - text.width/2;
+  text.y = this.Sprite.height/2 - text.height/2 - 4;
   this.Sprite.addChild(text);
 
   this.func = func;

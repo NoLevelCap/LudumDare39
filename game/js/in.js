@@ -21,7 +21,7 @@ function setup() {
   loadEvents();
   loadMainGame();
 
-  MAP = new Map(stage);
+  
 
   //get the stage details
   Console.log(stage);
