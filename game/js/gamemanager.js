@@ -38,7 +38,21 @@ function CheckPassedPOI(){
 
 function repairShip()
 {
-  
+  if (Gold >= 100 - shipHealth)
+  {
+    Gold -= 100 - shipHealth;
+    shipHealth = 100;
+  }
+}
+
+function buyCrew()
+{
+  if (Gold >= 40)
+  {
+    Gold -= 40;
+    crew += 1;
+    crewValue.text = crewused + "/" + crew;
+  }
 }
 
 function Sail(){

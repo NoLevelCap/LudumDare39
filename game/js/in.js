@@ -21,7 +21,7 @@ function setup() {
   loadEvents();
   loadMainGame();
 
-  
+
 
   MAP.showMap();
 
@@ -68,6 +68,11 @@ function play() {
     pause = true;
   }
 
+  if (shipHealth > 100)
+  {
+    shipHealth = 100;
+  }
+
   if (gameOver)
   {
     usersShip.ShipContainer.y += 2;
@@ -76,6 +81,9 @@ function play() {
       EVENTWINDOW.showEvent(new gameOverMessage());
     }
   }
+
+  MAP.repairTxt.text = (100 - shipHealth) + " gold";
+  MAP.buyCrewTxt.text = "40 gold";
 
   war.visible = warButtonsVisible();
 }
