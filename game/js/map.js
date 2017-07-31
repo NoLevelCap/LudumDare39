@@ -105,9 +105,14 @@ function Map(container){
     this.generateMap();
     this.createConnections();
 
+    this.repairBtn = new button("Repair", Tex_Main["Button_UI.png"], 10, 10, 144, 48, repairShip);
+    this.mapContainer.addChild(this.repairBtn.Sprite);
+
+    this.buyCrewBtn = new button("Buy crew", Tex_Main["Button_UI.png"], 10, 60, 144, 48, repairShip);
+    this.mapContainer.addChild(this.buyCrewBtn.Sprite);
+
     currentNode = this.segments[0].nodes[0];
     currentNode.setVisted();
-
     this.hideMap();
 }
 
@@ -216,6 +221,5 @@ function Connection(Node1, Node2){
   this.line.position.set(this.line.width/2 + mx*shiftfactor, this.startNode.Sprite.y + my*shiftfactor);
   this.line.rotation = val;
   this.startNode.parent.segment.addChild(this.line);
-
 
 }

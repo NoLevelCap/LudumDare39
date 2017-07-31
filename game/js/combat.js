@@ -101,7 +101,7 @@ function combatManager(){
     {
       moneyPlus = Math.floor(Math.random() * 60) + 10
       createMessage("You have sunk the enemy ship!", "You gain " + moneyPlus + " gold");
-      gold += moneyPlus;
+      Gold += moneyPlus;
       enemySink = true;
       animationTimer = 60 * 4;
     }

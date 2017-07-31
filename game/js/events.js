@@ -48,6 +48,7 @@ function DrawEvent(ignore){
   debug.log("Is good? " + isGood + " with " + (karma*100) + "% chance.");
   while (true) {
     event = EventCollection[getRandomInt(0, EventCollection.length)];
+//    event = EventCollection[6];
 //    debug.log(event);
     debug.log(event.good + ", " + isGood);
     if(event.good == isGood){
@@ -74,7 +75,6 @@ function EventData(text, type, vari, final, good){
   this.final = this.getFinal();
 
   this.fire = function(){
-    debug.log("HEY");
     this.vari = this.getVari();
     this.text = this.getText();
     this.final = this.getFinal();
@@ -116,11 +116,6 @@ function getHighestPowerBar(){
   return highest;
 }
 
-function IncreaseGold(val)
-{
-  gold += val;
-}
-
 function skipToNextEvent(){
   pause = false;
   posi = Math.floor(miniProgressShip.lastYard/100);
@@ -138,10 +133,15 @@ function getEventPastPoint(loc){
 }
 
 function affectAllPowerBars(val){
+  debug.log(val);
   hullPB.changePower(val);
   cannonPB.changePower(val);
   sailsPB.changePower(val);
   cookingPB.changePower(val);
+  hullPB.submitPower();
+  cannonPB.submitPower();
+  sailsPB.submitPower();
+  cookingPB.submitPower();
 }
 
 function changeCrewmen(val){
