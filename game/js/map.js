@@ -83,6 +83,11 @@ function Map(container){
     this.back = new Extras.TilingSprite(Tex_Main['EventBack.png'], 1280, 580);
     this.mapContainer.addChild(this.back);
 
+    text = new PIXI.Text("Map of Pirate Cove",{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'right'});
+    text.x = this.Sprite.width/2 - text.width/2;
+    text.y = this.Sprite.height/2 - text.height/2 - 4;
+    this.mapContainer.addChild(text);
+
     this.map = new Container();
     this.map.x = 640 - 320;
     this.map.y = 100;
