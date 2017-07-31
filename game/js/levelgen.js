@@ -1,9 +1,22 @@
 
-function getPoints(){
+var Type = {
+  difficult : 5,
+  peaceful : 1,
+  normal : 3
+}
+
+function getLevelType(key) {
+    return Type[key];
+}
+
+function getPoints(type){
   ab = new Array();
-  ab.push(getRandomInt(0, 5));
-  ab.push(getRandomInt(5, 10));
-  ab.push(getRandomInt(10, 15));
+  for (var i = 0; i < type; i++) {
+    do{
+      b = getRandomInt(0, 15);
+    }while(ab.includes(b));
+    ab.push(b);
+  }
   return ab;
 }
 
@@ -13,8 +26,9 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
 }
 
-function Level(){
-  this.POI = getPoints();
+function Level(type){
+  this.POI = getPoints(type);
+  this.type = type;
 }
 
 function InitLevel(){
@@ -27,9 +41,10 @@ function InitLevel(){
     createMessage("You could select some crew", "Click on the checkboxes\nto assign crew to areas of the ship");
     return;
   }
-
+    console.log("INIT LEVEL")
     pause = false;
     miniProgressShip.yards = 0;
+    miniProgressShip.lastYard = 0;
     SwitchCover(false);
     hullPB.submitPower();
     cannonPB.submitPower();
@@ -42,7 +57,7 @@ function InitLevel(){
     currentNode.setVisted();
     visitNode = null;
 
-    LOADEDLEVEL = new Level();
+    LOADEDLEVEL = new Level(currentNode.type);
     SHIPROGRESS.loadDisplay();
 }
 
@@ -50,4 +65,9 @@ function EndLevel(){
   pause = true;
   MAP.showMap();
   SwitchCover(true);
+  if(LOADEDLEVEL.type == getLevelType("difficult")){
+    prize = getRandomInt(50, 101);
+    IncreaseGold(prize);
+    EVENTWINDOW.showEvent(new emptyEvent("You find a cache of treasure!", "You get " + prize + "gold."));
+  }
 }

@@ -7,10 +7,10 @@ function Map(container){
     this.generateMap = function(map){
       for (var i = 0; i < 6; i++) {
         ms = new MapSegment(160*i);
-        ms.createNode();
+        ms.createNode(i>1&&i<5, i==0 || i == 1);
         if(i>1&&i<5){
           for (var b = 0; b < getRandomInt(0, 4); b++) {
-            ms.createNode();
+            ms.createNode(i>1&&i<5);
           }
         }
         this.map.addChild(ms.segment);
@@ -84,10 +84,6 @@ function Map(container){
     this.mapContainer.addChild(this.back);
 
 
-    text = new PIXI.Text("Map of Pirate Cove",{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'right'});
-    text.x = 640/2 - text.width/2;
-    text.y = 50 - text.height/2 - 4;
-    this.mapContainer.addChild(text);
 
     this.map = new Container();
     this.map.x = 640 - 320;
@@ -129,6 +125,7 @@ function Map(container){
       this.buyCrewTxt.y = 65;
       this.mapContainer.addChild(this.buyCrewBtn.Sprite);
       this.mapContainer.addChild(this.buyCrewTxt);
+
     currentNode = this.segments[0].nodes[0];
     currentNode.setVisted();
 
@@ -142,8 +139,8 @@ function MapSegment(x){
   this.segment.x = x;
   this.segment.y = 0;
 
-  this.createNode = function(){
-    this.nodes.push(new Node(this));
+  this.createNode = function(hard, easy){
+    this.nodes.push(new Node(this, hard, easy));
   };
 
   this.positionNodes = function(){
@@ -157,7 +154,19 @@ function MapSegment(x){
   }
 }
 
-function Node(container){
+function Node(container, hard, easy){
+  this.type = getLevelType("normal");
+  if(hard){
+    if(Math.random()<=0.33){
+      this.type = getLevelType("peaceful");
+    }else if(Math.random()<=0.5){
+      this.type = getLevelType("difficult");
+    }
+  }
+
+  if(easy){
+    this.type = getLevelType("peaceful");
+  }
   this.parent = container;
   this.genX = container.segment.x;
   this.Sprite = new Sprite(Tex_Main["WrittenCircle.png"]);
@@ -168,6 +177,19 @@ function Node(container){
   this.Sprite.anchor.set(0.5, 0.5);
   this.Sprite.p = this;
   this.Sprite.interactive = true;
+
+  if(this.type != getLevelType("normal")){
+    this.icon = new Sprite(Tex_Main["Peaceful.png"]);
+    if(this.type == getLevelType("difficult")){
+      this.icon.texture = Tex_Main["Dangerous.png"];
+    }
+    this.icon.x = 0;
+    this.icon.y = 0;
+    this.icon.width = 64;
+    this.icon.height = 64;
+    this.icon.anchor.set(0.5, 0.5);
+    this.Sprite.addChild(this.icon);
+  }
 
   this.visited = false;
 

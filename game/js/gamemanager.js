@@ -13,13 +13,14 @@ function CheckPassedPOI(){
       return;
     }
 
+    console.log(LOADEDLEVEL);
     if(LOADEDLEVEL.POI.includes(eventLoc-1)){
       debug.log("Create event");
       EVENTWINDOW.showEvent(DrawEvent());
       pause = true;
     }
     else {
-      if (Math.random() <= 0.25)
+      if (Math.random() <= 0.25 && LOADEDLEVEL.type != getLevelType("peaceful"))
       {
 
        initCombat();

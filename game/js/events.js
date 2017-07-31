@@ -155,6 +155,12 @@ function emptyEvent(text, description){
   this.fire = function(){pause=false;};
 }
 
+function looseEvent(text, description, func){
+  this.text = text;
+  this.final = description;
+  this.fire = func;
+}
+
 function gameOverMessage(){
   this.text = "Your ship sunk!!";
   this.final = "Refresh to play again";
