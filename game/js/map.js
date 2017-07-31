@@ -84,8 +84,8 @@ function Map(container){
     this.mapContainer.addChild(this.back);
 
     text = new PIXI.Text("Map of Pirate Cove",{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'right'});
-    text.x = this.Sprite.width/2 - text.width/2;
-    text.y = this.Sprite.height/2 - text.height/2 - 4;
+    text.x = 640/2 - text.width/2;
+    text.y = 50 - text.height/2 - 4;
     this.mapContainer.addChild(text);
 
     this.map = new Container();
