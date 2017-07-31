@@ -87,7 +87,7 @@ var EventEffects = {
   gold : function(val){IncreaseGold(val)},
   skip : function(val){skipToNextEvent()},
   lowest_stat : function(val){changeCrewmen(val); getLowestPowerBar().changePower(val);},
-  all_stats : function(val){changeCrewmen(val*4); affectAllPowerBars(val);},
+  all_stats : function(val){affectAllPowerBars(val); },
   health : function(val){HealShip(val); if(val < 0){SOUNDMANAGER.playSound("cannonBlast");}},
   highest_stat : function(val){changeCrewmen(val); getHighestPowerBar().changePower(val);},
   sails : function(val){changeCrewmen(val); sailsPB.changePower(val);},
@@ -135,14 +135,10 @@ function getEventPastPoint(loc){
 
 function affectAllPowerBars(val){
   debug.log(val);
-  hullPB.changePower(val);
-  cannonPB.changePower(val);
-  sailsPB.changePower(val);
-  cookingPB.changePower(val);
-  hullPB.submitPower();
-  cannonPB.submitPower();
-  sailsPB.submitPower();
-  cookingPB.submitPower();
+  changeCrewmen(val); hullPB.changePower(val); hullPB.submitPower();
+  changeCrewmen(val); cannonPB.changePower(val); cannonPB.submitPower();
+  changeCrewmen(val); sailsPB.changePower(val); sailsPB.submitPower();
+  changeCrewmen(val); cookingPB.changePower(val); cookingPB.submitPower();
 }
 
 function changeCrewmen(val){
