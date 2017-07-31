@@ -1,5 +1,7 @@
 
-var ShipSpeed = .1, pause = false, CrewSwitchingEnabled = true, crew = 8, crewused = 0, karma = .2;
+var ShipSpeed = .1, pause = true, CrewSwitchingEnabled = true, crew = 8, crewused = 0, karma = .2, shipName;
+
+var TUTMANAGER;
 
 var Gold = 0;
 
@@ -20,7 +22,7 @@ function CheckPassedPOI(){
       pause = true;
     }
     else {
-      if (Math.random() <= 0.25 && LOADEDLEVEL.type != getLevelType("peaceful"))
+      if (Math.random() <= 0.4 * LOADEDLEVEL.difficultyModifier && LOADEDLEVEL.type != getLevelType("peaceful"))
       {
 
        initCombat();
@@ -35,6 +37,16 @@ function CheckPassedPOI(){
 //    pause = true;
     miniProgressShip.eventPassed = false;
   }
+}
+
+function startGame(){
+  shipName = STARTMENU.textField.text.text;
+  if(!shipName.match(/The /i)){shipName = "The".concat(shipName)}
+
+  TUTMANAGER = new TutorialManager();
+  STARTMENU.visible = false;
+
+  TUTMANAGER.loadMessage("start");
 }
 
 function repairShip()
@@ -58,7 +70,7 @@ function buyCrew()
 
 function Sail(){
   if(!pause){
-    miniProgressShip.increaseYards(ShipSpeed);
+    miniProgressShip.increaseYards(ShipSpeed * LOADEDLEVEL.shipSpeedModifier);
     scrollingBackground.x = -miniProgressShip.yards * 2.1;
     CheckPassedPOI();
   }

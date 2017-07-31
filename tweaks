@@ -1,20 +1,28 @@
 Possible tweaks and adjustments:
--Make it so the lose gold event doesn't come up if you don't have enough gold
 -Change health to bars
 -Change treasure to arrow
 -Enemy ship encounters too frequent - maybe on sails and difficulty modifier
 -all stats bug
 - add difficulty modifers to level loading
 - peaceful have faster sailing speed
-- tutorialise
 -if 12 cooking then option to throw food in combat
 -move shop down
--name ship
 -random name gen for ports and other ship
 - square for ui events box
-- change spelling of too to to
 - no win condition
 - force end node to be ahrd
+- flank is easier if its the first action you take
+- fleeing is easier if they succecessfully flank you
+- display ship name on buy menu
+- add to shipnames
+- add to port names
+- there is a bug where some windows unpause at unwanted times
+- sail doesn't change ship crew after event change
 
 -----------Balancing---------------
 = Piss Orff
+
+--------DONE--------
+- Name ship
+- change spelling of too to to
+- tutorialise

@@ -155,10 +155,11 @@ function emptyEvent(text, description){
   this.fire = function(){pause=false;};
 }
 
-function looseEvent(text, description, func){
+function tutorialEvent(text, description){
   this.text = text;
   this.final = description;
-  this.fire = func;
+  this.used = false;
+  this.fire = function(){};
 }
 
 function gameOverMessage(){

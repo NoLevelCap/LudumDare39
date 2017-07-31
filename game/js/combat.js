@@ -24,7 +24,10 @@ function initCombat(){
   enemyFlank = false;
   AIShip.ShipContainer.x = -960;
   AIShip.ShipContainer.y = 50;
-  createMessage("An enemy ship approaches!", "");
+  if(TUTMANAGER.messages["combatStart"].used){
+    createMessage("An enemy ship approaches!", "");
+  }
+  TUTMANAGER.loadMessage("combatStart");
 }
 
 function createMessage(text, subtext)
