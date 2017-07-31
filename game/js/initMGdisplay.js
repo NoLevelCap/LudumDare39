@@ -555,7 +555,7 @@ function PowerBar(container, x, y, name, effect, onChange){
         intermediatary = this.temp_value;
         this.loadPower(0);
         hPower = getHighestPowerBar();
-        if (hPower.value + val + intermediatary >= 0 && hPower != this)
+        if (hPower.temp_value + val + intermediatary >= 0 && hPower != this)
         {
           getHighestPowerBar().changePower(val + intermediatary);
         }

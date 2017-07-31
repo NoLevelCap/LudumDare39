@@ -138,7 +138,7 @@ function affectAllPowerBars(val){
   changeCrewmen(val); hullPB.changePower(val); hullPB.submitPower();
   changeCrewmen(val); cannonPB.changePower(val); cannonPB.submitPower();
   changeCrewmen(val); sailsPB.changePower(val); sailsPB.submitPower();
-  changeCrewmen(val); cookingPB.changePower(val); cookingPB.changePower(val);
+  changeCrewmen(val); cookingPB.changePower(val); cookingPB.submitPower();
 }
 
 function changeCrewmen(val){
