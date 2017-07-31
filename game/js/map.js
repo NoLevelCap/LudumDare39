@@ -83,6 +83,7 @@ function Map(container){
     this.back = new Extras.TilingSprite(Tex_Main['EventBack.png'], 1280, 580);
     this.mapContainer.addChild(this.back);
 
+
     text = new PIXI.Text("Map of Pirate Cove",{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'right'});
     text.x = 640/2 - text.width/2;
     text.y = 50 - text.height/2 - 4;
@@ -92,6 +93,11 @@ function Map(container){
     this.map.x = 640 - 320;
     this.map.y = 100;
     this.mapContainer.addChild(this.map);
+
+    text = new PIXI.Text("Map of Pirate Cove",{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'center'});
+    text.x = 960/2 - text.width/2;
+    text.y = -50 - text.height/2 - 4;
+    this.map.addChild(text);
 
     for (var i = 0; i < 32; i++) {
       embossTop = new Sprite(Tex_Main['Trim.png']);
@@ -110,6 +116,19 @@ function Map(container){
     this.generateMap();
     this.createConnections();
 
+    this.repairBtn = new button("Repair", Tex_Main["Button_UI.png"], 10, 10, 144, 48, repairShip);
+      this.repairTxt = new PIXI.Text("12 gold",{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'right'});
+      this.repairTxt.x = 160;
+      this.repairTxt.y = 15;
+      this.mapContainer.addChild(this.repairBtn.Sprite);
+      this.mapContainer.addChild(this.repairTxt);
+
+      this.buyCrewBtn = new button("Buy crew", Tex_Main["Button_UI.png"], 10, 60, 144, 48, buyCrew);
+      this.buyCrewTxt = new PIXI.Text("24 gold",{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'right'});
+      this.buyCrewTxt.x = 160;
+      this.buyCrewTxt.y = 65;
+      this.mapContainer.addChild(this.buyCrewBtn.Sprite);
+      this.mapContainer.addChild(this.buyCrewTxt);
     currentNode = this.segments[0].nodes[0];
     currentNode.setVisted();
 
