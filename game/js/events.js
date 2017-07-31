@@ -88,7 +88,7 @@ var EventEffects = {
   skip : function(val){skipToNextEvent()},
   lowest_stat : function(val){changeCrewmen(val); getLowestPowerBar().changePower(val);},
   all_stats : function(val){changeCrewmen(val*4); affectAllPowerBars(val);},
-  health : function(val){HealShip(val)},
+  health : function(val){HealShip(val); if(val < 0){SOUNDMANAGER.playSound("cannonBlast");}},
   highest_stat : function(val){changeCrewmen(val); getHighestPowerBar().changePower(val);},
   sails : function(val){changeCrewmen(val); sailsPB.changePower(val);},
   cannons : function(val){changeCrewmen(val); cannonPB.changePower(val);},

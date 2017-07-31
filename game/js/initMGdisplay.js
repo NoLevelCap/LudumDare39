@@ -590,6 +590,7 @@ function button(name, texture, x, y, w, h, func, fs){
       this.y = this.p.sy;
     })
     .on('mouseup', function(){
+      SOUNDMANAGER.playSound("pencil");
       this.p.func();
     });
 

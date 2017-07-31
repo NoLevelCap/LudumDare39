@@ -26,6 +26,7 @@ function initCombat(){
   AIShip.ShipContainer.y = 50;
   AIShip.shipName = drawRandomArray(ShipNames);
   AIShip.text.text = AIShip.shipName;
+  SOUNDMANAGER.toggleCombat();
   if(TUTMANAGER.messages["combatStart"].used){
     createMessage("An enemy ship approaches!", "");
   }
@@ -106,6 +107,7 @@ function combatManager(){
     if (enemyHealth <= 0 && !enemySink)
     {
       moneyPlus = Math.floor(Math.random() * 60) + 10
+      SOUNDMANAGER.toggleCombat();
       createMessage("You have sunk the enemy ship!", "You gain " + moneyPlus + " gold");
       Gold += moneyPlus;
       enemySink = true;
@@ -154,6 +156,7 @@ function calcDefence(){
 function Fire(){
   if (warButtonsVisible())
   {
+    SOUNDMANAGER.playSound("cannonBlast");
     createMessage("Fire the cannons!", "You hit for " + calcDamage() + " damage");
     enemyHealth -= calcDamage();
     swapTurns();
@@ -216,6 +219,7 @@ function calcAIDamage()
 
 function AIFire()
 {
+  SOUNDMANAGER.playSound("cannonBlast");
   createMessage("Your enemy fires their cannons", "You take " + calcAIDamage() + " points of damage");
   TakeDamage(calcAIDamage());
   enemyFlank = false;

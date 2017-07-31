@@ -10,6 +10,8 @@ Possible tweaks and adjustments:
 - sail doesn't change ship crew after event change
 - recalculate enemy attack from hulls and cannons
 - fix skipping destination
+- add a on active sound play to events
+- non pause on complete
 
 -----------Balancing---------------
 -Enemy ship encounters too frequent - maybe on sails and difficulty modifier
