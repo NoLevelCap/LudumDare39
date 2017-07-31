@@ -121,6 +121,7 @@ function skipToNextEvent(){
   posi = Math.floor(miniProgressShip.lastYard/100);
   nl = getEventPastPoint(posi) + 1;
   miniProgressShip.yards = (nl * 100) - 20;
+  miniProgressShip.lastYard = Math.floor(miniProgressShip.yards/100) * 100;
 }
 
 function getEventPastPoint(loc){

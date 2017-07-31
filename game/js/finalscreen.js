@@ -47,10 +47,10 @@ function loadScreen(data){
   shift = 0
   for (var i = 0; i < lsScreenData.length; i++) {
     if(i%2==0){
-      reward = new PIXI.Text(lsScreenData[i],{fontFamily : 'Permanent Marker', fontSize: 72, lineHeight: 56, fill : 0x000000, align : 'left'});
+      reward = new PIXI.Text(lsScreenData[i],{fontFamily : 'Permanent Marker', fontSize: 64, lineHeight: 56, fill : 0x000000, align : 'left'});
       reward.x = 32;
     }else{
-      reward = new PIXI.Text(lsScreenData[i],{fontFamily : 'Permanent Marker', fontSize: 72, lineHeight: 56, fill : 0x000000, align : 'right'});
+      reward = new PIXI.Text(lsScreenData[i],{fontFamily : 'Permanent Marker', fontSize: 64, lineHeight: 56, fill : 0x000000, align : 'right'});
       reward.x = 1280 -reward.width  - 32;
     };
 
@@ -61,16 +61,20 @@ function loadScreen(data){
   }
 
   iconContainer = new Container();
-  boat = new Sprite(Tex_main["boat"]);
-  by = new Sprite(Tex_main["by"]);
+  boat = new Sprite(Tex_Main["boat.png"]);
+  by = new Sprite(Tex_Main["by.png"]);
   by.x = 160;
-  sn = new Sprite(Tex_main["sn"]);
+  sn = new Sprite(Tex_Main["sn.png"]);
+  tfp = new Sprite(Tex_Main["tfp.png"]);
+  tfp.x = 4;
+  tfp.y = -tfp.height - 8;
   sn.x = 160 * 2;
   iconContainer.addChild(boat);
   iconContainer.addChild(by);
   iconContainer.addChild(sn);
-  iconContainer.x = 10;
-  iconContainer.y = 720;
+  iconContainer.addChild(tfp);
+  iconContainer.x = 48 + 1280 - 896 ;
+  iconContainer.y = 720 + 80;
   FINALSCREEN.addChild(iconContainer);
 
   console.log();

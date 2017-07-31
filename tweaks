@@ -9,7 +9,6 @@ Possible tweaks and adjustments:
 - fleeing is easier if they succecessfully flank you
 - sail doesn't change ship crew after event change
 - recalculate enemy attack from hulls and cannons
-- fix skipping destination
 - add a on active sound play to events
 - non pause on complete
 

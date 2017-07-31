@@ -16,7 +16,7 @@ function loadStartMenu(){
 
   madeBy = new Sprite(Tex_Main["TitleScreenMadeBy.png"]);
   madeBy.x = 30;
-  madeBy.y = 750;
+  madeBy.y = 718;
   STARTMENU.addChild(madeBy);
 
   shipName = new PIXI.Text("Ship Name:",{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'center'});
