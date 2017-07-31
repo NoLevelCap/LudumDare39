@@ -6,6 +6,7 @@ function loadStartMenu(){
   stage.addChild(STARTMENU);
 
   back = new Extras.TilingSprite(Tex_Main["EventBack.png"], 1280, 960);
+  back.interactive = true;
   STARTMENU.addChild(back);
 
   title = new Sprite(Tex_Main["TitleScreen.png"]);
