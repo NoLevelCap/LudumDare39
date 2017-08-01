@@ -6,6 +6,7 @@ Possible tweaks and adjustments:
 - recalculate enemy attack from hulls and cannons
 >>>>>>> 14b1f4284d228b3101589a7c1d090d2ba2933381
 - add a on active sound play to events
+- crewmen to crewman
 
 -----------Balancing---------------
 -Enemy ship encounters too frequent - maybe on sails and difficulty modifier

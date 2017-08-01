@@ -47,6 +47,7 @@ function startGame(){
   TUTMANAGER = new TutorialManager();
   STARTMENU.visible = false;
 
+  submitStart();
   TUTMANAGER.loadMessage("start");
 }
 
