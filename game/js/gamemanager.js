@@ -1,5 +1,5 @@
 
-var ShipSpeed = .1, pause = true, CrewSwitchingEnabled = true, crew = 8, crewused = 0, karma = .2, shipName;
+var ShipSpeed = .1, pause = true, CrewSwitchingEnabled = true, crew = 8, crewused = 0, karma = .2, shipName, startTime;
 
 var TUTMANAGER;
 
@@ -40,6 +40,7 @@ function CheckPassedPOI(){
 }
 
 function startGame(){
+  startTime = Date.now();
   shipName = STARTMENU.textField.text.text;
   if(!shipName.match(/The /i)){shipName = "The".concat(shipName)}
 

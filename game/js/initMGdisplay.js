@@ -306,19 +306,43 @@ function EventDisplay(container){
     back.y = 0;
     container.addChild(back);
 
-    for (var i = 0; i < 16; i++) {
-      embossTop = new Sprite(Tex_Main['Trim.png']);
-      embossTop.x = i * 40;
+      embossTop = new Extras.TilingSprite(Tex_Main['Trim.png'], 16*40, 10);
+      embossTop.x = 0;
       embossTop.y = -10;
       container.addChild(embossTop);
-    }
 
-    for (var i = 0; i < 16; i++) {
-      embossTop = new Sprite(Tex_Main['Trim.png']);
-      embossTop.x = i * 40;
+
+
+      embossTop = new Extras.TilingSprite(Tex_Main['Trim.png'], 16*40, 10);
+      embossTop.x = 0;
       embossTop.y = 320;
       container.addChild(embossTop);
-    }
+
+      embossTop = new Extras.TilingSprite(Tex_Main['TrimRT.png'], 10, 8*40);
+      embossTop.x = 640;
+      embossTop.y = 0;
+      container.addChild(embossTop);
+
+      embossTop = new Extras.TilingSprite(Tex_Main['TrimRT.png'], 10, 8*40);
+      embossTop.x = -10;
+      embossTop.y = 0;
+      container.addChild(embossTop);
+
+      corner = new Sprite(Tex_Main['TrimCorner.png']);
+      corner.position.set(-10, -10);
+      container.addChild(corner);
+
+      corner = new Sprite(Tex_Main['TrimCorner.png']);
+      corner.position.set(-10, 320);
+      container.addChild(corner);
+
+      corner = new Sprite(Tex_Main['TrimCorner.png']);
+      corner.position.set(640, -10);
+      container.addChild(corner);
+
+      corner = new Sprite(Tex_Main['TrimCorner.png']);
+      corner.position.set(640, 320);
+      container.addChild(corner);
 
     this.eventSpeech = new PIXI.Text("This is where the event \n information goes. \n another line",{fontFamily : 'Permanent Marker', fontSize: 32, fill : 0x000000, align : 'center'});
     this.eventSpeech.x = 320 - this.eventSpeech.width/2;
@@ -533,14 +557,12 @@ function PowerBar(container, x, y, name, effect, onChange){
   };
 
   this.changePower = function(val){
-
     if(val != 0){
-      if(this.temp_value + val < 0 && crewused >= crew){
+      if(this.temp_value + val < 0 && crewused > crew){
         intermediatary = this.temp_value;
-        debug.log(this.temp_value + ", " + this.value + ", " + val + ", " + intermediatary);
         this.loadPower(0);
         hPower = getHighestPowerBar();
-        if (hPower.value + val + intermediatary >= 0 && hPower != this)
+        if (hPower.temp_value + val + intermediatary >= 0 && hPower != this)
         {
           getHighestPowerBar().changePower(val + intermediatary);
         }
@@ -548,6 +570,7 @@ function PowerBar(container, x, y, name, effect, onChange){
         this.loadPower(this.temp_value + val);
       }
     }
+    this.submitPower();
   }
 
   this.submitPower = function(){

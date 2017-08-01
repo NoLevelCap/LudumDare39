@@ -1,5 +1,5 @@
 
-var currentNode, visitNode;
+var currentNode, visitNode, areaname;
 
 function Map(container){
     this.segments = new Array();
@@ -90,7 +90,8 @@ function Map(container){
     this.map.y = 100;
     this.mapContainer.addChild(this.map);
 
-    text = new PIXI.Text("Map of " + drawRandomArray(PortNames),{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'center'});
+    areaname = drawRandomArray(PortNames);
+    text = new PIXI.Text("Map of " + areaname,{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'center'});
     text.x = 960/2 - text.width/2;
     text.y = -50 - text.height/2 - 4;
     this.map.addChild(text);
@@ -245,6 +246,16 @@ function Node(container, hard, easy){
   this.setVisted = function(){
     this.Sprite.texture = Tex_Main["WrittenCircleScored.png"];
     this.visited = true;
+  }
+
+  this.isFinalNode = function (){
+    a = 0;
+    for (var i = 0; i < this.connections.length; i++) {
+      if(this.connections[i].startNode === this){
+        a++;
+      }
+    }
+    return (a<=0);
   }
 
 
