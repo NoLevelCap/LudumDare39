@@ -7,7 +7,7 @@ function Map(container){
     this.generateMap = function(map){
       for (var i = 0; i < 6; i++) {
         ms = new MapSegment(160*i);
-        ms.createNode(i>1&&i<5, i==0 || i == 1);
+        ms.createNode(i>1&&i<5, i==0 || i == 1,i == 5);
         if(i>1&&i<5){
           for (var b = 0; b < getRandomInt(0, 4); b++) {
             ms.createNode(i>1&&i<5);
@@ -155,9 +155,15 @@ function MapSegment(x){
   this.segment.x = x;
   this.segment.y = 0;
 
-  this.createNode = function(hard, easy){
-    this.nodes.push(new Node(this, hard, easy));
+  this.createNode = function(hard, easy, difficult){
+    this.nodes.push(new Node(this, hard, easy, difficult));
   };
+
+  this.makeLastNodeDifficult = function()
+  {
+    debug.log("MAKING SHIT HARD " + (this.nodes.length - 1));
+    this.nodes[this.nodes.length - 1].type = getLevelType("difficult");
+  }
 
   this.positionNodes = function(){
     for (var i = 0; i < this.nodes.length; i++) {
@@ -170,7 +176,7 @@ function MapSegment(x){
   }
 }
 
-function Node(container, hard, easy){
+function Node(container, hard, easy, isDifficult){
   this.type = getLevelType("normal");
   if(hard){
     if(Math.random()<=0.33){
@@ -183,6 +189,11 @@ function Node(container, hard, easy){
   if(easy){
     this.type = getLevelType("peaceful");
   }
+
+  if(isDifficult){
+    this.type = getLevelType("difficult");
+  }
+
   this.parent = container;
   this.genX = container.segment.x;
   this.Sprite = new Sprite(Tex_Main["WrittenCircle.png"]);
