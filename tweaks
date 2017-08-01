@@ -1,11 +1,10 @@
 Possible tweaks and adjustments:
 - if 12 cooking then option to throw food in combat
 - sail doesn't change ship crew after event change
-<<<<<<< HEAD
-=======
-- recalculate enemy attack from hulls and cannons
->>>>>>> 14b1f4284d228b3101589a7c1d090d2ba2933381
 - add a on active sound play to events
+
+-two buttons to shop, sell health to gain money, increase maximum health size
+=======
 - crewmen to crewman
 
 -----------Balancing---------------
