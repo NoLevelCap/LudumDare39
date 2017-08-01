@@ -1,16 +1,8 @@
 Possible tweaks and adjustments:
-- Change treasure to arrow
-- all stats bug
-- peaceful have faster sailing speed
 - if 12 cooking then option to throw food in combat
-- square for ui events box
-- no win condition
-- flank is easier if its the first action you take
-- fleeing is easier if they succecessfully flank you
 - sail doesn't change ship crew after event change
 - recalculate enemy attack from hulls and cannons
 - add a on active sound play to events
-- non pause on complete
 
 -----------Balancing---------------
 -Enemy ship encounters too frequent - maybe on sails and difficulty modifier

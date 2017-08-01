@@ -282,10 +282,10 @@ function ShipManagment(container){
   submit = new button("Submit", Tex_Main['Button_UI.png'], 1120, 860, 144, 48, function(){InitLevel()});
   container.addChild(submit.Sprite);
 
-  hullPB = new PowerBar(container, 140, 620, "HULL", function(){}, function(){TUTMANAGER.loadMessage("crewChangeHull")});
-  cannonPB = new PowerBar(container, 140, 700, "CANNON",  function(){}, function(){TUTMANAGER.loadMessage("crewChangeCannons")});
-  sailsPB = new PowerBar(container, 140, 780, "SAILS", function(){ ShipSpeed = 0.1 + (this.value/12) * 1.9 + LOADEDLEVEL.shipSpeedModifier * 1;}, function(){TUTMANAGER.loadMessage("crewChangeSails")});
-  cookingPB = new PowerBar(container, 140, 860, "COOKING", function() { karma = 0.5 + (this.value/12) * 0.4 + (1 - LOADEDLEVEL.difficultyModifier) * 0.1;}, function(){TUTMANAGER.loadMessage("crewChangeCooks")});
+  hullPB = new PowerBar(container, 140, 620, "HULL", function(){}, function(){TUTMANAGER.loadMessage("crewChangeHull");if (Math.random() < 0.5) {grunt();}});
+  cannonPB = new PowerBar(container, 140, 700, "CANNON",  function(){}, function(){TUTMANAGER.loadMessage("crewChangeCannons");if (Math.random() < 0.5) {grunt();}});
+  sailsPB = new PowerBar(container, 140, 780, "SAILS", function(){ ShipSpeed = 0.1 + (this.value/12) * 1.9 + LOADEDLEVEL.shipSpeedModifier * 1;}, function(){TUTMANAGER.loadMessage("crewChangeSails");if (Math.random() < 0.5) {grunt();}});
+  cookingPB = new PowerBar(container, 140, 860, "COOKING", function() { karma = 0.5 + (this.value/12) * 0.4 + (1 - LOADEDLEVEL.difficultyModifier) * 0.1;}, function(){TUTMANAGER.loadMessage("crewChangeCooks");if (Math.random() < 0.5) {grunt();}});
 
   cover = new Sprite(Tex_Main['break.png']);
   cover.x = -10;
@@ -355,6 +355,13 @@ function EventDisplay(container){
     container.addChild(this.eventDesc);
 
     this.showEvent = function(event){
+
+      if (event == EventCollection[12] || event == EventCollection[7])
+      {
+        debug.log("SPLASH");
+        SOUNDMANAGER.playSound("splash");
+      }
+
       this.currentEvent = event;
 
       this.container.visible = true;

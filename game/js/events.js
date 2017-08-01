@@ -48,7 +48,6 @@ function DrawEvent(ignore){
   debug.log("Is good? " + isGood + " with " + (karma*100) + "% chance.");
   while (true) {
     event = EventCollection[getRandomInt(0, EventCollection.length)];
-//    event = EventCollection[6];
 //    debug.log(event);
     debug.log(event.good + ", " + isGood);
     if(event.good == isGood){
