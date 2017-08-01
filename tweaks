@@ -1,6 +1,10 @@
 Possible tweaks and adjustments:
 - if 12 cooking then option to throw food in combat
 - sail doesn't change ship crew after event change
+<<<<<<< HEAD
+=======
+- recalculate enemy attack from hulls and cannons
+>>>>>>> master
 - add a on active sound play to events
 
 -----------Balancing---------------
