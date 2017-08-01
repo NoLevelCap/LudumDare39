@@ -5,7 +5,7 @@ function initCombat(){
   inCombat = true;
   flankFlag = false;
   firstMove = true;
-  enemyHealth = Math.floor((Math.random() * 10 * (cannonsPB.value / 12.0) * 0.7) + 5) * 10;
+  enemyHealth = Math.floor((Math.random() * 10 * (cannonsPB.value / 12.0) * 1.2) + 5) * 10;
   enemyAttack = Math.floor((Math.random() * 6) + ((cannonPB.value + hullPB.value) / 2) - 4);
   if (enemyAttack > 12)
   {
