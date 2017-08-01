@@ -135,16 +135,22 @@ function getEventPastPoint(loc){
 function affectAllPowerBars(val){
   debug.log(val);
 <<<<<<< HEAD
+<<<<<<< HEAD
   hullPB.changeImmediatePower(val);
   cannonPB.changeImmediatePower(val);
   sailsPB.changeImmediatePower(val);
   cookingPB.changeImmediatePower(val);
 =======
+=======
+>>>>>>> 14b1f4284d228b3101589a7c1d090d2ba2933381
   changeCrewmen(val); hullPB.changePower(val); hullPB.submitPower();
   changeCrewmen(val); cannonPB.changePower(val); cannonPB.submitPower();
   changeCrewmen(val); sailsPB.changePower(val); sailsPB.submitPower();
   changeCrewmen(val); cookingPB.changePower(val); cookingPB.submitPower();
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 14b1f4284d228b3101589a7c1d090d2ba2933381
 }
 
 function changeCrewmen(val){
