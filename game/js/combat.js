@@ -1,11 +1,12 @@
-var flankFlag, enemyHealth, enemyAttack, enemySpeed, playerTurn, enemyTurn, enemyFlank, shipHealth = 100, AITimer, animationTimer, enemyEnter, enemySink, AIShip, animFlee;
+var flankFlag, enemyHealth, enemyAttack, enemySpeed, playerTurn, enemyTurn, enemyFlank, shipHealth = 100, AITimer, animationTimer, enemyEnter, enemySink, AIShip, animFlee, firstMove;
 
 // Initialise combat scenario
 function initCombat(){
   inCombat = true;
   flankFlag = false;
+  firstMove = true;
   enemyHealth = Math.floor((Math.random() * 10) + 5) * 10;
-  enemyAttack = Math.floor((Math.random() * 6) + sailsPB.value - 4);
+  enemyAttack = Math.floor((Math.random() * 6) + ((cannonPB.value + hullPB.value) / 2) - 4);
   if (enemyAttack > 12)
   {
     enemyAttack = 12;
@@ -118,6 +119,7 @@ function combatManager(){
 
 // Function to swap enemy and player turns
 function swapTurns(){
+  firstMove = false;
   playerTurn = !playerTurn;
   enemyTurn = !enemyTurn;
   if (enemyTurn)
@@ -139,11 +141,23 @@ function calcDamage(){
 }
 
 function calcFleeStat(){
-  return (sailsPB.value / 20.0);
+  if (enemyFlank == true)
+  {
+    return (sailsPB.value / 12.0);
+  }
+  else {
+    return (sailsPB.value / 20.0);
+  }
 }
 
 function calcFlankStat(){
-  return (sailsPB.value / 12.0);
+  if (firstMove)
+  {
+    return (sailsPB.value / 6.0);
+  }
+  else {
+    return (sailsPB.value / 12.0);
+  }
 }
 
 function calcDefence(){

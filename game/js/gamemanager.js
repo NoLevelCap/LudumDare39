@@ -68,6 +68,27 @@ function buyCrew()
   }
 }
 
+function grunt()
+{
+  rand = Math.floor(Math.random() * 4);
+  if (rand == 0)
+  {
+    SOUNDMANAGER.playSound("okay");
+  }
+  if (rand == 1)
+  {
+    SOUNDMANAGER.playSound("canDo");
+  }
+  if (rand == 2)
+  {
+    SOUNDMANAGER.playSound("ayeCaptain");
+  }
+  if (rand == 3)
+  {
+    SOUNDMANAGER.playSound("yesSir");
+  }
+}
+
 function Sail(){
   if(!pause){
     miniProgressShip.increaseYards(ShipSpeed * LOADEDLEVEL.shipSpeedModifier);

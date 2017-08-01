@@ -4,6 +4,11 @@ function SoundManager(){
     combatMusic : new Howl({ src: ['sound/combatMusic.mp3'], autoplay: true, volume: 0, loop: true}),
     pencil : new Howl({ src: ['sound/pencil.mp3'], volume: 3}),
     cannonBlast : new Howl({ src: ['sound/cannonBlast.mp3'], volume: 3}),
+    okay : new Howl({ src: ['sound/okay.mp3'], volume: 3}),
+    yesSir : new Howl({ src: ['sound/yesSir.mp3'], volume: 3}),
+    canDo : new Howl({ src: ['sound/canDo.mp3'], volume: 3}),
+    ayeCaptain : new Howl({ src: ['sound/ayeCaptain.mp3'], volume: 3}),
+    splash : new Howl({ src: ['sound/splash.mp3'], volume: 3}),
   }
 
 
