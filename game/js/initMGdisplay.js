@@ -2,7 +2,7 @@
 
 var MainGameContainer, SHIPVIEWER, SHIPROGRESS, SHIPMANAGMENT, LOADEDLEVEL, EVENTWINDOW,
 miniProgressShip, scrollingBackground, hullPB, cannonPB, sailsPB, cookingPB, shipHealth, inCombat, war,
-cover, crewValue, healthView, enemyHealthView, goldValue, Gold, submit, canEditPower, gameOver, usersShip, crew,
+cover, crewValue, healthView, enemyHealthView, goldValue, Gold, submit, canEditPower, gameOver, usersShip, crew, maxHealth,
 animatables = new Array();
 
 function loadMainGame(){
@@ -10,6 +10,7 @@ function loadMainGame(){
   stage.addChild(MainGameContainer);
 
   shipHealth = 100;
+  maxHealth = 100;
   Gold = 0;
   pause = true;
   canEditPower = true;
