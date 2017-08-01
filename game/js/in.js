@@ -67,7 +67,7 @@ function play() {
     enemyHealthView.x = 1280 - enemyHealthView.width - 10;
   }
 
-  healthView.text = shipName + " health: " + shipHealth;
+  healthView.text = shipName + " health: " + shipHealth + "/" + maxHealth;
   goldValue.text = "Gold: " + Gold;
   if (Gold < 0)
   {
@@ -80,9 +80,10 @@ function play() {
     pause = true;
   }
 
-  if (shipHealth > 100)
+  maxHealth = Math.floor(100 + ((hullPB.value / 12.0) * 100));
+  if (shipHealth > maxHealth)
   {
-    shipHealth = 100;
+    shipHealth = maxHealth;
   }
 
   if (gameOver)
