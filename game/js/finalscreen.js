@@ -30,6 +30,45 @@ function submitScore(scoreinfo){
   });
 }
 
+function shitData(){
+  this.shipname = shipName;
+  this.areaname = areaname;
+}
+
+function submitStart(){
+
+  nd = new shitData();
+  console.log(nd);
+    console.log($.param( nd ));
+
+  request = $.ajax({
+        url: "php/startlog.php",
+        type: "post",
+        data: nd
+  });
+
+  // Callback handler that will be called on success
+  request.done(function (response, textStatus, jqXHR){
+      // Log a message to the console
+      console.log("Done" + response);
+  });
+
+  // Callback handler that will be called on failure
+  request.fail(function (jqXHR, textStatus, errorThrown){
+      // Log the error to the console
+      console.error(
+          "The following error occurred: "+
+          textStatus, errorThrown
+      );
+  });
+
+  // Callback handler that will be called regardless
+  // if the request failed or succeeded
+  request.always(function () {
+      // Reenable the inputs
+  });
+}
+
 var statsLoaded = false, stats, FINALSCREEN;
 
 function loadScreen(data){
