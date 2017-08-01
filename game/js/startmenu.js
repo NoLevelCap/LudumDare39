@@ -19,7 +19,7 @@ function loadStartMenu(){
   madeBy.y = 718;
   STARTMENU.addChild(madeBy);
 
-  shipName = new PIXI.Text("Ship Name:",{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'center'});
+  shipName = new PIXI.Text("Name Your Ship:",{fontFamily : 'Permanent Marker', fontSize: 24, fill : 0x000000, align : 'center'});
   shipName.x = 1280 - 32 -shipName.width - 8;
   shipName.y = 600 - shipName.height/2;
   STARTMENU.addChild(shipName);

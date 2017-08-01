@@ -1,7 +1,7 @@
 //Create a Pixi stage and renderer and add the
 //renderer.view to the DOM
 var stage = new Container(),
-    renderer = autoDetectRenderer(1280, 960, {resolution: .85});
+    renderer = autoDetectRenderer(1280, 960, {resolution: .8});
 document.body.appendChild(renderer.view);
 
 loader
@@ -90,6 +90,7 @@ function play() {
     usersShip.ShipContainer.y += 2;
     if (usersShip.ShipContainer.y > 400 && usersShip.ShipContainer.y < 403)
     {
+      submitScore(new ScoreInfo(shipName, areaname, Gold, Math.floor((Date.now() - startTime)/1000), crew, 0));
       EVENTWINDOW.showEvent(new gameOverMessage());
     }
   }

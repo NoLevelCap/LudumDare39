@@ -90,9 +90,9 @@
         <key>maxTextureSize</key>
         <QSize>
             <key>width</key>
-            <int>2048</int>
+            <int>4096</int>
             <key>height</key>
-            <int>2048</int>
+            <int>8192</int>
         </QSize>
         <key>fixedTextureSize</key>
         <QSize>
@@ -220,8 +220,11 @@
             <key type="filename">WrittenCircleScored.png</key>
             <key type="filename">WrittenDoubleCircle.png</key>
             <key type="filename">WrittenX.png</key>
+            <key type="filename">boat.png</key>
+            <key type="filename">by.png</key>
             <key type="filename">circle.png</key>
             <key type="filename">diamond.png</key>
+            <key type="filename">sn.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -247,6 +250,19 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">EndingMadeBy.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>320,55,640,110</rect>
+                <key>scale9Paddings</key>
+                <rect>320,55,640,110</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">EnemyShip.png</key>
             <key type="filename">Ship.png</key>
             <struct type="IndividualSpriteSettings">
@@ -261,6 +277,32 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">TitleScreen.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>295,110,590,220</rect>
+                <key>scale9Paddings</key>
+                <rect>295,110,590,220</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">TitleScreenMadeBy.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>120,64,240,128</rect>
+                <key>scale9Paddings</key>
+                <rect>120,64,240,128</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">Trim.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -271,6 +313,32 @@
                 <rect>10,3,20,5</rect>
                 <key>scale9Paddings</key>
                 <rect>10,3,20,5</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">TrimCorner.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>3,3,5,5</rect>
+                <key>scale9Paddings</key>
+                <rect>3,3,5,5</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">TrimRT.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>3,10,5,20</rect>
+                <key>scale9Paddings</key>
+                <rect>3,10,5,20</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -313,6 +381,32 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">dis.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>523,42,1045,84</rect>
+                <key>scale9Paddings</key>
+                <rect>523,42,1045,84</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">market.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>160,96,320,192</rect>
+                <key>scale9Paddings</key>
+                <rect>160,96,320,192</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">person.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -336,6 +430,19 @@
                 <rect>18,12,36,24</rect>
                 <key>scale9Paddings</key>
                 <rect>18,12,36,24</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">tfp.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>113,14,225,28</rect>
+                <key>scale9Paddings</key>
+                <rect>113,14,225,28</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

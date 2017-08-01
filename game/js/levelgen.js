@@ -82,7 +82,7 @@ function EndLevel(){
 
   if(currentNode.isFinalNode()){
     console.log("final node!!");
-    submitScore(new ScoreInfo(shipName, areaname, Gold, Math.floor((Date.now() - startTime)/1000), crew));
+    submitScore(new ScoreInfo(shipName, areaname, Gold, Math.floor((Date.now() - startTime)/1000), crew, 1));
   }
 
   MAP.showMap();

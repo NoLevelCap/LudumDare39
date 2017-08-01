@@ -1,5 +1,10 @@
+var completed;
+
 function submitScore(scoreinfo){
   data = scoreinfo;
+  if(data.completed == 1){
+    completed = true;
+  }
   console.log($.param( data ));
 
   request = $.ajax({
@@ -11,7 +16,9 @@ function submitScore(scoreinfo){
   // Callback handler that will be called on success
   request.done(function (response, textStatus, jqXHR){
       // Log a message to the console
-      loadScreen(JSON.parse(response));
+      if(completed){
+        loadScreen(JSON.parse(response));
+      }
   });
 
   // Callback handler that will be called on failure
@@ -142,10 +149,11 @@ function handleStats(data){
   return output;
 }
 
-function ScoreInfo(shipname, areaname, gold, time, crew){
+function ScoreInfo(shipname, areaname, gold, time, crew, completed){
   this.shipname = shipname;
   this.areaname = areaname;
   this.gold = gold;
   this.time = time;
   this.crew = crew;
+  this.completed = completed;
 }
