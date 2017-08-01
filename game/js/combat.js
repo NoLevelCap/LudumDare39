@@ -1,4 +1,4 @@
-var flankFlag, enemyHealth, enemyAttack, enemySpeed, playerTurn, enemyTurn, enemyFlank, shipHealth = 100, AITimer, animationTimer, enemyEnter, enemySink, AIShip, animFlee, firstMove;
+var flankFlag, enemyHealth, enemyAttack, enemySpeed, playerTurn, enemyTurn, enemyFlank, shipHealth = 120, AITimer, animationTimer, enemyEnter, enemySink, AIShip, animFlee, firstMove;
 
 // Initialise combat scenario
 function initCombat(){

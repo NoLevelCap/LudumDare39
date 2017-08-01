@@ -557,11 +557,16 @@ function PowerBar(container, x, y, name, effect, onChange){
   };
 
   this.changePower = function(val){
+    console.log(this);
     if(val != 0){
+      console.log(this.temp_value + "/" + val + "/" + (crewused > crew));
       if(this.temp_value + val < 0 && crewused > crew){
         intermediatary = this.temp_value;
+        console.log(intermediatary);
         this.loadPower(0);
         hPower = getHighestPowerBar();
+        console.log("HPOW");
+        console.log(hPower);
         if (hPower.temp_value + val + intermediatary >= 0 && hPower != this)
         {
           getHighestPowerBar().changePower(val + intermediatary);

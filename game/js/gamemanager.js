@@ -22,7 +22,7 @@ function CheckPassedPOI(){
       pause = true;
     }
     else {
-      if (Math.random() <= 0.4 * LOADEDLEVEL.difficultyModifier && LOADEDLEVEL.type != getLevelType("peaceful") && eventLoc < 16)
+      if (Math.random() <= 0.2 * LOADEDLEVEL.difficultyModifier && LOADEDLEVEL.type != getLevelType("peaceful") && eventLoc < 16)
       {
 
        initCombat();
